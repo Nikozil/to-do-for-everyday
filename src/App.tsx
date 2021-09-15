@@ -1,26 +1,29 @@
 import React from 'react';
-import logo from './logo.svg';
+import { Provider } from 'react-redux';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { ProvideAuth } from './api/useAuth';
 import './App.css';
+import AppPage from './components/AppPage';
+import Login from './components/Pages/Login/LoginPage';
+import store from './Redux/store';
 
-function App() {
+const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ProvideAuth>
+      <Provider store={store}>
+        <BrowserRouter>
+          <Switch>
+            <Route path="/login" render={() => <Login />}></Route>
+            <Route path="/">
+              <div className="App app-wrapper">
+                <AppPage />
+              </div>
+            </Route>
+          </Switch>
+        </BrowserRouter>
+      </Provider>
+    </ProvideAuth>
   );
-}
+};
 
 export default App;
