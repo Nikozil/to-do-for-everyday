@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { ProvideAuth } from './api/useAuth';
 import './App.css';
 import AppPage from './components/AppPage';
-import Login from './components/Pages/Login/LoginPage';
+import Login from './components/Pages/LoginPage/LoginPage';
 import store from './Redux/store';
 
 const App: React.FC = () => {

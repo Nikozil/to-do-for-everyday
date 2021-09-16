@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import CheckList from '../Pages/CheckList/CheckListPage';
+import CheckList from '../Pages/CheckListPage/CheckListPage';
 import Table from '../Pages/Table/TablePage';
 import styles from './AppContent.module.css';
 

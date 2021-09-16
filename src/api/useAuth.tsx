@@ -4,6 +4,9 @@ import {
   signInWithEmailAndPassword,
   signOut,
   updatePassword,
+  setPersistence,
+  browserSessionPersistence,
+  browserLocalPersistence,
 } from '@firebase/auth';
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { getFirebase, getReCaptcha } from '../firebase';
@@ -29,26 +32,28 @@ export const useAuth = () => {
 const useProvideAuth = () => {
   const [user, setUser] = useState<UserState>(null);
 
-  const signin =
-    (email: InputType, password: InputType) =>
-    async (event: React.FormEvent<HTMLFormElement>) => {
-      event.preventDefault();
-      if (firebaseApp) {
-        try {
-          const userCredential = await signInWithEmailAndPassword(
-            auth,
-            email.value,
-            password.value
-          );
-          const responseUser = userCredential.user;
-          setUser(responseUser);
-          console.log('user', responseUser);
-          alert(`Welcome back! ${responseUser.email}`);
-        } catch (error) {
-          console.log('error', error);
-        }
+  const signin = async (email: string, password: string, remember: boolean) => {
+    if (firebaseApp) {
+      try {
+        await setPersistence(
+          auth,
+          remember ? browserLocalPersistence : browserSessionPersistence
+        );
+
+        const userCredential = await signInWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+        const responseUser = userCredential.user;
+        setUser(responseUser);
+        // console.log('user', responseUser);
+      } catch (error) {
+        console.log('error', error);
+        throw new Error('Неверный логин или пароль');
       }
-    };
+    }
+  };
 
   const signout = async () => {
     if (firebaseApp) {
@@ -104,10 +109,7 @@ type UserState = UserType | null;
 
 interface AuthType {
   user: UserState;
-  signin: (
-    email: InputType,
-    password: InputType
-  ) => (event: React.FormEvent<HTMLFormElement>) => Promise<void>;
+  signin: (email: string, password: string, remember: boolean) => Promise<void>;
   signout: () => Promise<void>;
   updatepassword: (
     newPassword: string
