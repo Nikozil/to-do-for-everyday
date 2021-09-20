@@ -1,0 +1,95 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Login Page tests render correct 1`] = `
+<DocumentFragment>
+  <div
+    class="wrapper"
+  >
+    <div
+      class="content"
+    >
+      <div
+        class="logo"
+      >
+        <img
+          alt=""
+          src="Logo.png"
+        />
+      </div>
+      <form
+        action="#"
+      >
+        <div
+          class="mb-1"
+        >
+          <label
+            class="form-label"
+            for="email"
+          >
+            Email
+          </label>
+          <input
+            class="form-control"
+            id="email"
+            name="email"
+            placeholder="guest@gmail.com"
+            type="email"
+            value=""
+          />
+          <div
+            class="form-text"
+            style="height: 21px;"
+          />
+        </div>
+        <div
+          class="mb-1"
+        >
+          <label
+            class="form-label"
+            for="password"
+          >
+            Password
+          </label>
+          <input
+            class="form-control"
+            id="password"
+            name="password"
+            placeholder=""
+            type="password"
+            value=""
+          />
+          <div
+            class="form-text"
+            style="height: 21px;"
+          />
+        </div>
+        <div
+          class="mb-1 form-check"
+        >
+          <label
+            class="form-check-label"
+          >
+            <input
+              class="form-check-input"
+              name="remember"
+              type="checkbox"
+              value="false"
+            />
+            Запомнить сессию
+          </label>
+        </div>
+        <div
+          class="text-center mb-1"
+        >
+          <button
+            class="btn btn-success center-block"
+            type="submit"
+          >
+            Войти
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</DocumentFragment>
+`;

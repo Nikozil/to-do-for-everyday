@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { ProvideAuth } from './api/useAuth';
 import './App.css';
 import AppPage from './components/AppPage';
-import Login from './components/Pages/LoginPage/LoginPage';
+import LoginPage from './components/Pages/LoginPage/LoginPage';
 import store from './Redux/store';
 
 const App: React.FC = () => {
@@ -13,7 +13,7 @@ const App: React.FC = () => {
       <Provider store={store}>
         <BrowserRouter>
           <Switch>
-            <Route path="/login" render={() => <Login />}></Route>
+            <Route path="/login" render={() => <LoginPage />}></Route>
             <Route path="/">
               <div className="App app-wrapper">
                 <AppPage />
