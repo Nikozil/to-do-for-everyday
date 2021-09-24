@@ -31,6 +31,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "coverage": "react-scripts test --coverage",
+    "coverageAllFiles": "react-scripts test a --coverage",
     "eject": "react-scripts eject",
     "login": "firebase login",
     "init": "firebase init",
@@ -56,5 +57,11 @@
   },
   "devDependencies": {
     "@types/react-router-dom": "^5.1.8"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.ts",
+      "src/**/*.tsx"
+    ]
   }
 }
