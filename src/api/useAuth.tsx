@@ -13,6 +13,8 @@ import { getFirebase, getReCaptcha } from '../firebase';
 import { InputType } from '../hooks/useInput';
 
 export const firebaseApp = getFirebase();
+if (!firebaseApp) throw new Error('Firebase not initialized');
+
 export const auth = getAuth();
 const appCheck = getReCaptcha(firebaseApp);
 
