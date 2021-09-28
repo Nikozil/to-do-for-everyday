@@ -1,15 +1,25 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import LogoComponent from '../../../assets/LogoComponent/LogoComponent';
+import { AppStateType } from '../../../Redux/store';
+import { singIn } from '../../../Redux/userReducer';
 import LoginForm from '../../Forms/LoginForm/LoginForm';
 import styles from './LoginPage.module.css';
-import Logo from '../../../assets/Logo.png';
-import LogoComponent from '../../../assets/LogoComponent/LogoComponent';
 
 const LoginPage: React.FC = () => {
+  const dispatch = useDispatch();
+
+  const loginError = useSelector(
+    (state: AppStateType) => state.user.loginError
+  );
+  const handleSubmit = (email: string, password: string, remember: boolean) => {
+    dispatch(singIn(email, password, remember));
+  };
   return (
     <div className={styles.wrapper}>
       <div className={styles.content}>
         <LogoComponent className={styles.logo} />
-        <LoginForm />
+        <LoginForm loginError={loginError} handleSubmit={handleSubmit} />
       </div>
     </div>
   );

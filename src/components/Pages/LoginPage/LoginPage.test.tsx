@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { render } from '../../../utils/tests/test-utils';
 import LoginPage from './LoginPage';
 
 describe('Login Page tests', () => {

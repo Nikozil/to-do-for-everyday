@@ -1,28 +1,45 @@
-import React from 'react';
-import { Provider } from 'react-redux';
+import React, { useEffect } from 'react';
+import { Provider, useDispatch } from 'react-redux';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { ProvideAuth } from './api/useAuth';
 import './App.css';
+import PreloaderPage from './assets/PreloaderPage/PreloaderPage';
 import AppPage from './components/AppPage/AppPage';
 import LoginPage from './components/Pages/LoginPage/LoginPage';
+import { useRequireAuth } from './hooks/useRequireAuth';
 import store from './Redux/store';
+import { updateUserData } from './Redux/userReducer';
 
 const App: React.FC = () => {
   return (
-    <ProvideAuth>
-      <Provider store={store}>
-        <BrowserRouter>
-          <Switch>
-            <Route path="/login">
-              <LoginPage />
-            </Route>
-            <Route path="/">
-              <AppPage />
-            </Route>
-          </Switch>
-        </BrowserRouter>
-      </Provider>
-    </ProvideAuth>
+    <Provider store={store}>
+      <BrowserRouter>
+        <RouteContainer />
+      </BrowserRouter>
+    </Provider>
+  );
+};
+
+const RouteContainer: React.FC = () => {
+  const dispatch = useDispatch();
+  const auth = useRequireAuth();
+
+  useEffect(() => {
+    dispatch(updateUserData());
+  }, []);
+
+  if (auth === null) {
+    return <PreloaderPage />;
+  }
+
+  return (
+    <Switch>
+      <Route path="/login">
+        <LoginPage />
+      </Route>
+      <Route path="/">
+        <AppPage />
+      </Route>
+    </Switch>
   );
 };
 

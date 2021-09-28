@@ -1,7 +1,6 @@
 import React from 'react';
-import styles from './PreloaderPage.module.css';
-import Logo from '../Logo.png';
 import LogoComponent from '../LogoComponent/LogoComponent';
+import styles from './PreloaderPage.module.css';
 
 const PreloaderPage = () => {
   return (

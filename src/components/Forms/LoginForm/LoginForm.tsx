@@ -1,15 +1,11 @@
+import { ErrorMessage, Field, Form, Formik } from 'formik';
 import React from 'react';
-import { Formik, Field, Form, ErrorMessage } from 'formik';
-import { useAuth } from '../../../api/useAuth';
-import { useHistory } from 'react-router';
 import {
   validateEmail,
   validatePassword,
 } from '../../../utils/validators/authValidators';
 
-const LoginForm: React.FC = () => {
-  const auth = useAuth();
-  const history = useHistory();
+const LoginForm: React.FC<PropsType> = ({ handleSubmit, loginError }) => {
   const initialValues: MyFormValues = {
     email: '',
     password: '',
@@ -19,13 +15,7 @@ const LoginForm: React.FC = () => {
     <Formik
       initialValues={initialValues}
       onSubmit={async (values, { setStatus }) => {
-        try {
-          await auth.signin(values.email, values.password, values.remember);
-
-          history.push('/');
-        } catch {
-          setStatus('Неверный логин или пароль');
-        }
+        handleSubmit(values.email, values.password, values.remember);
       }}>
       {({ errors, touched, isValidating, status }) => (
         <Form>
@@ -60,7 +50,7 @@ const LoginForm: React.FC = () => {
             />
             <div className="form-text" style={{ height: '21px' }}>
               <ErrorMessage name="password" />
-              {!!status && <>{status}</>}
+              {loginError && <>{loginError}</>}
             </div>
           </div>
 
@@ -91,4 +81,8 @@ interface MyFormValues {
   email: string;
   password: string;
   remember: boolean;
+}
+interface PropsType {
+  handleSubmit: (email: string, password: string, remember: boolean) => void;
+  loginError: string | null;
 }

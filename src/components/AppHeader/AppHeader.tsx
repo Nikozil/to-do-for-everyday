@@ -1,23 +1,19 @@
 import React from 'react';
-import { Col, Container, Row } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import { useAuth } from '../../api/useAuth';
+import { useDispatch } from 'react-redux';
+import { singOut } from '../../Redux/userReducer';
 import styles from './AppHeader.module.css';
 
 const AppHeader = () => {
-  const auth = useAuth();
-  const signout = () => {
-    auth.signout();
+  const dispatch = useDispatch();
+  const signoutHandler = () => {
+    dispatch(singOut());
   };
 
   return (
     <header className={styles.header}>
       <div className={styles.username}>UserName</div>
       <div className={styles.login}>
-        {/* <Link to="/login" className="link-dark">
-          Login
-        </Link> */}
-        <button onClick={signout}>Sign out</button>
+        <button onClick={signoutHandler}>Sign out</button>
       </div>
     </header>
   );

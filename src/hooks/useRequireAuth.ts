@@ -1,16 +1,19 @@
 import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
-import { useAuth } from '../api/useAuth';
+import { AppStateType } from '../Redux/store';
 
 export const useRequireAuth = (redirectUrl = '/login') => {
-  const auth = useAuth();
+  const user = useSelector((state: AppStateType) => state.user.user);
   const history = useHistory();
-
   useEffect(() => {
-    if (auth.user === false) {
+    if (user === false) {
       history.push(redirectUrl);
     }
-  }, [auth]);
+    if (user) {
+      history.push('/');
+    }
+  }, [user]);
 
-  return auth;
+  return user;
 };
