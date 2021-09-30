@@ -11,13 +11,13 @@ import {
 } from '@firebase/auth';
 import React, { Dispatch } from 'react';
 import { getFirebase, getReCaptcha } from '../firebase';
-import { UserState } from '../Redux/userReducer';
+import { UserState } from '../Redux/modules/userReducer';
 
 export const firebaseApp = getFirebase();
 if (!firebaseApp) throw new Error('Firebase not initialized');
 
 export const auth = getAuth();
-const appCheck = getReCaptcha(firebaseApp);
+export const appCheck = getReCaptcha(firebaseApp);
 
 export const AuthAPI = {
   signUp: async (email: string, password: string, remember: boolean) => {
@@ -65,8 +65,6 @@ export const AuthAPI = {
   signOut: async () => {
     if (firebaseApp) {
       try {
-        console.log(auth);
-
         const responce = await signOut(auth);
         return responce;
       } catch (error) {
@@ -82,23 +80,25 @@ export const AuthAPI = {
         try {
           const currentUser = auth.currentUser;
           if (currentUser) {
-            const response = await updatePassword(currentUser, newPassword);
+            await updatePassword(currentUser, newPassword);
           } else throw new Error('Пользователь не авторизован');
         } catch (error) {
           console.log('error', error);
         }
       }
     },
-  updateUserStatus:
-    (dispatch: Dispatch<any>) => (callback: (user: UserState) => void) => {
-      if (firebaseApp) {
-        onAuthStateChanged(auth, (user) => {
-          if (user) {
-            dispatch(callback(user));
-          } else {
-            dispatch(callback(false));
-          }
-        });
-      }
-    },
+  updateUserStatus: (
+    dispatch: Dispatch<any>,
+    callback: (user: UserState) => void
+  ) => {
+    if (firebaseApp) {
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          dispatch(callback(user));
+        } else {
+          dispatch(callback(false));
+        }
+      });
+    }
+  },
 };

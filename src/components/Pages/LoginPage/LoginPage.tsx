@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import LogoComponent from '../../../assets/LogoComponent/LogoComponent';
 import { AppStateType } from '../../../Redux/store';
-import { singIn } from '../../../Redux/userReducer';
+import { signIn } from '../../../Redux/modules/userReducer';
 import LoginForm from '../../Forms/LoginForm/LoginForm';
 import styles from './LoginPage.module.css';
 
@@ -13,7 +13,7 @@ const LoginPage: React.FC = () => {
     (state: AppStateType) => state.user.loginError
   );
   const handleSubmit = (email: string, password: string, remember: boolean) => {
-    dispatch(singIn(email, password, remember));
+    dispatch(signIn(email, password, remember));
   };
   return (
     <div className={styles.wrapper}>

@@ -7,7 +7,7 @@ import AppPage from './components/AppPage/AppPage';
 import LoginPage from './components/Pages/LoginPage/LoginPage';
 import { useRequireAuth } from './hooks/useRequireAuth';
 import store from './Redux/store';
-import { updateUserData } from './Redux/userReducer';
+import { updateUserData } from './Redux/modules/userReducer';
 
 const App: React.FC = () => {
   return (

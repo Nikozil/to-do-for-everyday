@@ -1,12 +1,11 @@
 import {
-  Action,
   AnyAction,
   applyMiddleware,
   combineReducers,
   createStore,
 } from 'redux';
-import userReducer from './userReducer';
 import reduxThunk, { ThunkAction } from 'redux-thunk';
+import userReducer from './modules/userReducer';
 
 let rootReducer = combineReducers({
   user: userReducer,

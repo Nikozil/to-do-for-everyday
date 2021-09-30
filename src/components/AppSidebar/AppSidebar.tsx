@@ -1,10 +1,9 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
-
-import styles from './AppSidebar.module.css';
-import Logo from '../../assets/Logo.png';
 import { AiFillCheckCircle, AiOutlineBorderlessTable } from 'react-icons/ai';
-import { Button, Container, Nav, Navbar } from 'react-bootstrap';
+import { NavLink } from 'react-router-dom';
+import Logo from '../../assets/Logo.png';
+import styles from './AppSidebar.module.css';
+
 const cn = require('classnames');
 const AppSidebar = () => {
   return (

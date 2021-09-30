@@ -1,10 +1,7 @@
 import userEvent from '@testing-library/user-event';
-import LoginForm from './LoginForm';
-import { useAuth } from '../../../api/useAuth';
-import { singIn } from '../../../Redux/userReducer';
-
 import React from 'react';
 import { render, screen, waitFor } from '../../../utils/tests/test-utils';
+import LoginForm from './LoginForm';
 
 const handleSubmit = jest.fn();
 const loginError = null;

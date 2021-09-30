@@ -1,12 +1,12 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { singOut } from '../../Redux/userReducer';
+import { signOut } from '../../Redux/modules/userReducer';
 import styles from './AppHeader.module.css';
 
 const AppHeader = () => {
   const dispatch = useDispatch();
   const signoutHandler = () => {
-    dispatch(singOut());
+    dispatch(signOut());
   };
 
   return (

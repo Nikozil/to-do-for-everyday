@@ -1,5 +1,7 @@
-import { AuthAPI } from '../api/AuthAPI';
-import { AppThunk, InferActionsTypes } from './store';
+import { AuthAPI } from '../../api/AuthAPI';
+import { AppThunk, InferActionsTypes } from '../store';
+import { User } from '@firebase/auth/dist/auth-exp-public';
+
 let initialState = {
   user: null as UserState,
   loginError: null as LoginErrorType,
@@ -39,26 +41,25 @@ export const actions = {
     } as const),
 };
 
-export const singIn =
+export const signIn =
   (email: string, password: string, remember: boolean): AppThunk =>
   async (dispatch) => {
     try {
-      let user = await AuthAPI.signIn(email, password, remember);
+      await AuthAPI.signIn(email, password, remember);
       dispatch(actions.setError(null));
     } catch (err: any) {
       dispatch(actions.setError(err.message as string));
     }
   };
-export const singOut = (): AppThunk => async (dispatch) => {
-  let user = await AuthAPI.signOut();
+export const signOut = (): AppThunk => async (dispatch) => {
+  await AuthAPI.signOut();
   dispatch(actions.setUserData(false));
 };
 export const updateUserData = (): AppThunk => async (dispatch) => {
-  AuthAPI.updateUserStatus(dispatch)(actions.setUserData);
+  await AuthAPI.updateUserStatus(dispatch, actions.setUserData);
 };
 
-interface UserType {}
-export type UserState = UserType | null;
+export type UserState = User | null | false;
 type LoginErrorType = string | null;
 
 export default userReducer;
