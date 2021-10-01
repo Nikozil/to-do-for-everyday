@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AppHeader render correct 1`] = `
+<DocumentFragment>
+  <header
+    class="header"
+  >
+    <div
+      class="pagename"
+    />
+    <div
+      class="usermenu"
+    >
+      <div
+        class="username"
+      >
+        Аноним
+      </div>
+      <button
+        class="btn btn-secondary btn-sm mx-1"
+      >
+        Выйти
+      </button>
+    </div>
+  </header>
+   
+</DocumentFragment>
+`;

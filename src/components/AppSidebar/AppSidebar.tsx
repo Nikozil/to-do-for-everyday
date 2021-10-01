@@ -2,7 +2,7 @@ import React from 'react';
 import { AiFillCheckCircle, AiOutlineBorderlessTable } from 'react-icons/ai';
 import { NavLink } from 'react-router-dom';
 import Logo from '../../assets/Logo.png';
-import styles from './AppSidebar.module.css';
+import styles from './AppSidebar.module.scss';
 
 const cn = require('classnames');
 const AppSidebar = () => {

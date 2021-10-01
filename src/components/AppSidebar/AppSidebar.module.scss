@@ -1,29 +1,29 @@
+@import '../../App.scss';
 .sidebar {
   grid-area: s;
   overflow: hidden;
   /* background-color: #3c4b64; */
-  background-color: #354052;
+  // background-color: #354052;
+  background-color: $primary-color;
   display: flex;
   flex-direction: column;
-}
-@media screen and (max-width: 767px) {
-  .sidebar {
+  @media screen and (max-width: 767px) {
     display: flex;
     flex-direction: row;
   }
 }
+
 .logo {
   width: 56px;
   height: 56px;
   margin: 2px;
-}
-@media screen and (max-width: 767px) {
-  .logo {
+  @media screen and (max-width: 767px) {
     width: 40px;
     height: 40px;
     margin-left: 2px;
   }
 }
+
 .logo img {
   max-width: 100%;
   max-height: 100%;
@@ -31,43 +31,43 @@
 
 .ibutton {
   font-size: 50px;
-  color: #fff;
+  color: $white-color;
   line-height: 0;
   opacity: 0.8;
-}
-@media screen and (max-width: 767px) {
-  .ibutton {
+  @media screen and (max-width: 767px) {
     font-size: 30px;
   }
 }
+
 .button {
   padding: 0 !important;
   width: 60px;
   margin: 2px 0 2px 0;
   background-color: inherit !important;
+  @media screen and (max-width: 767px) {
+    width: 40px;
+    height: 40px;
+    margin: 0;
+  }
 }
 .button:focus,
 .button:active {
   outline: unset !important;
   box-shadow: unset !important;
 }
-@media screen and (max-width: 767px) {
-  .button {
-    width: 40px;
-    height: 40px;
-    margin: 0;
-  }
-}
+
 .navbar {
   box-sizing: content-box;
   text-align: center;
-  background-color: #6c757d;
-}
-@media screen and (max-width: 767px) {
-  .navbar {
+  background-color: $button-color;
+  @media screen and (max-width: 767px) {
     margin: 0 2px 0 2px;
   }
 }
+.navbar:hover {
+  background-color: $button-color-hover;
+}
+
 .selected {
-  background-color: #a0aeba;
+  background-color: $button-color-selected;
 }

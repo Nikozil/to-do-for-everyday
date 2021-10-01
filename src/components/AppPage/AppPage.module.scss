@@ -2,24 +2,23 @@
   display: grid;
   margin: 0 auto;
   height: 100vh;
+  min-width: 350px;
 
   grid-template-areas:
     's h'
     's c';
 
-  grid-template-rows: 30px 1fr;
+  grid-template-rows: 40px 1fr;
   grid-template-columns: 60px 1fr;
+  @media screen and (max-width: 767px) {
+    grid-template-areas:
+      's'
+      'h'
+      'c';
+    grid-template-rows: 40px 35px 1fr;
+    grid-template-columns: 1fr;
+  }
 }
 .app-wrapper-content {
   grid-area: c;
-}
-@media screen and (max-width: 767px) {
-  .app-wrapper {
-    grid-template-areas:
-      'h'
-      's'
-      'c';
-    grid-template-rows: 25px 40px 1fr;
-    grid-template-columns: 1fr;
-  }
 }

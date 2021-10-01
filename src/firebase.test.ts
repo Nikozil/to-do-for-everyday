@@ -5,7 +5,6 @@ describe('firebase', () => {
     expect(getFirebase()).toBeTruthy();
   });
   it('initialized then instance is exist', () => {
-    let instance = {};
     expect(getFirebase()).toBeTruthy();
   });
 

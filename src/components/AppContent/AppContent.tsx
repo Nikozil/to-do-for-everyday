@@ -1,17 +1,22 @@
 import React from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import CheckList from '../Pages/CheckListPage/CheckListPage';
 import Table from '../Pages/Table/TablePage';
-import styles from './AppContent.module.css';
+import styles from './AppContent.module.scss';
 
 const AppContent = () => {
   return (
     <div className={styles.content}>
       <Switch>
-        <Route path="/checkList" render={() => <CheckList />}></Route>
-        <Route path="/table" render={() => <Table />}></Route>
-        <Route path="/">
-          <Redirect to="/checkList" />
+        <Route
+          exact
+          path="/"
+          component={() => <Redirect to="/checkList" />}></Route>
+        <Route path="/checkList">
+          <CheckList />
+        </Route>
+        <Route path="/table">
+          <Table />
         </Route>
       </Switch>
     </div>

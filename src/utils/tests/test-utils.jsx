@@ -1,13 +1,34 @@
-import React from 'react';
 import { render as rtlRender } from '@testing-library/react';
-import { createStore } from 'redux';
+import { createMemoryHistory } from 'history';
+import React from 'react';
 import { Provider } from 'react-redux';
-import store from '../../Redux/store';
-// Import your own reducer
+import { Router } from 'react-router-dom';
+import { applyMiddleware, combineReducers, createStore } from 'redux';
+import reduxThunk from 'redux-thunk';
+import userReducer from '../../Redux/modules/userReducer';
 
-function render(ui, { ...renderOptions } = {}) {
+function render(
+  ui,
+  {
+    preloadedState,
+    store = createStore(
+      combineReducers({
+        user: userReducer,
+      }),
+      preloadedState,
+      applyMiddleware(reduxThunk)
+    ),
+    route = '/',
+    history = createMemoryHistory({ initialEntries: [route] }),
+    ...renderOptions
+  } = {}
+) {
   function Wrapper({ children }) {
-    return <Provider store={store}>{children}</Provider>;
+    return (
+      <Provider store={store}>
+        <Router history={history}>{children} </Router>
+      </Provider>
+    );
   }
   return rtlRender(ui, { wrapper: Wrapper, ...renderOptions });
 }

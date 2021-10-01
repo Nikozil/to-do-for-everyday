@@ -4,7 +4,7 @@ import LogoComponent from '../../../assets/LogoComponent/LogoComponent';
 import { AppStateType } from '../../../Redux/store';
 import { signIn } from '../../../Redux/modules/userReducer';
 import LoginForm from '../../Forms/LoginForm/LoginForm';
-import styles from './LoginPage.module.css';
+import styles from './LoginPage.module.scss';
 
 const LoginPage: React.FC = () => {
   const dispatch = useDispatch();

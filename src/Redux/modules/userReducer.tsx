@@ -60,6 +60,6 @@ export const updateUserData = (): AppThunk => async (dispatch) => {
 };
 
 export type UserState = User | null | false;
-type LoginErrorType = string | null;
+export type LoginErrorType = string | null;
 
 export default userReducer;

@@ -2,7 +2,7 @@ import React from 'react';
 import AppContent from '../AppContent/AppContent';
 import AppHeader from '../AppHeader/AppHeader';
 import AppSidebar from '../AppSidebar/AppSidebar';
-import styles from './AppPage.module.css';
+import styles from './AppPage.module.scss';
 
 const AppPage: React.FC = () => {
   return (
