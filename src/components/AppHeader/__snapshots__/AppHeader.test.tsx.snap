@@ -11,11 +11,12 @@ exports[`AppHeader render correct 1`] = `
     <div
       class="usermenu"
     >
-      <div
+      <a
         class="username"
+        href="/settings"
       >
         Аноним
-      </div>
+      </a>
       <button
         class="btn btn-secondary btn-sm mx-1"
       >

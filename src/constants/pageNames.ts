@@ -21,3 +21,12 @@ interface NavLinkType {
   link: string;
   Icon: React.FC;
 }
+
+export const PageNames: PageNamesType = {
+  '/checkList': 'Список дел',
+  '/table': 'Таблица',
+  '/settings': 'Настройки',
+};
+interface PageNamesType {
+  [key: string]: string;
+}

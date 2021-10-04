@@ -14,7 +14,7 @@ const AppSidebar: React.FC = () => {
 
       <nav className={styles.navbar}>
         {NavLinks.map((i) => (
-          <NavLinkComponent link={i.link} Icon={i.Icon} />
+          <NavLinkComponent link={i.link} Icon={i.Icon} key={i.link} />
         ))}
       </nav>
     </div>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import CheckList from '../Pages/CheckListPage/CheckListPage';
+import Settings from '../Pages/Settings/Settings';
 import Table from '../Pages/Table/TablePage';
 import styles from './AppContent.module.scss';
 
@@ -18,6 +19,10 @@ const AppContent = () => {
         <Route path="/table">
           <Table />
         </Route>
+        <Route path="/settings">
+          <Settings />
+        </Route>
+        <Route path="*">404</Route>
       </Switch>
     </div>
   );

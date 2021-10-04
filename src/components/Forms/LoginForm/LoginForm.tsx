@@ -15,7 +15,7 @@ const LoginForm: React.FC<PropsType> = ({ handleSubmit, loginError }) => {
     <Formik
       initialValues={initialValues}
       onSubmit={async (values, { setStatus }) => {
-        handleSubmit(values.email, values.password, values.remember);
+        await handleSubmit(values.email, values.password, values.remember);
       }}>
       {({ errors, touched, isValidating, status }) => (
         <Form>

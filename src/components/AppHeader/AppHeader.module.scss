@@ -2,7 +2,7 @@
 
 .header {
   grid-area: h;
-  background-color: $white-color;
+  background-color: $header-color;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -20,5 +20,13 @@
   align-items: center;
 }
 .username {
+  padding: 2px;
+  border-radius: 3px;
   margin-right: 5px;
+  text-decoration: none;
+  color: $text-color;
+  &:hover {
+    color: white;
+    background-color: $button-color-hover;
+  }
 }
