@@ -8,10 +8,10 @@ import {
   signOut,
   createUserWithEmailAndPassword,
   updatePassword,
+  User,
 } from '@firebase/auth';
 import React, { Dispatch } from 'react';
 import { getFirebase, getReCaptcha } from '../firebase';
-import { UserState } from '../Redux/modules/userReducer';
 
 export const firebaseApp = getFirebase();
 if (!firebaseApp) throw new Error('Firebase not initialized');
@@ -89,14 +89,19 @@ export const AuthAPI = {
     },
   updateUserStatus: (
     dispatch: Dispatch<any>,
-    callback: (user: UserState) => void
+    setUserCallback: (user: User) => void,
+    setAuthCallback: (authStatus: boolean) => void,
+    setInitCallback: (initStatus: boolean) => void
   ) => {
     if (firebaseApp) {
       onAuthStateChanged(auth, (user) => {
         if (user) {
-          dispatch(callback(user));
+          dispatch(setInitCallback(true));
+          dispatch(setAuthCallback(true));
+          dispatch(setUserCallback(user));
         } else {
-          dispatch(callback(false));
+          dispatch(setInitCallback(true));
+          dispatch(setAuthCallback(false));
         }
       });
     }

@@ -1,21 +1,25 @@
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 import PreloaderPage from './assets/PreloaderPage/PreloaderPage';
 import AppPage from './components/AppPage/AppPage';
 import LoginPage from './components/Pages/LoginPage/LoginPage';
 import { useRequireAuth } from './hooks/useRequireAuth';
 import { updateUserData } from './Redux/modules/userReducer';
+import { AppStateType } from './Redux/store';
 
 const RoutingContainer: React.FC = () => {
   const dispatch = useDispatch();
-  const auth = useRequireAuth();
+  useRequireAuth();
+  const initStatus = useSelector(
+    (state: AppStateType) => state.user.initStatus
+  );
 
   useEffect(() => {
     dispatch(updateUserData());
   });
 
-  if (auth === null) {
+  if (!initStatus) {
     return <PreloaderPage />;
   }
 

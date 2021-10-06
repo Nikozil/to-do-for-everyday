@@ -1,4 +1,4 @@
-import React, { MouseEvent, useEffect } from 'react';
+import React, { MouseEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router';
 import { Link } from 'react-router-dom';
@@ -8,13 +8,9 @@ import { AppStateType } from '../../Redux/store';
 import styles from './AppHeader.module.scss';
 
 const AppHeader = () => {
-  const user = useSelector((state: AppStateType) => state.user.user);
+  const user = useSelector((state: AppStateType) => state.user);
   const pathname = useLocation().pathname;
   const dispatch = useDispatch();
-  useEffect(() => {
-    //@ts-ignore
-    if (user) console.log('header', user.displayName);
-  }, [user]);
 
   const signoutHandler = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
@@ -26,7 +22,9 @@ const AppHeader = () => {
       <div className={styles.pagename}>{PageNames[pathname]}</div>
       <div className={styles.usermenu}>
         <Link to="/settings" className={styles.username}>
-          {user ? user.displayName || user.email : 'Аноним'}
+          {user.authStatus
+            ? user.userData.displayName || user.userData.email
+            : 'Аноним'}
         </Link>
         <button
           className={'btn btn-secondary btn-sm mx-1'}

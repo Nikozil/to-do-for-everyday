@@ -5,13 +5,15 @@ import { AppStateType } from '../Redux/store';
 
 export const useRequireAuth = (redirectUrl = '/login') => {
   const pathname = useLocation().pathname;
-  const user = useSelector((state: AppStateType) => state.user.user);
+  const authStatus = useSelector(
+    (state: AppStateType) => state.user.authStatus
+  );
   const history = useHistory();
   useEffect(() => {
-    if (user === false) history.push(redirectUrl);
+    if (!authStatus) history.push(redirectUrl);
 
-    if (user && pathname === redirectUrl) history.push('/');
-  }, [user, redirectUrl, history, pathname]);
+    if (authStatus && pathname === redirectUrl) history.push('/');
+  }, [authStatus, redirectUrl, history, pathname]);
 
-  return user;
+  return authStatus;
 };

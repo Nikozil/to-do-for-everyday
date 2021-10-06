@@ -29,7 +29,6 @@ describe('LoginForm tests', () => {
 
   it('rendering and enter wrongEmail', async () => {
     render(<LoginForm loginError={loginError} handleSubmit={handleSubmit} />);
-
     userEvent.type(screen.getByLabelText(/email/i), 'test.com');
     userEvent.type(screen.getByLabelText(/password/i), 'password');
 
@@ -37,7 +36,7 @@ describe('LoginForm tests', () => {
 
     await waitFor(() => {
       expect(handleSubmit).not.toHaveBeenCalled();
-      expect(screen.getByText(/Неверный email/i));
+      expect(screen.getByText(/Неверный email/i)).toBeInTheDocument();
     });
   });
 
@@ -48,8 +47,8 @@ describe('LoginForm tests', () => {
 
     await waitFor(() => {
       expect(handleSubmit).not.toHaveBeenCalled();
-      expect(screen.getByText(/Email не указан/i));
-      expect(screen.getByText(/Пароль не указан/i));
+      expect(screen.getByText(/Email не указан/i)).toBeInTheDocument();
+      expect(screen.getByText(/Пароль не указан/i)).toBeInTheDocument();
     });
   });
   it('rendering error due to failed login', async () => {
@@ -59,6 +58,6 @@ describe('LoginForm tests', () => {
         handleSubmit={handleSubmit}
       />
     );
-    expect(screen.getByText(/Неверный логин или пароль/i));
+    expect(screen.getByText(/Неверный логин или пароль/i)).toBeInTheDocument();
   });
 });

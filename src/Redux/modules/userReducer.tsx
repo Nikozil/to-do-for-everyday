@@ -4,7 +4,12 @@ import { User } from '@firebase/auth/dist/auth-exp-public';
 import { UserAPI } from '../../api/UserAPI';
 
 let initialState = {
-  user: null as UserState,
+  userData: {
+    displayName: null,
+    email: null,
+  } as User,
+  authStatus: false as boolean,
+  initStatus: false as boolean,
   loginError: null as LoginErrorType,
 };
 
@@ -17,7 +22,17 @@ const userReducer = (
     case 'to-do-for-everyday/user/SET_USER_DATA':
       return {
         ...state,
-        user: action.payload,
+        userData: { ...action.payload },
+      };
+    case 'to-do-for-everyday/user/SET_AUTH_STATUS':
+      return {
+        ...state,
+        authStatus: action.payload,
+      };
+    case 'to-do-for-everyday/user/SET_INIT_STATUS':
+      return {
+        ...state,
+        initStatus: action.payload,
       };
     case 'to-do-for-everyday/user/SET_ERROR':
       return {
@@ -31,10 +46,20 @@ const userReducer = (
 };
 export type ActionsTypes = InferActionsTypes<typeof actions>;
 export const actions = {
-  setUserData: (user: UserState) =>
+  setUserData: (userData: User) =>
     ({
       type: 'to-do-for-everyday/user/SET_USER_DATA',
-      payload: user,
+      payload: userData,
+    } as const),
+  setAuthStatus: (authStatus: boolean) =>
+    ({
+      type: 'to-do-for-everyday/user/SET_AUTH_STATUS',
+      payload: authStatus,
+    } as const),
+  setInitStatus: (initStatus: boolean) =>
+    ({
+      type: 'to-do-for-everyday/user/SET_INIT_STATUS',
+      payload: initStatus,
     } as const),
   setError: (error: LoginErrorType) =>
     ({
@@ -55,19 +80,24 @@ export const signIn =
   };
 export const signOut = (): AppThunk => async (dispatch) => {
   await AuthAPI.signOut();
-  dispatch(actions.setUserData(false));
+  dispatch(actions.setAuthStatus(false));
+  dispatch(actions.setUserData(initialState.userData));
 };
 export const updateUserData = (): AppThunk => async (dispatch) => {
-  await AuthAPI.updateUserStatus(dispatch, actions.setUserData);
-  console.log('updateUserData');
+  await AuthAPI.updateUserStatus(
+    dispatch,
+    actions.setUserData,
+    actions.setAuthStatus,
+    actions.setInitStatus
+  );
 };
 export const updateProfile =
   (displayName: string): AppThunk =>
   async (dispatch) => {
     await UserAPI.updateProfile(displayName);
+    dispatch(updateUserData());
   };
 
-export type UserState = User | null | false;
 export type LoginErrorType = string | null;
 
 export default userReducer;
