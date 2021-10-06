@@ -1,23 +1,15 @@
-import {
-  AnyAction,
-  applyMiddleware,
-  combineReducers,
-  createStore,
-} from 'redux';
+import { configureStore } from '@reduxjs/toolkit';
+import { AnyAction } from 'redux';
 import reduxThunk, { ThunkAction } from 'redux-thunk';
-import userReducer from './modules/userReducer';
+import userSlice from './modules/userReducer';
 
-let rootReducer = combineReducers({
-  user: userReducer,
-});
-type RootReducerType = typeof rootReducer;
-export type AppStateType = ReturnType<RootReducerType>;
+const reducer = {
+  user: userSlice.reducer,
+};
+
+export type AppStateType = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
-export type InferActionsTypes<T> = T extends {
-  [key: string]: (...args: any[]) => infer U;
-}
-  ? U
-  : never;
+
 export type AppThunk<ReturnType = void> = ThunkAction<
   ReturnType,
   AppStateType,
@@ -25,5 +17,8 @@ export type AppThunk<ReturnType = void> = ThunkAction<
   AnyAction
 >;
 
-const store = createStore(rootReducer, {}, applyMiddleware(reduxThunk));
+const store = configureStore({
+  reducer,
+  middleware: [reduxThunk],
+});
 export default store;

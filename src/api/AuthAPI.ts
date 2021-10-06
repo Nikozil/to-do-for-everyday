@@ -96,12 +96,12 @@ export const AuthAPI = {
     if (firebaseApp) {
       onAuthStateChanged(auth, (user) => {
         if (user) {
-          dispatch(setInitCallback(true));
           dispatch(setAuthCallback(true));
           dispatch(setUserCallback(user));
-        } else {
           dispatch(setInitCallback(true));
+        } else {
           dispatch(setAuthCallback(false));
+          dispatch(setInitCallback(true));
         }
       });
     }

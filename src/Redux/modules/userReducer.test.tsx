@@ -1,6 +1,8 @@
-import userReducer, {
-  actions,
-  ActionsTypes,
+import userSlice, {
+  setAuthStatus,
+  setError,
+  setInitStatus,
+  setUserData,
   signIn,
   signOut,
   updateUserData,
@@ -8,7 +10,8 @@ import userReducer, {
 import { AuthAPI } from '../../api/AuthAPI';
 import { User } from '@firebase/auth/dist/auth-exp-public';
 import { userReducerInitialState as initialState } from '../../utils/tests/test-utils';
-
+import { AnyAction } from 'redux';
+const reducer = userSlice.reducer;
 const getStateMock = jest.fn();
 const dispatchMock = jest.fn();
 beforeEach(() => {
@@ -21,36 +24,36 @@ const AuthAPIMock = AuthAPI as jest.Mocked<typeof AuthAPI>;
 
 let result = {} as User;
 
-describe('userReducer', () => {
+describe('userSlice', () => {
   describe('reducer', () => {
     it('should return the initial state', () => {
-      expect(userReducer(undefined, {} as ActionsTypes)).toEqual(initialState);
+      expect(reducer(undefined, {} as AnyAction)).toEqual(initialState);
     });
   });
 
   describe('actions', () => {
     it('should add new user data', () => {
       const userData = { uid: '12345', email: 'mail@mail.ru' } as User;
-      expect(userReducer(undefined, actions.setUserData(userData))).toEqual({
+      expect(reducer(undefined, setUserData(userData))).toEqual({
         ...initialState,
         userData: { uid: '12345', email: 'mail@mail.ru' },
       });
     });
     it('should add new loginError', () => {
       const error = 'Wrong password';
-      expect(userReducer(undefined, actions.setError(error))).toEqual({
+      expect(reducer(undefined, setError(error))).toEqual({
         ...initialState,
         loginError: 'Wrong password',
       });
     });
     it('should change authStatus', () => {
-      expect(userReducer(undefined, actions.setAuthStatus(true))).toEqual({
+      expect(reducer(undefined, setAuthStatus(true))).toEqual({
         ...initialState,
         authStatus: true,
       });
     });
     it('should change initStatus', () => {
-      expect(userReducer(undefined, actions.setInitStatus(true))).toEqual({
+      expect(reducer(undefined, setInitStatus(true))).toEqual({
         ...initialState,
         initStatus: true,
       });
@@ -64,7 +67,7 @@ describe('userReducer', () => {
         AuthAPIMock.signIn.mockResolvedValue(result);
         await thunk(dispatchMock, getStateMock, {});
         expect(dispatchMock).toHaveBeenCalled();
-        expect(dispatchMock).toHaveBeenCalledWith(actions.setError(null));
+        expect(dispatchMock).toHaveBeenCalledWith(setError(null));
       });
       it('signIn fail', async () => {
         const thunk = signIn('123', '123', true);
@@ -74,7 +77,7 @@ describe('userReducer', () => {
         await thunk(dispatchMock, getStateMock, {});
         expect(dispatchMock).toHaveBeenCalled();
         expect(dispatchMock).toHaveBeenCalledWith(
-          actions.setError('Неверный логин или пароль')
+          setError('Неверный логин или пароль')
         );
       });
     });
@@ -83,13 +86,10 @@ describe('userReducer', () => {
         const thunk = signOut();
         await thunk(dispatchMock, getStateMock, {});
         expect(dispatchMock).toHaveBeenCalledTimes(2);
-        expect(dispatchMock).toHaveBeenNthCalledWith(
-          1,
-          actions.setAuthStatus(false)
-        );
+        expect(dispatchMock).toHaveBeenNthCalledWith(1, setAuthStatus(false));
         expect(dispatchMock).toHaveBeenNthCalledWith(
           2,
-          actions.setUserData(initialState.userData)
+          setUserData(initialState.userData)
         );
       });
     });
@@ -100,9 +100,9 @@ describe('userReducer', () => {
         expect(AuthAPIMock.updateUserStatus).toHaveBeenCalled();
         expect(AuthAPIMock.updateUserStatus).toHaveBeenCalledWith(
           dispatchMock,
-          actions.setUserData,
-          actions.setAuthStatus,
-          actions.setInitStatus
+          setUserData,
+          setAuthStatus,
+          setInitStatus
         );
       });
     });

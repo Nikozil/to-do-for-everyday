@@ -1,24 +1,24 @@
+import { configureStore } from '@reduxjs/toolkit';
 import { render as rtlRender, RenderOptions } from '@testing-library/react';
 import { createMemoryHistory, MemoryHistory } from 'history';
+import React, { ReactElement } from 'react';
 import { Provider } from 'react-redux';
 import { Router } from 'react-router-dom';
-import { applyMiddleware, combineReducers, createStore } from 'redux';
 import reduxThunk from 'redux-thunk';
-import userReducer from '../../Redux/modules/userReducer';
-import { User } from '@firebase/auth/dist/auth-exp-public';
-import React, { ReactElement } from 'react';
+import userSlice, { UserData } from '../../Redux/modules/userReducer';
 
+const reducer = {
+  user: userSlice.reducer,
+};
 const render = (
   ui: ReactElement,
   {
     preloadedState,
-    store = createStore(
-      combineReducers({
-        user: userReducer,
-      }),
+    store = configureStore({
+      reducer,
+      middleware: [reduxThunk],
       preloadedState,
-      applyMiddleware(reduxThunk)
-    ),
+    }),
     route = '/',
     history = createMemoryHistory({ initialEntries: [route] }),
     ...renderOptions
@@ -41,9 +41,10 @@ export { render };
 //userReducer initial state
 export let userReducerInitialState = {
   userData: {
+    uid: '',
     displayName: null,
     email: null,
-  } as User,
+  } as UserData,
   authStatus: false,
   initStatus: false,
   loginError: null,
