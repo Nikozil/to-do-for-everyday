@@ -1,16 +1,18 @@
 import {
   browserLocalPersistence,
   browserSessionPersistence,
+  createUserWithEmailAndPassword,
+  EmailAuthProvider,
   getAuth,
   onAuthStateChanged,
+  reauthenticateWithCredential,
   setPersistence,
   signInWithEmailAndPassword,
   signOut,
-  createUserWithEmailAndPassword,
   updatePassword,
   User,
 } from '@firebase/auth';
-import React, { Dispatch } from 'react';
+import { Dispatch } from 'react';
 import { getFirebase, getReCaptcha } from '../firebase';
 
 export const firebaseApp = getFirebase();
@@ -72,21 +74,24 @@ export const AuthAPI = {
       }
     }
   },
-  updatePassword:
-    (newPassword: string) =>
-    async (event: React.FormEvent<HTMLFormElement>) => {
-      event.preventDefault();
-      if (firebaseApp) {
-        try {
-          const currentUser = auth.currentUser;
-          if (currentUser) {
-            await updatePassword(currentUser, newPassword);
-          } else throw new Error('Пользователь не авторизован');
-        } catch (error) {
-          console.log('error', error);
-        }
+
+  updatePassword: async (oldPassword: string, newPassword: string) => {
+    const user = auth.currentUser;
+    if (firebaseApp && user && user.email) {
+      try {
+        const credential1 = EmailAuthProvider.credential(
+          user.email,
+          oldPassword
+        );
+        await reauthenticateWithCredential(user, credential1);
+        await updatePassword(user, newPassword);
+        return 'Пароль изменен';
+      } catch (error) {
+        console.log('error', error);
+        throw new Error('Неверный пароль');
       }
-    },
+    } else throw new Error('Пользователь не авторизован');
+  },
   updateUserStatus: (
     dispatch: Dispatch<any>,
     setUserCallback: (user: User) => void,

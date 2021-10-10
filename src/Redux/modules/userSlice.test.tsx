@@ -5,11 +5,14 @@ import userSlice, {
   setUserData,
   signIn,
   signOut,
+  updatePassword,
+  updateProfile,
   updateUserData,
-} from './userReducer';
+} from './userSlice';
 import { AuthAPI } from '../../api/AuthAPI';
+import { UserAPI } from '../../api/UserAPI';
 import { User } from '@firebase/auth/dist/auth-exp-public';
-import { userReducerInitialState as initialState } from '../../utils/tests/test-utils';
+import { userSliceInitialState as initialState } from '../../utils/tests/test-utils';
 import { AnyAction } from 'redux';
 const reducer = userSlice.reducer;
 const getStateMock = jest.fn();
@@ -20,7 +23,9 @@ beforeEach(() => {
 });
 
 jest.mock('../../api/AuthAPI');
+jest.mock('../../api/UserAPI');
 const AuthAPIMock = AuthAPI as jest.Mocked<typeof AuthAPI>;
+const UserAPIMock = UserAPI as jest.Mocked<typeof UserAPI>;
 
 let result = {} as User;
 
@@ -103,6 +108,41 @@ describe('userSlice', () => {
           setUserData,
           setAuthStatus,
           setInitStatus
+        );
+      });
+    });
+    describe('updateProfile', () => {
+      it('updateProfile completed', async () => {
+        const displayName = 'displayName';
+        const thunk = updateProfile(displayName);
+        await thunk(dispatchMock, getStateMock, {});
+        expect(UserAPIMock.updateProfile).toHaveBeenCalled();
+        expect(UserAPIMock.updateProfile).toHaveBeenCalledWith(displayName);
+        expect(dispatchMock).toHaveBeenCalled();
+      });
+      it('updateProfile uncompleted', async () => {
+        const displayName = 'displayName';
+        const thunk = updateProfile(displayName);
+        UserAPIMock.updateProfile.mockRejectedValue(
+          new Error('Неверный логин или пароль')
+        );
+        await thunk(dispatchMock, getStateMock, {});
+        expect(UserAPIMock.updateProfile).toHaveBeenCalled();
+        expect(UserAPIMock.updateProfile).toHaveBeenCalledWith(displayName);
+        expect(dispatchMock).not.toHaveBeenCalled();
+      });
+    });
+    describe('updatePassword', () => {
+      it('updatePassword completed', async () => {
+        const oldPassword = 'oldPassword';
+        const newPassword = 'newPassword';
+        const thunk = updatePassword(oldPassword, newPassword);
+        AuthAPIMock.updatePassword.mockResolvedValue('Пароль изменен');
+        await thunk(dispatchMock, getStateMock, {});
+        expect(AuthAPIMock.updatePassword).toHaveBeenCalled();
+        expect(AuthAPIMock.updatePassword).toHaveBeenCalledWith(
+          oldPassword,
+          newPassword
         );
       });
     });

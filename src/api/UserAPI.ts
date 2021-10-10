@@ -9,6 +9,7 @@ export const UserAPI = {
       await updateProfile(user, {
         displayName: displayName,
       });
+      return 'Имя пользователя изменено';
     } catch (error) {
       throw new Error('Обновить профиль не удалось');
     }

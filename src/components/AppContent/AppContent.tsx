@@ -1,7 +1,7 @@
 import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import CheckList from '../Pages/CheckListPage/CheckListPage';
-import Settings from '../Pages/Settings/Settings';
+import Settings from '../Pages/SettingsPage/SettingsPage';
 import Table from '../Pages/Table/TablePage';
 import styles from './AppContent.module.scss';
 

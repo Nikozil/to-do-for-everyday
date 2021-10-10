@@ -59,10 +59,24 @@ export const updateUserData = (): AppThunk => async (dispatch) => {
   );
 };
 export const updateProfile =
-  (displayName: string): AppThunk =>
+  (displayName: string): AppThunk<Promise<string>> =>
   async (dispatch) => {
-    await UserAPI.updateProfile(displayName);
+    try {
+      await UserAPI.updateProfile(displayName);
+    } catch (err: any) {
+      return err.message;
+    }
     dispatch(updateUserData());
+  };
+export const updatePassword =
+  (oldPassword: string, newPassword: string): AppThunk<Promise<string>> =>
+  async (dispatch) => {
+    try {
+      let responce = await AuthAPI.updatePassword(oldPassword, newPassword);
+      return responce;
+    } catch (err: any) {
+      return err.message as string;
+    }
   };
 
 export default userSlice;

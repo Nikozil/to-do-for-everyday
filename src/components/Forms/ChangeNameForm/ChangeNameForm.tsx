@@ -1,25 +1,19 @@
 import { Field, Form, Formik } from 'formik';
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { updateProfile } from '../../../Redux/modules/userReducer';
-import { AppStateType } from '../../../Redux/store';
-
-const Settings = () => {
-  const user = useSelector((state: AppStateType) => state.user);
-  const dispatch = useDispatch();
+const ChangeNameForm: React.FC<PropsType> = ({ displayName, handleSubmit }) => {
   const initialValues: MyFormValues = {
-    displayName: user.userData.displayName || '',
+    displayName: displayName || '',
   };
   return (
     <Formik
       initialValues={initialValues}
       onSubmit={async (values, { setStatus }) => {
-        await dispatch(updateProfile(values.displayName));
+        await handleSubmit(values.displayName);
       }}>
       {({ errors, touched, isValidating, status }) => (
         <Form>
           <div className="mb-1">
-            <label htmlFor="email" className="form-label">
+            <label htmlFor="displayName" className={'form-label'}>
               Имя
             </label>
             <Field
@@ -31,7 +25,7 @@ const Settings = () => {
             />
           </div>
 
-          <div className={'text-center mb-1'}>
+          <div className={'text-center my-2'}>
             <button type="submit" className={'btn btn-success center-block'}>
               Изменить
             </button>
@@ -42,8 +36,12 @@ const Settings = () => {
   );
 };
 
-export default Settings;
+export default ChangeNameForm;
 
 interface MyFormValues {
   displayName: string;
+}
+interface PropsType {
+  displayName: string | null;
+  handleSubmit: (displayName: string) => void;
 }

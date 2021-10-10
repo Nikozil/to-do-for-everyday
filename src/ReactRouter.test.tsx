@@ -2,7 +2,7 @@ import RoutingContainer from './RoutingContainer';
 import {
   render,
   screen,
-  userReducerInitialState as initialState,
+  userSliceInitialState as initialState,
 } from './utils/tests/test-utils';
 
 describe('RoutingContainer tests', () => {

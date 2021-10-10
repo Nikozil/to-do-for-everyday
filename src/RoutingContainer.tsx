@@ -5,7 +5,7 @@ import PreloaderPage from './assets/PreloaderPage/PreloaderPage';
 import AppPage from './components/AppPage/AppPage';
 import LoginPage from './components/Pages/LoginPage/LoginPage';
 import { useRequireAuth } from './hooks/useRequireAuth';
-import { updateUserData } from './Redux/modules/userReducer';
+import { updateUserData } from './Redux/modules/userSlice';
 import { AppStateType } from './Redux/store';
 
 const RoutingContainer: React.FC = () => {

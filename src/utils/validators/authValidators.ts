@@ -1,4 +1,4 @@
-export function validateEmail(value: string) {
+export const validateEmail = (value: string): string | undefined => {
   let error;
   if (!value) {
     error = 'Email не указан';
@@ -6,12 +6,23 @@ export function validateEmail(value: string) {
     error = 'Неверный email';
   }
   return error;
-}
-export function validatePassword(value: string) {
+};
+export const validatePassword = (value: string): string | undefined => {
   let error;
   if (!value) {
     error = 'Пароль не указан';
   }
 
   return error;
-}
+};
+export const validateConfirmPassword = (
+  value: string,
+  confirmValue: string
+): string | undefined => {
+  let error;
+  if (value !== confirmValue) {
+    error = 'Пароль не совпадает';
+  }
+
+  return error;
+};

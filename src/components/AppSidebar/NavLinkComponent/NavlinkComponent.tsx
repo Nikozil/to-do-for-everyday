@@ -2,7 +2,7 @@ import React from 'react';
 
 import { NavLink } from 'react-router-dom';
 import styles from './NavLinkComponent.module.scss';
-const cn = require('classnames');
+import cn from 'classnames';
 
 const NavLinkComponent: React.FC<NavLinkProps> = ({ link, Icon }) => {
   return (

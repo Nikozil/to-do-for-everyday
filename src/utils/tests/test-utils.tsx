@@ -5,7 +5,7 @@ import React, { ReactElement } from 'react';
 import { Provider } from 'react-redux';
 import { Router } from 'react-router-dom';
 import reduxThunk from 'redux-thunk';
-import userSlice, { UserData } from '../../Redux/modules/userReducer';
+import userSlice, { UserData } from '../../Redux/modules/userSlice';
 
 const reducer = {
   user: userSlice.reducer,
@@ -39,7 +39,7 @@ export * from '@testing-library/react';
 export { render };
 
 //userReducer initial state
-export let userReducerInitialState = {
+export let userSliceInitialState = {
   userData: {
     uid: '',
     displayName: null,

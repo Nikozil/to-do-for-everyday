@@ -1,4 +1,8 @@
-import { validateEmail, validatePassword } from './authValidators';
+import {
+  validateConfirmPassword,
+  validateEmail,
+  validatePassword,
+} from './authValidators';
 describe('enter email', () => {
   it('enter wrong email', () => {
     const wrongEmail = [
@@ -27,5 +31,15 @@ describe('enter password', () => {
   });
   it('enter noempty password', () => {
     expect(validatePassword('Password')).toBeUndefined();
+  });
+});
+describe('confirm password', () => {
+  it('enter different  password', () => {
+    expect(validateConfirmPassword('Password', 'Pasword')).toMatch(
+      /Пароль не совпадает/
+    );
+  });
+  it('enter identical  password', () => {
+    expect(validateConfirmPassword('Password', 'Password')).toBeUndefined();
   });
 });
