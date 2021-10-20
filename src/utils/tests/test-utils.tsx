@@ -5,10 +5,12 @@ import React, { ReactElement } from 'react';
 import { Provider } from 'react-redux';
 import { Router } from 'react-router-dom';
 import reduxThunk from 'redux-thunk';
+import tasksSlice, { Task } from '../../Redux/modules/tasksSlice';
 import userSlice, { UserData } from '../../Redux/modules/userSlice';
 
 const reducer = {
   user: userSlice.reducer,
+  tasks: tasksSlice.reducer,
 };
 const render = (
   ui: ReactElement,
@@ -48,6 +50,11 @@ export let userSliceInitialState = {
   authStatus: false,
   initStatus: false,
   loginError: null,
+};
+//tasksReducer initial state
+export let tasksSliceInitialState = {
+  tasksList: [] as Task[],
+  initStatus: false as boolean,
 };
 
 //Types

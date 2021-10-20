@@ -14,12 +14,15 @@ import {
 } from '@firebase/auth';
 import { Dispatch } from 'react';
 import { getFirebase, getReCaptcha } from '../firebase';
+import { getFirestore } from 'firebase/firestore';
 
 export const firebaseApp = getFirebase();
 if (!firebaseApp) throw new Error('Firebase not initialized');
 
 export const auth = getAuth();
+
 export const appCheck = getReCaptcha(firebaseApp);
+export const db = getFirestore();
 
 export const AuthAPI = {
   signUp: async (email: string, password: string, remember: boolean) => {

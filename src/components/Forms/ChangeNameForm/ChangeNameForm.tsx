@@ -20,7 +20,7 @@ const ChangeNameForm: React.FC<PropsType> = ({ displayName, handleSubmit }) => {
               id="displayName"
               name="displayName"
               placeholder="Имя"
-              type="displayName"
+              type="text"
               className="form-control"
             />
           </div>

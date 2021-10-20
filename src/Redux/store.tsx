@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { AnyAction } from 'redux';
 import reduxThunk, { ThunkAction } from 'redux-thunk';
+import tasksSlice from './modules/tasksSlice';
 import userSlice from './modules/userSlice';
 
 const reducer = {
   user: userSlice.reducer,
+  tasks: tasksSlice.reducer,
 };
 
 export type AppStateType = ReturnType<typeof store.getState>;

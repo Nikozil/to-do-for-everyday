@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CheckListPage render correct 1`] = `
+<DocumentFragment>
+  <div
+    class="wrapper"
+  >
+    <div
+      class="content"
+    >
+      <div
+        class="my-4"
+      >
+        <form
+          action="#"
+        >
+          <div
+            class="mb-1"
+          >
+            <input
+              autocomplete="off"
+              class="form-control"
+              id="newTask"
+              name="newTask"
+              placeholder="Новая Задача"
+              type="text"
+              value=""
+            />
+          </div>
+        </form>
+      </div>
+      <div
+        class="spinner-border  spinner"
+        role="status"
+      >
+        <span
+          class="visually-hidden"
+        >
+          Loading...
+        </span>
+      </div>
+    </div>
+  </div>
+   
+</DocumentFragment>
+`;

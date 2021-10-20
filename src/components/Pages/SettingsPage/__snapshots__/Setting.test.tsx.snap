@@ -25,7 +25,7 @@ exports[`Settings Page tests render correct 1`] = `
             id="displayName"
             name="displayName"
             placeholder="Имя"
-            type="displayName"
+            type="text"
             value=""
           />
         </div>

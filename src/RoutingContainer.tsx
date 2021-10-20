@@ -17,7 +17,7 @@ const RoutingContainer: React.FC = () => {
 
   useEffect(() => {
     dispatch(updateUserData());
-  });
+  }, [dispatch]);
 
   if (!initStatus) {
     return <PreloaderPage />;
