@@ -24,21 +24,23 @@ const TaskComponent: React.FC<PropsType> = ({
   };
   return (
     <div className={styles.content}>
-      <span>
-        <span
+      <span className={styles.task}>
+        <button
+          name={'delete task'}
           onClick={clickDeleteHandler}
           className={styles.doneToggle}
           data-testid="delete-button">
           <ImCross />
-        </span>{' '}
-        {name}
+        </button>
+        <span className={styles.taskName}>{name}</span>
       </span>
-      <span
+      <button
+        name={'task done'}
         onClick={clickCheckHandler}
         className={styles.doneToggle}
         data-testid="check-button">
         {done ? <ImCheckboxChecked /> : <ImCheckboxUnchecked />}
-      </span>
+      </button>
     </div>
   );
 };

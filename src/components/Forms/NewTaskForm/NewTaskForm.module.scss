@@ -1,0 +1,5 @@
+@import '../../../App.scss';
+
+.newTask {
+  @include focus-important;
+}

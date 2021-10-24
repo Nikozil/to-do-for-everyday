@@ -1,5 +1,7 @@
 import React from 'react';
 import { Field, Form, Formik } from 'formik';
+import cn from 'classnames';
+import styles from './NewTaskForm.module.scss';
 
 const NewTaskForm: React.FC<PropsType> = ({ handleSubmit }) => {
   const initialValues: MyFormValues = {
@@ -20,7 +22,7 @@ const NewTaskForm: React.FC<PropsType> = ({ handleSubmit }) => {
               name="newTask"
               placeholder="Новая Задача"
               type="text"
-              className="form-control"
+              className={cn('form-control', styles.newTask)}
               autoComplete="off"
             />
           </div>

@@ -19,7 +19,7 @@ exports[`CheckListPage render correct 1`] = `
           >
             <input
               autocomplete="off"
-              class="form-control"
+              class="form-control newTask"
               id="newTask"
               name="newTask"
               placeholder="Новая Задача"

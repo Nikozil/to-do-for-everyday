@@ -10,3 +10,17 @@ $B-color: #9fc0f5;
 $C-color: #86a2cf;
 $text-color: #000000;
 $nav-icon-color: #fff;
+
+@mixin focus {
+  border: none;
+  outline: none;
+  &:focus-visible {
+    box-shadow: 0 0 0 0.25rem rgba(130, 138, 145, 0.5);
+  }
+}
+@mixin focus-important {
+  &:focus-visible {
+    border-color: rgba(130, 138, 145, 0.5) !important;
+    box-shadow: 0 0 0 0.25rem rgba(130, 138, 145, 0.5) !important;
+  }
+}

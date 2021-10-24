@@ -29,4 +29,5 @@
     color: white;
     background-color: $button-color-hover;
   }
+  @include focus;
 }
