@@ -4,11 +4,10 @@ import { render, screen, waitFor } from '../../../utils/tests/test-utils';
 import LoginForm from './LoginForm';
 
 const handleSubmit = jest.fn();
-const loginError = null;
 
 describe('LoginForm tests', () => {
   it('rendering and submitting', async () => {
-    render(<LoginForm loginError={loginError} handleSubmit={handleSubmit} />);
+    render(<LoginForm handleSubmit={handleSubmit} />);
 
     userEvent.type(screen.getByLabelText(/email/i), 'test@test.com');
     userEvent.type(screen.getByLabelText(/password/i), 'password');
@@ -28,7 +27,7 @@ describe('LoginForm tests', () => {
   });
 
   it('rendering and enter wrongEmail', async () => {
-    render(<LoginForm loginError={loginError} handleSubmit={handleSubmit} />);
+    render(<LoginForm handleSubmit={handleSubmit} />);
     userEvent.type(screen.getByLabelText(/email/i), 'test.com');
     userEvent.type(screen.getByLabelText(/password/i), 'password');
 
@@ -41,7 +40,7 @@ describe('LoginForm tests', () => {
   });
 
   it('email and password not entered', async () => {
-    render(<LoginForm loginError={loginError} handleSubmit={handleSubmit} />);
+    render(<LoginForm handleSubmit={handleSubmit} />);
 
     userEvent.click(screen.getByRole('button', { name: /войти/i }));
 
@@ -52,12 +51,18 @@ describe('LoginForm tests', () => {
     });
   });
   it('rendering error due to failed login', async () => {
-    render(
-      <LoginForm
-        loginError={'Неверный логин или пароль'}
-        handleSubmit={handleSubmit}
-      />
-    );
-    expect(screen.getByText(/Неверный логин или пароль/i)).toBeInTheDocument();
+    handleSubmit.mockReturnValue('Неверный логин или пароль');
+    render(<LoginForm handleSubmit={handleSubmit} />);
+    userEvent.type(screen.getByLabelText(/email/i), 'test@test.com');
+    userEvent.type(screen.getByLabelText(/password/i), 'wrongPassword');
+
+    userEvent.click(screen.getByRole('button', { name: /войти/i }));
+
+    await waitFor(() => {
+      expect(handleSubmit).toHaveBeenCalled();
+      expect(
+        screen.getByText(/Неверный логин или пароль/i)
+      ).toBeInTheDocument();
+    });
   });
 });

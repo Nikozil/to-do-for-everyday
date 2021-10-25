@@ -5,7 +5,7 @@ import {
   validatePassword,
 } from '../../../utils/validators/authValidators';
 
-const LoginForm: React.FC<PropsType> = ({ handleSubmit, loginError }) => {
+const LoginForm: React.FC<PropsType> = ({ handleSubmit }) => {
   const initialValues: MyFormValues = {
     email: '',
     password: '',
@@ -15,7 +15,12 @@ const LoginForm: React.FC<PropsType> = ({ handleSubmit, loginError }) => {
     <Formik
       initialValues={initialValues}
       onSubmit={async (values, { setStatus }) => {
-        await handleSubmit(values.email, values.password, values.remember);
+        let response = await handleSubmit(
+          values.email,
+          values.password,
+          values.remember
+        );
+        setStatus(response);
       }}>
       {({ errors, touched, isValidating, status }) => (
         <Form>
@@ -50,7 +55,7 @@ const LoginForm: React.FC<PropsType> = ({ handleSubmit, loginError }) => {
             />
             <div className="form-text" style={{ height: '21px' }}>
               <ErrorMessage name="password" />
-              {loginError && <>{loginError}</>}
+              {status && <>{status}</>}
             </div>
           </div>
 
@@ -84,5 +89,4 @@ interface MyFormValues {
 }
 interface PropsType {
   handleSubmit: (email: string, password: string, remember: boolean) => void;
-  loginError: string | null;
 }

@@ -1,6 +1,5 @@
 import userSlice, {
   setAuthStatus,
-  setError,
   setInitStatus,
   setUserData,
   signIn,
@@ -44,13 +43,7 @@ describe('userSlice', () => {
         userData: { uid: '12345', email: 'mail@mail.ru' },
       });
     });
-    it('should add new loginError', () => {
-      const error = 'Wrong password';
-      expect(reducer(undefined, setError(error))).toEqual({
-        ...initialState,
-        loginError: 'Wrong password',
-      });
-    });
+
     it('should change authStatus', () => {
       expect(reducer(undefined, setAuthStatus(true))).toEqual({
         ...initialState,
@@ -71,19 +64,8 @@ describe('userSlice', () => {
         const thunk = signIn('123', '123', true);
         AuthAPIMock.signIn.mockResolvedValue(result);
         await thunk(dispatchMock, getStateMock, {});
-        expect(dispatchMock).toHaveBeenCalled();
-        expect(dispatchMock).toHaveBeenCalledWith(setError(null));
-      });
-      it('signIn fail', async () => {
-        const thunk = signIn('123', '123', true);
-        AuthAPIMock.signIn.mockRejectedValue(
-          new Error('Неверный логин или пароль')
-        );
-        await thunk(dispatchMock, getStateMock, {});
-        expect(dispatchMock).toHaveBeenCalled();
-        expect(dispatchMock).toHaveBeenCalledWith(
-          setError('Неверный логин или пароль')
-        );
+        expect(AuthAPIMock.signIn).toHaveBeenCalled();
+        expect(AuthAPIMock.signIn).toHaveBeenCalledWith('123', '123', true);
       });
     });
     describe('signOut', () => {

@@ -49,7 +49,6 @@ export let userSliceInitialState = {
   } as UserData,
   authStatus: false,
   initStatus: false,
-  loginError: null,
 };
 //tasksReducer initial state
 export let tasksSliceInitialState = {

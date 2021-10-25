@@ -74,6 +74,7 @@ export const AuthAPI = {
         return responce;
       } catch (error) {
         console.log('error', error);
+        throw new Error('Что-то пошло не так');
       }
     }
   },

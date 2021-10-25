@@ -8,7 +8,6 @@ let initialState = {
   userData: { uid: '', displayName: null, email: null } as UserData,
   authStatus: false as boolean,
   initStatus: false as boolean,
-  loginError: null as LoginErrorType,
 };
 
 export type initialStateType = typeof initialState;
@@ -26,29 +25,29 @@ const userSlice = createSlice({
     setInitStatus: (state, action: PayloadAction<boolean>) => {
       state.initStatus = action.payload;
     },
-    setError: (state, action: PayloadAction<LoginErrorType>) => {
-      state.loginError = action.payload;
-    },
   },
 });
 
-export const { setUserData, setAuthStatus, setInitStatus, setError } =
-  userSlice.actions;
+export const { setUserData, setAuthStatus, setInitStatus } = userSlice.actions;
 
 export const signIn =
   (email: string, password: string, remember: boolean): AppThunk =>
   async (dispatch) => {
     try {
       await AuthAPI.signIn(email, password, remember);
-      dispatch(setError(null));
+      return 'Авторизация выполнена';
     } catch (err: any) {
-      dispatch(setError(err.message as string));
+      return err.message as string;
     }
   };
 export const signOut = (): AppThunk => async (dispatch) => {
-  await AuthAPI.signOut();
-  dispatch(setAuthStatus(false));
-  dispatch(setUserData(initialState.userData));
+  try {
+    await AuthAPI.signOut();
+    dispatch(setAuthStatus(false));
+    dispatch(setUserData(initialState.userData));
+  } catch (err: any) {
+    return err.message as string;
+  }
 };
 export const updateUserData = (): AppThunk => async (dispatch) => {
   await AuthAPI.updateUserStatus(
@@ -80,7 +79,5 @@ export const updatePassword =
   };
 
 export default userSlice;
-
-export type LoginErrorType = string | null;
 
 export type UserData = Pick<User, 'uid' | 'displayName' | 'email'>;

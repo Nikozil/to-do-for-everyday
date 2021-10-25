@@ -24,6 +24,23 @@ describe('ChangePasswordForm tests', () => {
       expect(handleSubmit).toHaveBeenCalledWith('oldPassword', 'newPassword');
     });
   });
+  it('enter wrong oldPassword', async () => {
+    handleSubmit.mockReturnValue('Неверный пароль');
+    render(<ChangePasswordForm handleSubmit={handleSubmit} />);
+    userEvent.type(screen.getByLabelText(/Старый пароль/i), 'wrongOldPassword');
+    userEvent.type(screen.getByLabelText(/^Новый пароль$/i), 'newPassword');
+    userEvent.type(
+      screen.getByLabelText(/Подтвердите новый пароль/i),
+      'newPassword'
+    );
+
+    userEvent.click(screen.getByRole('button', { name: /Изменить/i }));
+
+    await waitFor(() => {
+      expect(handleSubmit).toHaveBeenCalled();
+      expect(screen.getByText(/Неверный пароль/i)).toBeInTheDocument();
+    });
+  });
   it('new password not entered', async () => {
     render(<ChangePasswordForm handleSubmit={handleSubmit} />);
     userEvent.type(screen.getByLabelText(/Старый пароль/i), 'oldPassword');

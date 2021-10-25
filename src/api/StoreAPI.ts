@@ -29,14 +29,7 @@ export const StoreAPI = {
         const querySnapshot = await getDocs(
           collection(db, `users/${userid}/tasks`)
         );
-        console.log('Server asks');
 
-        // console.log(
-        //   querySnapshot.docs.map((i) => {
-        //     const id = i.id;
-        //     return { id, data: { ...i.data() } };
-        //   })
-        // );
         let tasks = querySnapshot.docs.map((i) => {
           const id = i.id;
           return { id, data: { ...i.data() } } as Task;
