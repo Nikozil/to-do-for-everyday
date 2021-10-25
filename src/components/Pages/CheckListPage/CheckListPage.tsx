@@ -16,6 +16,9 @@ import cn from 'classnames';
 
 const CheckListPage = () => {
   const tasks = useSelector((state: AppStateType) => state.tasks.tasksList);
+  const undoneTasks = tasks.filter((i) => !i.data.done);
+  const doneTasks = tasks.filter((i) => i.data.done);
+
   const initTasksStatus = useSelector(
     (state: AppStateType) => state.tasks.initStatus
   );
@@ -53,9 +56,21 @@ const CheckListPage = () => {
         {initTasksStatus ? (
           <>
             <span>Задачи</span>
-            {tasks.filter((i) => !i.data.done).map(mapTaskComponent)}
+            {undoneTasks.length ? (
+              undoneTasks.map(mapTaskComponent)
+            ) : (
+              <span className={styles['taskList__comment']}>
+                Нет новых задач
+              </span>
+            )}
             <span>Выполнено</span>
-            {tasks.filter((i) => i.data.done).map(mapTaskComponent)}
+            {doneTasks.length ? (
+              doneTasks.map(mapTaskComponent)
+            ) : (
+              <span className={styles['taskList__comment']}>
+                Задачи не выполнены
+              </span>
+            )}
           </>
         ) : (
           <div className={cn('spinner-border ', styles.spinner)} role="status">

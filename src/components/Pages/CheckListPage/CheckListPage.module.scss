@@ -19,8 +19,16 @@
 
   font-size: 1.5em;
   color: $primary-color;
+  @media screen and (max-width: 767px) {
+    font-size: 1.2rem;
+    margin: 0 15px 0 10px;
+  }
 }
 .spinner {
   margin: 0 auto 0 auto;
   color: $primary-color !important;
+}
+.taskList__comment {
+  color: $comment-color;
+  font-size: 0.8em;
 }
