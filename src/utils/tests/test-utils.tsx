@@ -5,12 +5,14 @@ import React, { ReactElement } from 'react';
 import { Provider } from 'react-redux';
 import { Router } from 'react-router-dom';
 import reduxThunk from 'redux-thunk';
+import clockSlice from '../../Redux/modules/clockSlice';
 import tasksSlice, { Task } from '../../Redux/modules/tasksSlice';
 import userSlice, { UserData } from '../../Redux/modules/userSlice';
 
 const reducer = {
   user: userSlice.reducer,
   tasks: tasksSlice.reducer,
+  clock: clockSlice.reducer,
 };
 const render = (
   ui: ReactElement,

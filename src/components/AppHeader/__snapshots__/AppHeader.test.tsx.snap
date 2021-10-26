@@ -8,6 +8,9 @@ exports[`AppHeader render correct 1`] = `
     <div
       class="pagename"
     />
+    <div>
+       
+    </div>
     <div
       class="usermenu"
     >

@@ -10,6 +10,8 @@
 .pagename {
   margin-left: 5px;
   font-size: 1.5rem;
+  width: 150px;
+
   @media screen and (max-width: 767px) {
     font-size: 1.2rem;
   }
@@ -18,6 +20,8 @@
 .usermenu {
   display: flex;
   align-items: center;
+  width: 150px;
+  justify-content: flex-end;
 }
 .username {
   padding: 2px;
