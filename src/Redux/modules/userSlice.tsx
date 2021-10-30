@@ -4,7 +4,7 @@ import { AuthAPI } from '../../api/AuthAPI';
 import { UserAPI } from '../../api/UserAPI';
 import { AppThunk } from '../store';
 
-let initialState = {
+export const initialState = {
   userData: { uid: '', displayName: null, email: null } as UserData,
   authStatus: false as boolean,
   initStatus: false as boolean,

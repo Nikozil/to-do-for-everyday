@@ -1,9 +1,6 @@
+import { initialState } from './Redux/modules/userSlice';
 import RoutingContainer from './RoutingContainer';
-import {
-  render,
-  screen,
-  userSliceInitialState as initialState,
-} from './utils/tests/test-utils';
+import { render, screen } from './utils/tests/test-utils';
 
 describe('RoutingContainer tests', () => {
   it('default routing must show Logo', () => {

@@ -1,4 +1,5 @@
 import userSlice, {
+  initialState,
   setAuthStatus,
   setInitStatus,
   setUserData,
@@ -11,7 +12,6 @@ import userSlice, {
 import { AuthAPI } from '../../api/AuthAPI';
 import { UserAPI } from '../../api/UserAPI';
 import { User } from '@firebase/auth/dist/auth-exp-public';
-import { userSliceInitialState as initialState } from '../../utils/tests/test-utils';
 import { AnyAction } from 'redux';
 const reducer = userSlice.reducer;
 const getStateMock = jest.fn();

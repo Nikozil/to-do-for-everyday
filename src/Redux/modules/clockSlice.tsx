@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { getTime } from 'date-fns';
 import { AppThunk } from '../store';
 
-export let initialState = {
+export const initialState = {
   date: null as number | null,
   interval: undefined as number | undefined,
 };

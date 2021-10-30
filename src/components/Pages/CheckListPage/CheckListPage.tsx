@@ -1,49 +1,71 @@
+import cn from 'classnames';
+import { endOfToday, getTime } from 'date-fns';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   addTask,
-  updateTask,
-  getTasks,
+  checkTask,
   deleteTask,
+  getTasks,
   Task,
-  PartialTaskData,
+  uncheckTask,
+  updateTask,
 } from '../../../Redux/modules/tasksSlice';
 import { AppStateType } from '../../../Redux/store';
-import TaskComponent from './TaskComponent/TaskComponent';
-import styles from './CheckListPage.module.scss';
 import NewTaskForm from '../../Forms/NewTaskForm/NewTaskForm';
-import cn from 'classnames';
+import styles from './CheckListPage.module.scss';
+import DoneTaskComponent from './DoneTaskComponent/DoneTaskComponent';
+import TaskComponent from './TaskComponent/TaskComponent';
 
 const CheckListPage = () => {
-  const tasks = useSelector((state: AppStateType) => state.tasks.tasksList);
-  const undoneTasks = tasks.filter((i) => !i.data.done);
-  const doneTasks = tasks.filter((i) => i.data.done);
-
   const initTasksStatus = useSelector(
     (state: AppStateType) => state.tasks.initStatus
   );
+  const tasks = useSelector((state: AppStateType) => state.tasks.tasksList);
+  const undoneTasks = tasks.filter(
+    (i) => !i.data.done && i.data.time <= getTime(endOfToday())
+  );
+  const doneTasks = useSelector(
+    (state: AppStateType) => state.tasks.doneTasksList
+  );
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getTasks());
   }, [dispatch]);
 
   const newTaskSubmit = (task: string) => {
-    dispatch(addTask(task));
+    let time = new Date().getTime();
+    dispatch(addTask(task, time));
   };
-  const taskComponentCheckHandler = (id: string, data: PartialTaskData) => {
-    dispatch(updateTask(id, data));
+  const taskComponentCheckHandler = (task: Task) => {
+    dispatch(checkTask(task));
+  };
+  const taskComponentUncheckHandler = (id: string) => {
+    dispatch(uncheckTask(id));
+  };
+  const taskComponentRepeatHandler = (id: string) => {
+    dispatch(updateTask(id, { repeat: 1 }));
   };
   const taskComponentDeleteHandler = (id: string) => {
     dispatch(deleteTask(id));
   };
-  const mapTaskComponent = (i: Task) => (
+
+  const mapTaskComponent = (task: Task) => (
     <TaskComponent
-      id={i.id}
-      key={i.id}
-      name={i.data.name}
-      done={i.data.done}
+      task={task}
+      key={task.id}
       checkHandler={taskComponentCheckHandler}
+      repeatHandler={taskComponentRepeatHandler}
       deleteHandler={taskComponentDeleteHandler}
+    />
+  );
+  const mapDoneTaskComponent = ([id, name]: string[]) => (
+    <DoneTaskComponent
+      id={id}
+      key={id}
+      name={name}
+      uncheckHandler={taskComponentUncheckHandler}
     />
   );
 
@@ -64,8 +86,8 @@ const CheckListPage = () => {
               </span>
             )}
             <span>Выполнено</span>
-            {doneTasks.length ? (
-              doneTasks.map(mapTaskComponent)
+            {Object.keys(doneTasks).length ? (
+              Object.entries(doneTasks).map(mapDoneTaskComponent)
             ) : (
               <span className={styles['taskList__comment']}>
                 Задачи не выполнены

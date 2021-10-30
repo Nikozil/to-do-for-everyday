@@ -6,8 +6,8 @@ import { Provider } from 'react-redux';
 import { Router } from 'react-router-dom';
 import reduxThunk from 'redux-thunk';
 import clockSlice from '../../Redux/modules/clockSlice';
-import tasksSlice, { Task } from '../../Redux/modules/tasksSlice';
-import userSlice, { UserData } from '../../Redux/modules/userSlice';
+import tasksSlice from '../../Redux/modules/tasksSlice';
+import userSlice from '../../Redux/modules/userSlice';
 
 const reducer = {
   user: userSlice.reducer,
@@ -41,22 +41,6 @@ const render = (
 export * from '@testing-library/react';
 // override render method
 export { render };
-
-//userReducer initial state
-export let userSliceInitialState = {
-  userData: {
-    uid: '',
-    displayName: null,
-    email: null,
-  } as UserData,
-  authStatus: false,
-  initStatus: false,
-};
-//tasksReducer initial state
-export let tasksSliceInitialState = {
-  tasksList: [] as Task[],
-  initStatus: false as boolean,
-};
 
 //Types
 interface WrapperOptions {
