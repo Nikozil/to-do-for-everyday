@@ -209,16 +209,17 @@ describe('tasksSlice', () => {
         );
       });
       it('checkTask completed with repeat', async () => {
+        let date = new Date().getTime();
         let task = {
           id: '123',
-          data: { name: 'task0', done: false, time: 1635611630166, repeat: 1 },
+          data: { name: 'task0', done: false, time: date, repeat: 1 },
         };
         const thunk = checkTask(task);
         await thunk(dispatchMock, getStateMock, {});
         expect(StoreAPIMock.setBatchDoneTask).toHaveBeenCalled();
         const taskApiData = {
           taskId: '123',
-          taskData: { time: 1635698030166 },
+          taskData: { time: date + 86400000 },
         };
         const doneTaskApiData = {
           doneTaskDate: format(new Date(), 'dd.MM.yyyy'),
@@ -232,7 +233,7 @@ describe('tasksSlice', () => {
         expect(dispatchMock).toBeCalledTimes(2);
         expect(dispatchMock).toHaveBeenNthCalledWith(
           1,
-          editTask({ id: '123', data: { time: 1635698030166 } })
+          editTask({ id: '123', data: { time: date + 86400000 } })
         );
         expect(dispatchMock).toHaveBeenNthCalledWith(
           2,

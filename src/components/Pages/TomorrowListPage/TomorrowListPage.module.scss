@@ -1,0 +1,34 @@
+@import '../../../App.scss';
+
+.wrapper {
+  display: flex;
+  // align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+.content {
+  display: flex;
+  flex-direction: column;
+
+  height: 95%;
+  width: 100%;
+  min-width: 200px;
+  max-width: 600px;
+  margin: 0 5px 0 5px;
+  text-align: center;
+
+  font-size: 1.5em;
+  color: $primary-color;
+  @media screen and (max-width: 767px) {
+    font-size: 1.2rem;
+    margin: 0 15px 0 10px;
+  }
+}
+.spinner {
+  margin: 0 auto 0 auto;
+  color: $primary-color !important;
+}
+.taskList__comment {
+  color: $comment-color;
+  font-size: 0.8em;
+}

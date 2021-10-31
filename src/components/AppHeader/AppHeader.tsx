@@ -23,7 +23,10 @@ const AppHeader = () => {
   return (
     <header className={styles.header}>
       <div className={styles.pagename}>{PageNames[pathname]}</div>
-      <div> {date ? format(new Date(date), 'HH:mm') : null}</div>
+      <div className={styles.clock}>
+        {' '}
+        {date ? format(new Date(date), 'HH:mm') : null}
+      </div>
       <div className={styles.usermenu}>
         <Link to="/settings" className={styles.username}>
           {user.authStatus

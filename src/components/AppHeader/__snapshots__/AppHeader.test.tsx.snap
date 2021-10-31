@@ -8,7 +8,9 @@ exports[`AppHeader render correct 1`] = `
     <div
       class="pagename"
     />
-    <div>
+    <div
+      class="clock"
+    >
        
     </div>
     <div

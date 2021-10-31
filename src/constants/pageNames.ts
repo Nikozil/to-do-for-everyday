@@ -1,19 +1,26 @@
 import React from 'react';
-import { AiFillCheckCircle, AiOutlineBorderlessTable } from 'react-icons/ai';
+// import { AiOutlineBorderlessTable } from 'react-icons/ai';
+import { RiCheckboxBlankLine, RiCheckboxFill } from 'react-icons/ri';
 
 export const NavLinks: NavLinkType[] = [
   {
     name: 'Checklist',
     nameRus: 'Список дел',
     link: '/checkList',
-    Icon: AiFillCheckCircle,
+    Icon: RiCheckboxFill,
   },
   {
-    name: 'Table',
-    nameRus: 'Таблица',
-    link: '/table',
-    Icon: AiOutlineBorderlessTable,
+    name: 'Tomorrowlist',
+    nameRus: 'Дела на завтра',
+    link: '/tomorrowList',
+    Icon: RiCheckboxBlankLine,
   },
+  // {
+  //   name: 'Table',
+  //   nameRus: 'Таблица',
+  //   link: '/table',
+  //   Icon: AiOutlineBorderlessTable,
+  // },
 ];
 interface NavLinkType {
   name: string;
@@ -26,6 +33,7 @@ export const PageNames: PageNamesType = {
   '/checkList': 'Список дел',
   '/table': 'Таблица',
   '/settings': 'Настройки',
+  '/tomorrowList': 'Дела на завтра',
 };
 interface PageNamesType {
   [key: string]: string;
