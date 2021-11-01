@@ -7,8 +7,7 @@ describe('NewTaskForm tests', () => {
   it('rendering and click uncheck', async () => {
     render(
       <DoneTaskComponent
-        id={'123'}
-        name={'Task'}
+        task={{ id: '123', name: 'Task' }}
         uncheckHandler={uncheckHandler}
       />
     );
@@ -18,7 +17,7 @@ describe('NewTaskForm tests', () => {
     await waitFor(() => {
       expect(uncheckHandler).toHaveBeenCalled();
 
-      expect(uncheckHandler).toHaveBeenCalledWith('123');
+      expect(uncheckHandler).toHaveBeenCalledWith({ id: '123', name: 'Task' });
     });
   });
 });

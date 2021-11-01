@@ -6,6 +6,7 @@ import {
   addTask,
   checkTask,
   deleteTask,
+  DoneTask,
   getTasks,
   Task,
   uncheckTask,
@@ -26,7 +27,7 @@ const CheckListPage = () => {
     (i) => !i.data.done && i.data.time <= getTime(endOfToday())
   );
   const doneTasks = useSelector(
-    (state: AppStateType) => state.tasks.doneTasksList
+    (state: AppStateType) => state.tasks.doneDay.doneTasksList
   );
 
   const dispatch = useDispatch();
@@ -41,8 +42,8 @@ const CheckListPage = () => {
   const taskComponentCheckHandler = (task: Task) => {
     dispatch(checkTask(task));
   };
-  const taskComponentUncheckHandler = (id: string) => {
-    dispatch(uncheckTask(id));
+  const taskComponentUncheckHandler = (task: DoneTask) => {
+    dispatch(uncheckTask(task));
   };
   const taskComponentRepeatHandler = (id: string) => {
     dispatch(updateTask(id, { repeat: 1 }));
@@ -60,11 +61,10 @@ const CheckListPage = () => {
       deleteHandler={taskComponentDeleteHandler}
     />
   );
-  const mapDoneTaskComponent = ([id, name]: string[]) => (
+  const mapDoneTaskComponent = (task: DoneTask) => (
     <DoneTaskComponent
-      id={id}
-      key={id}
-      name={name}
+      task={task}
+      key={task.id}
       uncheckHandler={taskComponentUncheckHandler}
     />
   );
@@ -86,8 +86,9 @@ const CheckListPage = () => {
               </span>
             )}
             <span>Выполнено</span>
-            {Object.keys(doneTasks).length ? (
-              Object.entries(doneTasks).map(mapDoneTaskComponent)
+
+            {doneTasks.length ? (
+              doneTasks.map(mapDoneTaskComponent)
             ) : (
               <span className={styles['taskList__comment']}>
                 Задачи не выполнены

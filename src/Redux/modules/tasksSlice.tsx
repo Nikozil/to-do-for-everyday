@@ -5,7 +5,7 @@ import { AppThunk } from '../store';
 
 export const initialState = {
   tasksList: [] as Task[],
-  doneTasksList: {} as DoneTask,
+  doneDay: { score: 0, tag: '', doneTasksList: [] } as DoneDay,
   initStatus: false as boolean,
 };
 
@@ -33,17 +33,23 @@ const tasksSlice = createSlice({
     setInitStatus: (state, action: PayloadAction<boolean>) => {
       state.initStatus = action.payload;
     },
-    setDoneTasks: (state, action: PayloadAction<DoneTask>) => {
-      return { ...state, doneTasksList: action.payload };
+    setDoneDay: (state, action: PayloadAction<DoneDay>) => {
+      state.doneDay = action.payload;
     },
     addTaskToDoneTasksList: (state, action: PayloadAction<DoneTask>) => {
-      return {
-        ...state,
-        doneTasksList: { ...state.doneTasksList, ...action.payload },
-      };
+      state.doneDay.doneTasksList.push(action.payload);
     },
     removeTaskToDoneTasksList: (state, action: PayloadAction<string>) => {
-      delete state.doneTasksList[action.payload];
+      const newdoneTasksList = state.doneDay.doneTasksList.filter(
+        (task) => task.id !== action.payload
+      );
+      state.doneDay.doneTasksList = newdoneTasksList;
+    },
+    setTag: (state, action: PayloadAction<string>) => {
+      state.doneDay.tag = action.payload;
+    },
+    setScore: (state, action: PayloadAction<Score>) => {
+      state.doneDay.score = action.payload;
     },
   },
 });
@@ -53,23 +59,23 @@ export const {
   editTask,
   removeTask,
   setInitStatus,
-  setDoneTasks,
+  setDoneDay,
   addTaskToDoneTasksList,
   removeTaskToDoneTasksList,
+  setTag,
+  setScore,
 } = tasksSlice.actions;
 
 export const getTasks = (): AppThunk => async (dispatch) => {
   try {
     let tasks = await StoreAPI.getTask();
-    let doneTasks = await StoreAPI.getDoneTask(
-      format(new Date(), 'dd.MM.yyyy')
-    );
+    let doneDay = await StoreAPI.getDoneDay(format(new Date(), 'dd.MM.yyyy'));
 
     if (!tasks) throw new Error('Не удалось получить данные');
-    if (!doneTasks) throw new Error('Не удалось получить данные');
+    if (!doneDay) throw new Error('Не удалось получить данные');
 
     dispatch(setTasks(tasks));
-    dispatch(setDoneTasks(doneTasks));
+    dispatch(setDoneDay(doneDay));
     dispatch(setInitStatus(true));
   } catch (err: any) {
     return err.message as string;
@@ -120,27 +126,29 @@ export const checkTask =
         newData = { done: !done };
       }
       // add task to done list
-      const doneTasksList = {
-        [id]: name,
+      const doneTasks = {
+        id: id,
+        name: name,
       };
       //send data as batch
       const taskApiData = { taskId: id, taskData: newData };
       const doneTaskApiData = {
         doneTaskDate: format(new Date(), 'dd.MM.yyyy'),
-        doneTasks: doneTasksList,
-        doneTasksMerge: true,
+        doneTask: doneTasks,
+        doneTaskRemove: false,
       };
       await StoreAPI.setBatchDoneTask(taskApiData, doneTaskApiData);
       //update store
       dispatch(editTask({ id, data: newData }));
-      dispatch(addTaskToDoneTasksList(doneTasksList));
+      dispatch(addTaskToDoneTasksList(doneTasks));
     } catch (err: any) {
       return err.message as string;
     }
   };
 export const uncheckTask =
-  (id: string): AppThunk =>
+  (task: DoneTask): AppThunk =>
   async (dispatch, getState) => {
+    const { id, name } = task;
     try {
       let task = getState().tasks.tasksList.find((task) => task.id === id);
       if (task) {
@@ -153,15 +161,15 @@ export const uncheckTask =
         } else {
           newData = { done: !done };
         }
-        // add task to done list
-        let doneTasksList = { ...getState().tasks.doneTasksList };
-        delete doneTasksList[id];
-        //send data as batch
         const taskApiData = { taskId: id, taskData: newData };
+        const doneTask = {
+          id: id,
+          name: name,
+        };
         const doneTaskApiData = {
           doneTaskDate: format(new Date(), 'dd.MM.yyyy'),
-          doneTasks: doneTasksList,
-          doneTasksMerge: false,
+          doneTask: doneTask,
+          doneTaskRemove: true,
         };
         await StoreAPI.setBatchDoneTask(taskApiData, doneTaskApiData);
 
@@ -203,5 +211,12 @@ interface PartialTask {
   data: PartialTaskData;
 }
 export interface DoneTask {
-  [id: string]: string;
+  id: string;
+  name: string;
 }
+export interface DoneDay {
+  tag: string;
+  score: Score;
+  doneTasksList: DoneTask[];
+}
+type Score = 0 | 1 | 2 | 3 | 4 | 5;

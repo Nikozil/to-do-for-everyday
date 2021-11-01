@@ -1,18 +1,22 @@
 import {
-  collection,
-  getDocs,
-  getDoc,
   addDoc,
-  setDoc,
-  doc,
+  collection,
   deleteDoc,
+  doc,
+  getDoc,
+  getDocs,
+  setDoc,
   writeBatch,
+  updateDoc,
+  arrayUnion,
+  arrayRemove,
 } from 'firebase/firestore';
 import {
-  TaskData,
-  Task,
-  PartialTaskData,
+  DoneDay,
   DoneTask,
+  PartialTaskData,
+  Task,
+  TaskData,
 } from '../Redux/modules/tasksSlice';
 import { auth, db } from './AuthAPI';
 
@@ -54,7 +58,7 @@ export const StoreAPI = {
     if (userid) {
       try {
         const task = doc(db, `users/${userid}/tasks`, taskid);
-        await setDoc(task, data, { merge: true });
+        await updateDoc(task, data);
       } catch (err) {
         console.log(err);
       }
@@ -73,37 +77,44 @@ export const StoreAPI = {
       }
     }
   },
-  setDoneTask: async (date: string, doneTasks: DoneTask, merge: boolean) => {
+  setDoneDay: async (date: string, doneDay: Partial<DoneDay>) => {
     const userid = auth.currentUser?.uid;
 
     if (userid) {
       try {
-        await setDoc(
-          doc(db, `users/${userid}/doneTasksLists`, date),
-          doneTasks,
-          {
-            merge: merge,
-          }
-        );
+        await updateDoc(doc(db, `users/${userid}/day`, date), doneDay);
       } catch (err) {
         console.log(err);
       }
     }
   },
-  getDoneTask: async (date: string) => {
+  updateDoneDay: async (date: string, doneDay: DoneDay, merge: boolean) => {
     const userid = auth.currentUser?.uid;
 
     if (userid) {
       try {
-        const docRef = doc(db, `users/${userid}/doneTasksLists`, date);
+        await setDoc(doc(db, `users/${userid}/day`, date), doneDay, {
+          merge: merge,
+        });
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  },
+  getDoneDay: async (date: string) => {
+    const userid = auth.currentUser?.uid;
+
+    if (userid) {
+      try {
+        const docRef = doc(db, `users/${userid}/days`, date);
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
           //return doneTaskList
-          return docSnap.data() as DoneTask;
+          return docSnap.data() as DoneDay;
         } else {
           // doc.data() will be undefined in this case
           //return empty object as doneTaskList
-          return {} as DoneTask;
+          return {} as DoneDay;
         }
       } catch (err) {
         console.log(err);
@@ -111,12 +122,12 @@ export const StoreAPI = {
       }
     }
   },
-  deleteDoneTask: async (doneTaskDate: string) => {
+  deleteDoneDay: async (doneDayDate: string) => {
     const userid = auth.currentUser?.uid;
 
     if (userid) {
       try {
-        const task = doc(db, `users/${userid}/doneTasksLists`, doneTaskDate);
+        const task = doc(db, `users/${userid}/days`, doneDayDate);
 
         await deleteDoc(task);
       } catch (err) {
@@ -128,23 +139,23 @@ export const StoreAPI = {
     taskApiData: TaskApi,
     doneTaskApiData: DoneTaskApiData
   ) => {
-    const { taskId, taskData } = taskApiData;
-    const { doneTaskDate, doneTasks, doneTasksMerge } = doneTaskApiData;
-    const userid = auth.currentUser?.uid;
     const batch = writeBatch(db);
+    const userid = auth.currentUser?.uid;
+    const { taskId, taskData } = taskApiData;
+    const { doneTaskDate, doneTask, doneTaskRemove } = doneTaskApiData;
     if (userid) {
       try {
+        //updateTask
         const task = doc(db, `users/${userid}/tasks`, taskId);
-        batch.set(task, taskData, { merge: true });
+        batch.update(task, taskData);
+        //updateDoneTask
+        let updatedDoneTask = doneTaskRemove
+          ? arrayRemove(doneTask)
+          : arrayUnion(doneTask);
+        let doneDay = { doneTasksList: updatedDoneTask };
+        const doneDayDoc = doc(db, `users/${userid}/days`, doneTaskDate);
+        batch.update(doneDayDoc, doneDay);
 
-        const doneTask = doc(
-          db,
-          `users/${userid}/doneTasksLists`,
-          doneTaskDate
-        );
-        batch.set(doneTask, doneTasks, {
-          merge: doneTasksMerge,
-        });
         await batch.commit();
       } catch (err) {
         console.log(err);
@@ -159,6 +170,6 @@ interface TaskApi {
 }
 interface DoneTaskApiData {
   doneTaskDate: string;
-  doneTasks: DoneTask;
-  doneTasksMerge: boolean;
+  doneTask: Partial<DoneTask>;
+  doneTaskRemove: boolean;
 }

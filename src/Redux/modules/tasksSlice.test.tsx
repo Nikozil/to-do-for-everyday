@@ -1,24 +1,26 @@
-import { StoreAPI } from '../../api/StoreAPI';
-import { AnyAction } from 'redux';
-import tasksSlice, {
-  getTasks,
-  setTasks,
-  editTask,
-  Task,
-  removeTask,
-  setInitStatus,
-  addTask,
-  updateTask,
-  deleteTask,
-  initialState,
-  DoneTask,
-  setDoneTasks,
-  addTaskToDoneTasksList,
-  removeTaskToDoneTasksList,
-  checkTask,
-  uncheckTask,
-} from './tasksSlice';
 import { format } from 'date-fns';
+import { AnyAction } from 'redux';
+import { StoreAPI } from '../../api/StoreAPI';
+import tasksSlice, {
+  addTask,
+  addTaskToDoneTasksList,
+  checkTask,
+  deleteTask,
+  DoneDay,
+  editTask,
+  getTasks,
+  initialState,
+  removeTask,
+  removeTaskToDoneTasksList,
+  setDoneDay,
+  setInitStatus,
+  setScore,
+  setTag,
+  setTasks,
+  Task,
+  uncheckTask,
+  updateTask,
+} from './tasksSlice';
 const reducer = tasksSlice.reducer;
 const getStateMock = jest.fn();
 const dispatchMock = jest.fn();
@@ -33,10 +35,18 @@ const StoreAPIMock = StoreAPI as jest.Mocked<typeof StoreAPI>;
 let getTaskResult = [
   { id: '123', data: { name: 'task0', done: true } },
 ] as Task[];
-let getDoneTaskResult = { '12312321': 'Task' } as DoneTask;
+let getDoneDay = {
+  score: 3,
+  tag: 'Печальный День',
+  doneTasksList: [{ id: '1234', name: 'Task' }],
+} as DoneDay;
 let testInitialState = {
   tasksList: [{ id: '123', data: { name: 'task0', done: true } }] as Task[],
-  doneTasksList: { '1234': 'Task' } as DoneTask,
+  doneDay: {
+    score: 3,
+    tag: 'Печальный День',
+    doneTasksList: [{ id: '1234', name: 'Task' }],
+  } as DoneDay,
   initStatus: false as boolean,
 };
 
@@ -79,17 +89,32 @@ describe('tasksSlice', () => {
       });
     });
     it('should set DoneTasks', () => {
-      expect(reducer(undefined, setDoneTasks({ '123': 'Task' }))).toEqual({
+      let doneDay = {
+        score: 3,
+        tag: 'Бе',
+        doneTasksList: [{ id: '1234', name: 'Task' }],
+      } as DoneDay;
+      expect(reducer(undefined, setDoneDay(doneDay))).toEqual({
         ...initialState,
-        doneTasksList: { '123': 'Task' },
+        doneDay: doneDay,
       });
     });
     it('should add TaskToDoneTasksList', () => {
       expect(
-        reducer(testInitialState, addTaskToDoneTasksList({ '12345': 'Task2' }))
+        reducer(
+          testInitialState,
+          addTaskToDoneTasksList({ id: '12345', name: 'Task2' })
+        )
       ).toEqual({
         ...testInitialState,
-        doneTasksList: { '1234': 'Task', '12345': 'Task2' },
+        doneDay: {
+          score: 3,
+          tag: 'Печальный День',
+          doneTasksList: [
+            { id: '1234', name: 'Task' },
+            { id: '12345', name: 'Task2' },
+          ],
+        },
       });
     });
     it('should remove TaskToDoneTasksList', () => {
@@ -97,7 +122,31 @@ describe('tasksSlice', () => {
         reducer(testInitialState, removeTaskToDoneTasksList('1234'))
       ).toEqual({
         ...testInitialState,
-        doneTasksList: {},
+        doneDay: {
+          score: 3,
+          tag: 'Печальный День',
+          doneTasksList: [],
+        },
+      });
+    });
+    it('should set Tag', () => {
+      expect(reducer(testInitialState, setTag('Чудесный День'))).toEqual({
+        ...testInitialState,
+        doneDay: {
+          score: 3,
+          tag: 'Чудесный День',
+          doneTasksList: [{ id: '1234', name: 'Task' }],
+        },
+      });
+    });
+    it('should set Score', () => {
+      expect(reducer(testInitialState, setScore(2))).toEqual({
+        ...testInitialState,
+        doneDay: {
+          score: 2,
+          tag: 'Печальный День',
+          doneTasksList: [{ id: '1234', name: 'Task' }],
+        },
       });
     });
   });
@@ -107,7 +156,7 @@ describe('tasksSlice', () => {
       it('getTasks completed', async () => {
         const thunk = getTasks();
         StoreAPIMock.getTask.mockResolvedValue(getTaskResult);
-        StoreAPIMock.getDoneTask.mockResolvedValue(getDoneTaskResult);
+        StoreAPIMock.getDoneDay.mockResolvedValue(getDoneDay);
         await thunk(dispatchMock, getStateMock, {});
         expect(StoreAPIMock.getTask).toHaveBeenCalled();
         expect(dispatchMock).toBeCalledTimes(3);
@@ -115,10 +164,7 @@ describe('tasksSlice', () => {
           1,
           setTasks(getTaskResult)
         );
-        expect(dispatchMock).toHaveBeenNthCalledWith(
-          2,
-          setDoneTasks(getDoneTaskResult)
-        );
+        expect(dispatchMock).toHaveBeenNthCalledWith(2, setDoneDay(getDoneDay));
         expect(dispatchMock).toHaveBeenNthCalledWith(3, setInitStatus(true));
       });
     });
@@ -191,8 +237,8 @@ describe('tasksSlice', () => {
         const taskApiData = { taskId: '123', taskData: { done: true } };
         const doneTaskApiData = {
           doneTaskDate: format(new Date(), 'dd.MM.yyyy'),
-          doneTasks: { '123': 'task0' },
-          doneTasksMerge: true,
+          doneTask: { id: '123', name: 'task0' },
+          doneTaskRemove: false,
         };
         expect(StoreAPIMock.setBatchDoneTask).toHaveBeenCalledWith(
           taskApiData,
@@ -205,7 +251,7 @@ describe('tasksSlice', () => {
         );
         expect(dispatchMock).toHaveBeenNthCalledWith(
           2,
-          addTaskToDoneTasksList({ '123': 'task0' })
+          addTaskToDoneTasksList({ id: '123', name: 'task0' })
         );
       });
       it('checkTask completed with repeat', async () => {
@@ -223,8 +269,8 @@ describe('tasksSlice', () => {
         };
         const doneTaskApiData = {
           doneTaskDate: format(new Date(), 'dd.MM.yyyy'),
-          doneTasks: { '123': 'task0' },
-          doneTasksMerge: true,
+          doneTask: { id: '123', name: 'task0' },
+          doneTaskRemove: false,
         };
         expect(StoreAPIMock.setBatchDoneTask).toHaveBeenCalledWith(
           taskApiData,
@@ -237,7 +283,7 @@ describe('tasksSlice', () => {
         );
         expect(dispatchMock).toHaveBeenNthCalledWith(
           2,
-          addTaskToDoneTasksList({ '123': 'task0' })
+          addTaskToDoneTasksList({ id: '123', name: 'task0' })
         );
       });
       it('updateTask uncompleted', async () => {
@@ -260,14 +306,14 @@ describe('tasksSlice', () => {
         };
 
         getStateMock.mockReturnValue({ tasks: { tasksList: [task] } });
-        const thunk = uncheckTask('123');
+        const thunk = uncheckTask({ id: '123', name: 'Task' });
         await thunk(dispatchMock, getStateMock, {});
         expect(StoreAPIMock.setBatchDoneTask).toHaveBeenCalled();
         const taskApiData = { taskId: '123', taskData: { done: false } };
         const doneTaskApiData = {
           doneTaskDate: format(new Date(), 'dd.MM.yyyy'),
-          doneTasks: {},
-          doneTasksMerge: false,
+          doneTask: { id: '123', name: 'Task' },
+          doneTaskRemove: true,
         };
         expect(StoreAPIMock.setBatchDoneTask).toHaveBeenCalledWith(
           taskApiData,
@@ -290,7 +336,7 @@ describe('tasksSlice', () => {
         };
 
         getStateMock.mockReturnValue({ tasks: { tasksList: [task] } });
-        const thunk = uncheckTask('123');
+        const thunk = uncheckTask({ id: '123', name: 'Task' });
         await thunk(dispatchMock, getStateMock, {});
         expect(StoreAPIMock.setBatchDoneTask).toHaveBeenCalled();
         const taskApiData = {
@@ -299,8 +345,8 @@ describe('tasksSlice', () => {
         };
         const doneTaskApiData = {
           doneTaskDate: format(new Date(), 'dd.MM.yyyy'),
-          doneTasks: {},
-          doneTasksMerge: false,
+          doneTask: { id: '123', name: 'Task' },
+          doneTaskRemove: true,
         };
         expect(StoreAPIMock.setBatchDoneTask).toHaveBeenCalledWith(
           taskApiData,
@@ -318,7 +364,7 @@ describe('tasksSlice', () => {
       });
       it('uncheckTask uncompleted', async () => {
         getStateMock.mockReturnValue({ tasks: { tasksList: [] } });
-        const thunk = uncheckTask('123');
+        const thunk = uncheckTask({ id: '123', name: 'Task' });
         const result = await thunk(dispatchMock, getStateMock, {});
         expect(result).toBe('Нет такой задачи');
       });
