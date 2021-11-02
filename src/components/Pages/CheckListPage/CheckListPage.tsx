@@ -1,35 +1,17 @@
-import cn from 'classnames';
-import { endOfToday, getTime } from 'date-fns';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  addTask,
-  checkTask,
-  deleteTask,
-  DoneTask,
-  getTasks,
-  Task,
-  uncheckTask,
-  updateTask,
-} from '../../../Redux/modules/tasksSlice';
+import SpinComponent from '../../../assets/SpinComponent/SpinComponent';
+import { addTask, getTasks } from '../../../Redux/modules/tasksSlice';
 import { AppStateType } from '../../../Redux/store';
 import NewTaskForm from '../../Forms/NewTaskForm/NewTaskForm';
 import styles from './CheckListPage.module.scss';
-import DoneTaskComponent from './DoneTaskComponent/DoneTaskComponent';
-import TaskComponent from './TaskComponent/TaskComponent';
+import DayScoreComponent from './DayScoreComponent/DayScoreComponent';
+import TasksListComponent from './TasksListComponent/TasksListComponent';
 
 const CheckListPage = () => {
   const initTasksStatus = useSelector(
     (state: AppStateType) => state.tasks.initStatus
   );
-  const tasks = useSelector((state: AppStateType) => state.tasks.tasksList);
-  const undoneTasks = tasks.filter(
-    (i) => !i.data.done && i.data.time <= getTime(endOfToday())
-  );
-  const doneTasks = useSelector(
-    (state: AppStateType) => state.tasks.doneDay.doneTasksList
-  );
-
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getTasks());
@@ -39,67 +21,27 @@ const CheckListPage = () => {
     let time = new Date().getTime();
     dispatch(addTask(task, time));
   };
-  const taskComponentCheckHandler = (task: Task) => {
-    dispatch(checkTask(task));
-  };
-  const taskComponentUncheckHandler = (task: DoneTask) => {
-    dispatch(uncheckTask(task));
-  };
-  const taskComponentRepeatHandler = (id: string) => {
-    dispatch(updateTask(id, { repeat: 1 }));
-  };
-  const taskComponentDeleteHandler = (id: string) => {
-    dispatch(deleteTask(id));
-  };
-
-  const mapTaskComponent = (task: Task) => (
-    <TaskComponent
-      task={task}
-      key={task.id}
-      checkHandler={taskComponentCheckHandler}
-      repeatHandler={taskComponentRepeatHandler}
-      deleteHandler={taskComponentDeleteHandler}
-    />
-  );
-  const mapDoneTaskComponent = (task: DoneTask) => (
-    <DoneTaskComponent
-      task={task}
-      key={task.id}
-      uncheckHandler={taskComponentUncheckHandler}
-    />
-  );
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.content}>
-        <div className={'my-4'}>
-          <NewTaskForm handleSubmit={newTaskSubmit} />
-        </div>
-        {initTasksStatus ? (
-          <>
-            <span>Задачи</span>
-            {undoneTasks.length ? (
-              undoneTasks.map(mapTaskComponent)
-            ) : (
-              <span className={styles['taskList__comment']}>
-                Нет новых задач
-              </span>
-            )}
-            <span>Выполнено</span>
-
-            {doneTasks.length ? (
-              doneTasks.map(mapDoneTaskComponent)
-            ) : (
-              <span className={styles['taskList__comment']}>
-                Задачи не выполнены
-              </span>
-            )}
-          </>
-        ) : (
-          <div className={cn('spinner-border ', styles.spinner)} role="status">
-            <span className="visually-hidden">Loading...</span>
+        <div className={styles.tasks}>
+          <div className={'my-4'}>
+            <NewTaskForm handleSubmit={newTaskSubmit} />
           </div>
-        )}
+          {initTasksStatus ? (
+            <TasksListComponent />
+          ) : (
+            <SpinComponent style={styles.spinner} />
+          )}
+        </div>
+        <div className={styles.dayScore}>
+          {initTasksStatus ? (
+            <DayScoreComponent />
+          ) : (
+            <SpinComponent style={styles.spinner} />
+          )}
+        </div>
       </div>
     </div>
   );

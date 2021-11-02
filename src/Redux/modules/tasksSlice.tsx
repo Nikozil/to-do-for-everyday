@@ -34,7 +34,7 @@ const tasksSlice = createSlice({
       state.initStatus = action.payload;
     },
     setDoneDay: (state, action: PayloadAction<DoneDay>) => {
-      state.doneDay = action.payload;
+      state.doneDay = { ...state.doneDay, ...action.payload };
     },
     addTaskToDoneTasksList: (state, action: PayloadAction<DoneTask>) => {
       state.doneDay.doneTasksList.push(action.payload);
@@ -192,6 +192,30 @@ export const deleteTask =
       return err.message as string;
     }
   };
+export const addTag =
+  (tag: string): AppThunk =>
+  async (dispatch) => {
+    try {
+      const date = format(new Date(), 'dd.MM.yyyy');
+      const doneDay = { tag };
+      await StoreAPI.updateDoneDay(date, doneDay);
+      dispatch(setTag(tag));
+    } catch (err: any) {
+      return err.message as string;
+    }
+  };
+export const addScore =
+  (score: Score): AppThunk =>
+  async (dispatch) => {
+    try {
+      const date = format(new Date(), 'dd.MM.yyyy');
+      const doneDay = { score };
+      await StoreAPI.updateDoneDay(date, doneDay);
+      dispatch(setScore(score));
+    } catch (err: any) {
+      return err.message as string;
+    }
+  };
 
 export default tasksSlice;
 
@@ -219,4 +243,4 @@ export interface DoneDay {
   score: Score;
   doneTasksList: DoneTask[];
 }
-type Score = 0 | 1 | 2 | 3 | 4 | 5;
+export type Score = 0 | 1 | 2 | 3 | 4 | 5;

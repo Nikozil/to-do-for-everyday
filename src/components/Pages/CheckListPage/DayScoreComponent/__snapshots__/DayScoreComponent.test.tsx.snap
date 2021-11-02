@@ -1,0 +1,188 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DayScoreComponent render correct 1`] = `
+<DocumentFragment>
+  <div>
+    Итоги дня
+    <form
+      action="#"
+    >
+      <div
+        class="row g-2 align-items-center"
+      >
+        <div
+          class="col-auto"
+        >
+          <label
+            class="col-form-label-sm"
+            for="tag"
+          >
+            #Tag дня:
+          </label>
+        </div>
+        <div
+          class="col"
+        >
+          <input
+            autocomplete="off"
+            class="form-control form-control-sm"
+            id="tag"
+            name="tag"
+            placeholder="Tag"
+            type="text"
+            value=""
+          />
+        </div>
+      </div>
+    </form>
+    <form
+      action="#"
+    >
+      <div
+        class="row g-2 align-items-center"
+      >
+        <div
+          class="col-auto"
+        >
+          <div
+            class="col-form-label-sm"
+            id="my-radio-group"
+          >
+            Оченка дня
+          </div>
+        </div>
+        <div
+          class="col-auto"
+        >
+          <div
+            aria-labelledby="my-radio-group"
+            role="group"
+          >
+            <label
+              class="label"
+            >
+              <input
+                class="radio"
+                name="score"
+                type="radio"
+                value="1"
+              />
+              <svg
+                fill="currentColor"
+                height="29"
+                stroke="currentColor"
+                stroke-width="0"
+                version="1.1"
+                viewBox="0 0 16 16"
+                width="29"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M16 6.204l-5.528-0.803-2.472-5.009-2.472 5.009-5.528 0.803 4 3.899-0.944 5.505 4.944-2.599 4.944 2.599-0.944-5.505 4-3.899zM8 11.773l-3.492 1.836 0.667-3.888-2.825-2.753 3.904-0.567 1.746-3.537 1.746 3.537 3.904 0.567-2.825 2.753 0.667 3.888-3.492-1.836z"
+                />
+              </svg>
+            </label>
+            <label
+              class="label"
+            >
+              <input
+                class="radio"
+                name="score"
+                type="radio"
+                value="2"
+              />
+              <svg
+                fill="currentColor"
+                height="29"
+                stroke="currentColor"
+                stroke-width="0"
+                version="1.1"
+                viewBox="0 0 16 16"
+                width="29"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M16 6.204l-5.528-0.803-2.472-5.009-2.472 5.009-5.528 0.803 4 3.899-0.944 5.505 4.944-2.599 4.944 2.599-0.944-5.505 4-3.899zM8 11.773l-3.492 1.836 0.667-3.888-2.825-2.753 3.904-0.567 1.746-3.537 1.746 3.537 3.904 0.567-2.825 2.753 0.667 3.888-3.492-1.836z"
+                />
+              </svg>
+            </label>
+            <label
+              class="label"
+            >
+              <input
+                class="radio"
+                name="score"
+                type="radio"
+                value="3"
+              />
+              <svg
+                fill="currentColor"
+                height="29"
+                stroke="currentColor"
+                stroke-width="0"
+                version="1.1"
+                viewBox="0 0 16 16"
+                width="29"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M16 6.204l-5.528-0.803-2.472-5.009-2.472 5.009-5.528 0.803 4 3.899-0.944 5.505 4.944-2.599 4.944 2.599-0.944-5.505 4-3.899zM8 11.773l-3.492 1.836 0.667-3.888-2.825-2.753 3.904-0.567 1.746-3.537 1.746 3.537 3.904 0.567-2.825 2.753 0.667 3.888-3.492-1.836z"
+                />
+              </svg>
+            </label>
+            <label
+              class="label"
+            >
+              <input
+                class="radio"
+                name="score"
+                type="radio"
+                value="4"
+              />
+              <svg
+                fill="currentColor"
+                height="29"
+                stroke="currentColor"
+                stroke-width="0"
+                version="1.1"
+                viewBox="0 0 16 16"
+                width="29"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M16 6.204l-5.528-0.803-2.472-5.009-2.472 5.009-5.528 0.803 4 3.899-0.944 5.505 4.944-2.599 4.944 2.599-0.944-5.505 4-3.899zM8 11.773l-3.492 1.836 0.667-3.888-2.825-2.753 3.904-0.567 1.746-3.537 1.746 3.537 3.904 0.567-2.825 2.753 0.667 3.888-3.492-1.836z"
+                />
+              </svg>
+            </label>
+            <label
+              class="label"
+            >
+              <input
+                class="radio"
+                name="score"
+                type="radio"
+                value="5"
+              />
+              <svg
+                fill="currentColor"
+                height="29"
+                stroke="currentColor"
+                stroke-width="0"
+                version="1.1"
+                viewBox="0 0 16 16"
+                width="29"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M16 6.204l-5.528-0.803-2.472-5.009-2.472 5.009-5.528 0.803 4 3.899-0.944 5.505 4.944-2.599 4.944 2.599-0.944-5.505 4-3.899zM8 11.773l-3.492 1.836 0.667-3.888-2.825-2.753 3.904-0.567 1.746-3.537 1.746 3.537 3.904 0.567-2.825 2.753 0.667 3.888-3.492-1.836z"
+                />
+              </svg>
+            </label>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+   
+</DocumentFragment>
+`;

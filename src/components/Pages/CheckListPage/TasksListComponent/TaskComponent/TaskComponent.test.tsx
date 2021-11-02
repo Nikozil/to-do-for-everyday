@@ -1,8 +1,8 @@
-import { render, screen, waitFor } from '../../../../utils/tests/test-utils';
+import { render, screen, waitFor } from '../../../../../utils/tests/test-utils';
 import userEvent from '@testing-library/user-event';
 
 import TaskComponent from './TaskComponent';
-import { Task } from '../../../../Redux/modules/tasksSlice';
+import { Task } from '../../../../../Redux/modules/tasksSlice';
 const testTask = { id: '123', data: { name: 'task0', repeat: 0 } } as Task;
 const checkHandler = jest.fn();
 const repeatHandler = jest.fn();
@@ -59,7 +59,7 @@ describe('NewTaskForm tests', () => {
     await waitFor(() => {
       expect(repeatHandler).toHaveBeenCalled();
 
-      expect(repeatHandler).toHaveBeenCalledWith(testTask.id);
+      expect(repeatHandler).toHaveBeenCalledWith('123', { repeat: 1 });
     });
   });
 });

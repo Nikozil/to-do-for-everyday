@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TasksListComponent render correct 1`] = `
+<DocumentFragment>
+  <span>
+    Задачи
+  </span>
+  <span
+    class="taskList__comment"
+  >
+    Нет новых задач
+  </span>
+  <span>
+    Выполнено
+  </span>
+  <div>
+    <span
+      class="taskList__comment"
+    >
+      Задачи не выполнены
+    </span>
+  </div>
+   
+</DocumentFragment>
+`;

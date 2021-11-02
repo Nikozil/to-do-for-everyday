@@ -1,12 +1,8 @@
 import cn from 'classnames';
 import React from 'react';
-import {
-  ImCheckboxUnchecked,
-  ImCross,
-  ImStarEmpty,
-  ImStarFull,
-} from 'react-icons/im';
-import { Task } from '../../../../Redux/modules/tasksSlice';
+import { ImCheckboxUnchecked, ImCross } from 'react-icons/im';
+import { RiPushpinFill, RiPushpinLine } from 'react-icons/ri';
+import { PartialTaskData, Task } from '../../../../../Redux/modules/tasksSlice';
 import styles from './TaskComponent.module.scss';
 
 const TaskComponent: React.FC<PropsType> = ({
@@ -24,7 +20,8 @@ const TaskComponent: React.FC<PropsType> = ({
   };
   const clickRepeatHandler = (event: React.MouseEvent) => {
     event.preventDefault();
-    repeatHandler(id);
+
+    repeatHandler(id, { repeat: repeat ? 0 : 1 });
   };
   const clickDeleteHandler = (event: React.MouseEvent) => {
     event.preventDefault();
@@ -50,7 +47,7 @@ const TaskComponent: React.FC<PropsType> = ({
           onClick={clickRepeatHandler}
           className={styles.button}
           data-testid="repeat-button">
-          {repeat ? <ImStarFull /> : <ImStarEmpty />}
+          {repeat ? <RiPushpinFill /> : <RiPushpinLine />}
         </button>
         <button
           name={'task done'}
@@ -69,6 +66,6 @@ export default TaskComponent;
 interface PropsType {
   task: Task;
   checkHandler: (task: Task) => void;
-  repeatHandler: (id: string) => void;
+  repeatHandler: (id: string, data: PartialTaskData) => void;
   deleteHandler: (id: string) => void;
 }

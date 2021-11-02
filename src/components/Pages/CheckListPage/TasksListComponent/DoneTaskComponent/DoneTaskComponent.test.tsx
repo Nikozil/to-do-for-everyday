@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from '../../../../utils/tests/test-utils';
+import { render, screen, waitFor } from '../../../../../utils/tests/test-utils';
 import userEvent from '@testing-library/user-event';
 
 import DoneTaskComponent from './DoneTaskComponent';

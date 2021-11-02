@@ -77,30 +77,32 @@ export const StoreAPI = {
       }
     }
   },
-  setDoneDay: async (date: string, doneDay: Partial<DoneDay>) => {
+  updateDoneDay: async (date: string, doneDay: Partial<DoneDay>) => {
     const userid = auth.currentUser?.uid;
 
     if (userid) {
       try {
-        await updateDoc(doc(db, `users/${userid}/day`, date), doneDay);
-      } catch (err) {
-        console.log(err);
-      }
-    }
-  },
-  updateDoneDay: async (date: string, doneDay: DoneDay, merge: boolean) => {
-    const userid = auth.currentUser?.uid;
-
-    if (userid) {
-      try {
-        await setDoc(doc(db, `users/${userid}/day`, date), doneDay, {
-          merge: merge,
+        await setDoc(doc(db, `users/${userid}/days`, date), doneDay, {
+          merge: true,
         });
       } catch (err) {
         console.log(err);
       }
     }
   },
+  // updateDoneDay: async (date: string, doneDay: DoneDay, merge: boolean) => {
+  //   const userid = auth.currentUser?.uid;
+
+  //   if (userid) {
+  //     try {
+  //       await setDoc(doc(db, `users/${userid}/day`, date), doneDay, {
+  //         merge: merge,
+  //       });
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   }
+  // },
   getDoneDay: async (date: string) => {
     const userid = auth.currentUser?.uid;
 
@@ -110,6 +112,7 @@ export const StoreAPI = {
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
           //return doneTaskList
+
           return docSnap.data() as DoneDay;
         } else {
           // doc.data() will be undefined in this case
@@ -135,6 +138,7 @@ export const StoreAPI = {
       }
     }
   },
+
   setBatchDoneTask: async (
     taskApiData: TaskApi,
     doneTaskApiData: DoneTaskApiData
@@ -154,7 +158,10 @@ export const StoreAPI = {
           : arrayUnion(doneTask);
         let doneDay = { doneTasksList: updatedDoneTask };
         const doneDayDoc = doc(db, `users/${userid}/days`, doneTaskDate);
-        batch.update(doneDayDoc, doneDay);
+        //if we add a task, we must use 'set', because doc can be undefined in db
+        doneTaskRemove
+          ? batch.update(doneDayDoc, doneDay)
+          : batch.set(doneDayDoc, doneDay, { merge: true });
 
         await batch.commit();
       } catch (err) {

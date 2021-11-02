@@ -6,6 +6,7 @@ import {
   addTask,
   deleteTask,
   getTasks,
+  PartialTaskData,
   Task,
   updateTask,
 } from '../../../Redux/modules/tasksSlice';
@@ -33,8 +34,8 @@ const TomorrowListPage = () => {
     dispatch(addTask(task, time));
   };
 
-  const taskComponentRepeatHandler = (id: string) => {
-    dispatch(updateTask(id, { repeat: 1 }));
+  const taskComponentRepeatHandler = (id: string, data: PartialTaskData) => {
+    dispatch(updateTask(id, data));
   };
   const taskComponentDeleteHandler = (id: string) => {
     dispatch(deleteTask(id));

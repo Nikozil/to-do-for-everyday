@@ -9,7 +9,7 @@
 .content {
   display: flex;
   flex-direction: column;
-
+  justify-content: space-between;
   height: 95%;
   width: 100%;
   min-width: 200px;
@@ -24,11 +24,10 @@
     margin: 0 15px 0 10px;
   }
 }
+.dayScore {
+  font-size: 0.8em;
+}
 .spinner {
   margin: 0 auto 0 auto;
   color: $primary-color !important;
-}
-.taskList__comment {
-  color: $comment-color;
-  font-size: 0.8em;
 }

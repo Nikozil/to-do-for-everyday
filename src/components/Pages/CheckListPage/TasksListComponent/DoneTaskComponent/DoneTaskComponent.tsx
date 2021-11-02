@@ -1,6 +1,6 @@
 import React from 'react';
 import { ImCheckboxChecked } from 'react-icons/im';
-import { DoneTask } from '../../../../Redux/modules/tasksSlice';
+import { DoneTask } from '../../../../../Redux/modules/tasksSlice';
 import styles from './DoneTaskComponent.module.scss';
 
 const DoneTaskComponent: React.FC<PropsType> = ({ task, uncheckHandler }) => {

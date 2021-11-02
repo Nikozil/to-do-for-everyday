@@ -39,7 +39,7 @@ describe('TomorrowTaskComponent tests', () => {
     await waitFor(() => {
       expect(repeatHandler).toHaveBeenCalled();
 
-      expect(repeatHandler).toHaveBeenCalledWith(testTask.id);
+      expect(repeatHandler).toHaveBeenCalledWith('123', { repeat: 1 });
     });
   });
 });

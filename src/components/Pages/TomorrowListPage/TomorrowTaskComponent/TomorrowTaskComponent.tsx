@@ -1,6 +1,7 @@
 import React from 'react';
-import { ImCross, ImStarEmpty, ImStarFull } from 'react-icons/im';
-import { Task } from '../../../../Redux/modules/tasksSlice';
+import { ImCross } from 'react-icons/im';
+import { RiPushpinFill, RiPushpinLine } from 'react-icons/ri';
+import { PartialTaskData, Task } from '../../../../Redux/modules/tasksSlice';
 import styles from './TomorrowTaskComponent.module.scss';
 
 const TomorrowTaskComponent: React.FC<PropsType> = ({
@@ -12,7 +13,7 @@ const TomorrowTaskComponent: React.FC<PropsType> = ({
   const { name, repeat } = data;
   const clickRepeatHandler = (event: React.MouseEvent) => {
     event.preventDefault();
-    repeatHandler(id);
+    repeatHandler(id, { repeat: repeat ? 0 : 1 });
   };
   const clickDeleteHandler = (event: React.MouseEvent) => {
     event.preventDefault();
@@ -36,7 +37,7 @@ const TomorrowTaskComponent: React.FC<PropsType> = ({
         onClick={clickRepeatHandler}
         className={styles.button}
         data-testid="repeat-button">
-        {repeat ? <ImStarFull /> : <ImStarEmpty />}
+        {repeat ? <RiPushpinFill /> : <RiPushpinLine />}
       </button>
     </div>
   );
@@ -46,6 +47,6 @@ export default TomorrowTaskComponent;
 
 interface PropsType {
   task: Task;
-  repeatHandler: (id: string) => void;
+  repeatHandler: (id: string, data: PartialTaskData) => void;
   deleteHandler: (id: string) => void;
 }
