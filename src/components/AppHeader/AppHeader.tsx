@@ -6,7 +6,7 @@ import { PageNames } from '../../constants/pageNames';
 import { startClock, stopClock } from '../../Redux/modules/clockSlice';
 import { AppStateType } from '../../Redux/store';
 import styles from './AppHeader.module.scss';
-import { format } from 'date-fns';
+import { format, getDay } from 'date-fns';
 
 const AppHeader = () => {
   const user = useSelector((state: AppStateType) => state.user);
@@ -18,14 +18,28 @@ const AppHeader = () => {
       dispatch(stopClock());
     };
   }, [dispatch]);
-  const date = useSelector((state: AppStateType) => state.clock.date);
-
+  const time = useSelector((state: AppStateType) => state.clock.time);
+  let days = [
+    'Воскресенье',
+    'Понедельник',
+    'Вторник',
+    'Среда',
+    'Четверг',
+    'Пятница',
+    'Суббота',
+  ];
   return (
     <header className={styles.header}>
       <div className={styles.pagename}>{PageNames[pathname]}</div>
       <div className={styles.clock}>
-        {' '}
-        {date ? format(new Date(date), 'HH:mm') : null}
+        <div className={styles['clock__date']}>
+          {`${days[getDay(time)]}, `}
+          {time ? format(time, 'dd.MM.yyyy') : null}
+        </div>
+        <div className={styles['clock__time']}>
+          {' '}
+          {time ? format(time, 'HH:mm') : null}
+        </div>
       </div>
       <div className={styles.usermenu}>
         <Link to="/settings" className={styles.username}>

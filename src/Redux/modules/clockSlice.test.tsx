@@ -41,7 +41,7 @@ describe('clockSlice', () => {
 
       expect(reducer(undefined, TICK())).toEqual({
         ...initialState,
-        date: time,
+        time: time,
       });
     });
     it('should set interval', () => {

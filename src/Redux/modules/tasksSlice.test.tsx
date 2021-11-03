@@ -26,7 +26,8 @@ const getStateMock = jest.fn();
 const dispatchMock = jest.fn();
 beforeEach(() => {
   dispatchMock.mockClear();
-  getStateMock.mockClear();
+  // getStateMock.mockClear();
+  getStateMock.mockReturnValue({ clock: { time: new Date().getTime() } });
 });
 
 jest.mock('../../api/StoreAPI');
@@ -158,6 +159,7 @@ describe('tasksSlice', () => {
         StoreAPIMock.getTask.mockResolvedValue(getTaskResult);
         StoreAPIMock.getLivedDay.mockResolvedValue(getLivedDay);
         await thunk(dispatchMock, getStateMock, {});
+
         expect(StoreAPIMock.getTask).toHaveBeenCalled();
         expect(dispatchMock).toBeCalledTimes(3);
         expect(dispatchMock).toHaveBeenNthCalledWith(
@@ -308,7 +310,10 @@ describe('tasksSlice', () => {
           data: { name: 'task0', done: true, time: 1635611630166, repeat: 0 },
         };
 
-        getStateMock.mockReturnValue({ tasks: { tasksList: [task] } });
+        getStateMock.mockReturnValue({
+          tasks: { tasksList: [task] },
+          clock: { time: new Date().getTime() },
+        });
         const thunk = uncheckTask({ id: '123', name: 'Task' });
         await thunk(dispatchMock, getStateMock, {});
         expect(StoreAPIMock.setBatchDoneTask).toHaveBeenCalled();
@@ -338,7 +343,10 @@ describe('tasksSlice', () => {
           data: { name: 'task0', done: true, time: 1635698030166, repeat: 1 },
         };
 
-        getStateMock.mockReturnValue({ tasks: { tasksList: [task] } });
+        getStateMock.mockReturnValue({
+          tasks: { tasksList: [task] },
+          clock: { time: new Date().getTime() },
+        });
         const thunk = uncheckTask({ id: '123', name: 'Task' });
         await thunk(dispatchMock, getStateMock, {});
         expect(StoreAPIMock.setBatchDoneTask).toHaveBeenCalled();

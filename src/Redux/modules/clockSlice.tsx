@@ -3,7 +3,7 @@ import { getTime } from 'date-fns';
 import { AppThunk } from '../store';
 
 export const initialState = {
-  date: null as number | null,
+  time: getTime(new Date()) as number,
   interval: undefined as number | undefined,
 };
 
@@ -15,7 +15,7 @@ const clockSlice = createSlice({
     TICK: (state) => {
       return {
         ...state,
-        date: getTime(new Date()),
+        time: getTime(new Date()),
       };
     },
     setClockInterval: (state, action: PayloadAction<any>) => {
@@ -34,7 +34,7 @@ export const startClock = (): AppThunk => (dispatch, getState) => {
 
   const interval = setInterval(() => {
     dispatch(TICK());
-  }, 10);
+  }, 1000);
 
   dispatch(setClockInterval(interval));
 };

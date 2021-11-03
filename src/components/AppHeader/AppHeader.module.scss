@@ -40,5 +40,15 @@
   @include focus;
 }
 .clock {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.clock__date {
+  font-size: 0.8em;
+}
+.clock__time {
   font-weight: 500;
 }

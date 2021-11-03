@@ -19,6 +19,8 @@ const TomorrowListPage = () => {
   const initTasksStatus = useSelector(
     (state: AppStateType) => state.tasks.initStatus
   );
+  const time = useSelector((state: AppStateType) => state.clock.time);
+
   const tasks = useSelector((state: AppStateType) => state.tasks.tasksList);
   const tomorrowTasks = tasks.filter(
     (i) => !i.data.done && i.data.time > getTime(endOfToday())
@@ -30,8 +32,8 @@ const TomorrowListPage = () => {
   }, [dispatch]);
 
   const newTaskSubmit = (task: string) => {
-    let time = getTime(add(getTime(new Date()), { days: 1 }));
-    dispatch(addTask(task, time));
+    let tomorrowTime = getTime(add(time, { days: 1 }));
+    dispatch(addTask(task, tomorrowTime));
   };
 
   const taskComponentRepeatHandler = (id: string, data: PartialTaskData) => {

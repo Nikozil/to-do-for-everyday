@@ -66,10 +66,12 @@ export const {
   setScore,
 } = tasksSlice.actions;
 
-export const getTasks = (): AppThunk => async (dispatch) => {
+export const getTasks = (): AppThunk => async (dispatch, getState) => {
   try {
     let tasks = await StoreAPI.getTask();
-    let livedDay = await StoreAPI.getLivedDay(format(new Date(), 'dd.MM.yyyy'));
+    let time = getState().clock.time;
+
+    let livedDay = await StoreAPI.getLivedDay(format(time, 'dd.MM.yyyy'));
 
     if (!tasks) throw new Error('Не удалось получить данные');
     if (!livedDay) throw new Error('Не удалось получить данные');
@@ -133,7 +135,7 @@ export const checkTask =
       //send data as batch
       const taskApiData = { taskId: id, taskData: newData };
       const doneTaskApiData = {
-        doneTaskDate: format(new Date(), 'dd.MM.yyyy'),
+        doneTaskDate: format(getState().clock.time, 'dd.MM.yyyy'),
         doneTask: doneTasks,
         doneTaskRemove: false,
       };
@@ -167,7 +169,7 @@ export const uncheckTask =
           name: name,
         };
         const doneTaskApiData = {
-          doneTaskDate: format(new Date(), 'dd.MM.yyyy'),
+          doneTaskDate: format(getState().clock.time, 'dd.MM.yyyy'),
           doneTask: doneTask,
           doneTaskRemove: true,
         };
@@ -194,11 +196,11 @@ export const deleteTask =
   };
 export const addTag =
   (tag: string): AppThunk =>
-  async (dispatch) => {
+  async (dispatch, getState) => {
     try {
-      const date = format(new Date(), 'dd.MM.yyyy');
+      const time = format(getState().clock.time, 'dd.MM.yyyy');
       const livedDay = { tag };
-      await StoreAPI.updateLivedDay(date, livedDay);
+      await StoreAPI.updateLivedDay(time, livedDay);
       dispatch(setTag(tag));
     } catch (err: any) {
       return err.message as string;
@@ -206,9 +208,9 @@ export const addTag =
   };
 export const addScore =
   (score: Score): AppThunk =>
-  async (dispatch) => {
+  async (dispatch, getState) => {
     try {
-      const date = format(new Date(), 'dd.MM.yyyy');
+      const date = format(getState().clock.time, 'dd.MM.yyyy');
       const livedDay = { score };
       await StoreAPI.updateLivedDay(date, livedDay);
       dispatch(setScore(score));
