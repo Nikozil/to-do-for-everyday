@@ -7,6 +7,7 @@ import cn from 'classnames';
 const NavLinkComponent: React.FC<NavLinkProps> = ({ link, Icon }) => {
   return (
     <NavLink
+      aria-label={link}
       to={link}
       className={cn(styles.navlink, 'btn', 'btn-secondary')}
       activeClassName={styles.selected}>

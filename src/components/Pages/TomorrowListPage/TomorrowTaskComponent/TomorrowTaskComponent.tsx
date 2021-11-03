@@ -24,6 +24,7 @@ const TomorrowTaskComponent: React.FC<PropsType> = ({
     <div className={styles.content}>
       <span className={styles.task}>
         <button
+          aria-label={'delete task'}
           name={'delete task'}
           onClick={clickDeleteHandler}
           className={styles.button}
@@ -33,7 +34,7 @@ const TomorrowTaskComponent: React.FC<PropsType> = ({
         <span className={styles.taskName}>{name}</span>
       </span>
       <button
-        name={'repeat'}
+        aria-label={'repeat task'}
         onClick={clickRepeatHandler}
         className={styles.button}
         data-testid="repeat-button">

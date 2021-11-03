@@ -16,7 +16,8 @@ const DoneTaskComponent: React.FC<PropsType> = ({ task, uncheckHandler }) => {
         <span className={styles.taskName}>{name}</span>
       </span>
       <button
-        name={'task done'}
+        aria-label={'task uncheck'}
+        name={'task uncheck'}
         onClick={clickUncheckHandler}
         className={styles.button}
         data-testid="uncheck-button">

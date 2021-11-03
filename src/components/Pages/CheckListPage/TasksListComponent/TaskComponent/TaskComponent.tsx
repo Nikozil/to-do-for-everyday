@@ -32,6 +32,7 @@ const TaskComponent: React.FC<PropsType> = ({
     <div className={styles.content}>
       <span className={styles.task}>
         <button
+          aria-label={'delete task'}
           name={'delete task'}
           onClick={clickDeleteHandler}
           className={styles.button}
@@ -43,14 +44,16 @@ const TaskComponent: React.FC<PropsType> = ({
 
       <span className={styles.buttons}>
         <button
-          name={'repeat'}
+          aria-label={'repeat task'}
+          name={'repeat task'}
           onClick={clickRepeatHandler}
           className={styles.button}
           data-testid="repeat-button">
           {repeat ? <RiPushpinFill /> : <RiPushpinLine />}
         </button>
         <button
-          name={'task done'}
+          aria-label={'task check'}
+          name={'task check'}
           onClick={clickCheckHandler}
           className={cn(styles.button, styles['buttons-margin'])}
           data-testid="check-button">

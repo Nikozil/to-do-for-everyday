@@ -13,8 +13,8 @@
   width: 300px;
 
   @media screen and (max-width: 767px) {
-    font-size: 1.2rem;
-    width: 150px;
+    font-size: 1.1rem;
+    width: 130px;
   }
 }
 
@@ -24,7 +24,8 @@
   width: 300px;
   justify-content: flex-end;
   @media screen and (max-width: 767px) {
-    width: 150px;
+    font-size: 0.9rem;
+    width: 130px;
   }
 }
 .username {
@@ -44,10 +45,16 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  @media screen and (max-width: 767px) {
+    font-size: 0.9em;
+  }
 }
 
 .clock__date {
   font-size: 0.8em;
+  @media screen and (max-width: 350px) {
+    display: none;
+  }
 }
 .clock__time {
   font-weight: 500;

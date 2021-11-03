@@ -9,7 +9,7 @@ const AppSidebar: React.FC = () => {
   return (
     <div className={styles.sidebar}>
       <div className={styles.logo}>
-        <img src={Logo} alt="" />
+        <img src={Logo} alt="Logo" />
       </div>
 
       <nav className={styles.navbar}>
