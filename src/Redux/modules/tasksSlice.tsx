@@ -5,7 +5,7 @@ import { AppThunk } from '../store';
 
 export const initialState = {
   tasksList: [] as Task[],
-  doneDay: { score: 0, tag: '', doneTasksList: [] } as DoneDay,
+  livedDay: { score: 0, tag: '', doneTasksList: [] } as LivedDay,
   initStatus: false as boolean,
 };
 
@@ -33,23 +33,23 @@ const tasksSlice = createSlice({
     setInitStatus: (state, action: PayloadAction<boolean>) => {
       state.initStatus = action.payload;
     },
-    setDoneDay: (state, action: PayloadAction<DoneDay>) => {
-      state.doneDay = { ...state.doneDay, ...action.payload };
+    setLivedDay: (state, action: PayloadAction<LivedDay>) => {
+      state.livedDay = { ...state.livedDay, ...action.payload };
     },
-    addTaskToDoneTasksList: (state, action: PayloadAction<DoneTask>) => {
-      state.doneDay.doneTasksList.push(action.payload);
+    addTaskToDoneTasksList: (state, action: PayloadAction<LivedTask>) => {
+      state.livedDay.doneTasksList.push(action.payload);
     },
     removeTaskToDoneTasksList: (state, action: PayloadAction<string>) => {
-      const newdoneTasksList = state.doneDay.doneTasksList.filter(
+      const newdoneTasksList = state.livedDay.doneTasksList.filter(
         (task) => task.id !== action.payload
       );
-      state.doneDay.doneTasksList = newdoneTasksList;
+      state.livedDay.doneTasksList = newdoneTasksList;
     },
     setTag: (state, action: PayloadAction<string>) => {
-      state.doneDay.tag = action.payload;
+      state.livedDay.tag = action.payload;
     },
     setScore: (state, action: PayloadAction<Score>) => {
-      state.doneDay.score = action.payload;
+      state.livedDay.score = action.payload;
     },
   },
 });
@@ -59,7 +59,7 @@ export const {
   editTask,
   removeTask,
   setInitStatus,
-  setDoneDay,
+  setLivedDay,
   addTaskToDoneTasksList,
   removeTaskToDoneTasksList,
   setTag,
@@ -69,13 +69,13 @@ export const {
 export const getTasks = (): AppThunk => async (dispatch) => {
   try {
     let tasks = await StoreAPI.getTask();
-    let doneDay = await StoreAPI.getDoneDay(format(new Date(), 'dd.MM.yyyy'));
+    let livedDay = await StoreAPI.getLivedDay(format(new Date(), 'dd.MM.yyyy'));
 
     if (!tasks) throw new Error('Не удалось получить данные');
-    if (!doneDay) throw new Error('Не удалось получить данные');
+    if (!livedDay) throw new Error('Не удалось получить данные');
 
     dispatch(setTasks(tasks));
-    dispatch(setDoneDay(doneDay));
+    dispatch(setLivedDay(livedDay));
     dispatch(setInitStatus(true));
   } catch (err: any) {
     return err.message as string;
@@ -146,7 +146,7 @@ export const checkTask =
     }
   };
 export const uncheckTask =
-  (task: DoneTask): AppThunk =>
+  (task: LivedTask): AppThunk =>
   async (dispatch, getState) => {
     const { id, name } = task;
     try {
@@ -197,8 +197,8 @@ export const addTag =
   async (dispatch) => {
     try {
       const date = format(new Date(), 'dd.MM.yyyy');
-      const doneDay = { tag };
-      await StoreAPI.updateDoneDay(date, doneDay);
+      const livedDay = { tag };
+      await StoreAPI.updateLivedDay(date, livedDay);
       dispatch(setTag(tag));
     } catch (err: any) {
       return err.message as string;
@@ -209,8 +209,8 @@ export const addScore =
   async (dispatch) => {
     try {
       const date = format(new Date(), 'dd.MM.yyyy');
-      const doneDay = { score };
-      await StoreAPI.updateDoneDay(date, doneDay);
+      const livedDay = { score };
+      await StoreAPI.updateLivedDay(date, livedDay);
       dispatch(setScore(score));
     } catch (err: any) {
       return err.message as string;
@@ -234,13 +234,13 @@ interface PartialTask {
   id: string;
   data: PartialTaskData;
 }
-export interface DoneTask {
+export interface LivedTask {
   id: string;
   name: string;
 }
-export interface DoneDay {
+export interface LivedDay {
   tag: string;
   score: Score;
-  doneTasksList: DoneTask[];
+  doneTasksList: LivedTask[];
 }
 export type Score = 0 | 1 | 2 | 3 | 4 | 5;

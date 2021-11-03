@@ -6,13 +6,13 @@ import tasksSlice, {
   addTaskToDoneTasksList,
   checkTask,
   deleteTask,
-  DoneDay,
+  LivedDay,
   editTask,
   getTasks,
   initialState,
   removeTask,
   removeTaskToDoneTasksList,
-  setDoneDay,
+  setLivedDay,
   setInitStatus,
   setScore,
   setTag,
@@ -35,18 +35,18 @@ const StoreAPIMock = StoreAPI as jest.Mocked<typeof StoreAPI>;
 let getTaskResult = [
   { id: '123', data: { name: 'task0', done: true } },
 ] as Task[];
-let getDoneDay = {
+let getLivedDay = {
   score: 3,
   tag: 'Печальный День',
   doneTasksList: [{ id: '1234', name: 'Task' }],
-} as DoneDay;
+} as LivedDay;
 let testInitialState = {
   tasksList: [{ id: '123', data: { name: 'task0', done: true } }] as Task[],
-  doneDay: {
+  livedDay: {
     score: 3,
     tag: 'Печальный День',
     doneTasksList: [{ id: '1234', name: 'Task' }],
-  } as DoneDay,
+  } as LivedDay,
   initStatus: false as boolean,
 };
 
@@ -89,14 +89,14 @@ describe('tasksSlice', () => {
       });
     });
     it('should set DoneTasks', () => {
-      let doneDay = {
+      let livedDay = {
         score: 3,
         tag: 'Бе',
         doneTasksList: [{ id: '1234', name: 'Task' }],
-      } as DoneDay;
-      expect(reducer(undefined, setDoneDay(doneDay))).toEqual({
+      } as LivedDay;
+      expect(reducer(undefined, setLivedDay(livedDay))).toEqual({
         ...initialState,
-        doneDay: doneDay,
+        livedDay: livedDay,
       });
     });
     it('should add TaskToDoneTasksList', () => {
@@ -107,7 +107,7 @@ describe('tasksSlice', () => {
         )
       ).toEqual({
         ...testInitialState,
-        doneDay: {
+        livedDay: {
           score: 3,
           tag: 'Печальный День',
           doneTasksList: [
@@ -122,7 +122,7 @@ describe('tasksSlice', () => {
         reducer(testInitialState, removeTaskToDoneTasksList('1234'))
       ).toEqual({
         ...testInitialState,
-        doneDay: {
+        livedDay: {
           score: 3,
           tag: 'Печальный День',
           doneTasksList: [],
@@ -132,7 +132,7 @@ describe('tasksSlice', () => {
     it('should set Tag', () => {
       expect(reducer(testInitialState, setTag('Чудесный День'))).toEqual({
         ...testInitialState,
-        doneDay: {
+        livedDay: {
           score: 3,
           tag: 'Чудесный День',
           doneTasksList: [{ id: '1234', name: 'Task' }],
@@ -142,7 +142,7 @@ describe('tasksSlice', () => {
     it('should set Score', () => {
       expect(reducer(testInitialState, setScore(2))).toEqual({
         ...testInitialState,
-        doneDay: {
+        livedDay: {
           score: 2,
           tag: 'Печальный День',
           doneTasksList: [{ id: '1234', name: 'Task' }],
@@ -156,7 +156,7 @@ describe('tasksSlice', () => {
       it('getTasks completed', async () => {
         const thunk = getTasks();
         StoreAPIMock.getTask.mockResolvedValue(getTaskResult);
-        StoreAPIMock.getDoneDay.mockResolvedValue(getDoneDay);
+        StoreAPIMock.getLivedDay.mockResolvedValue(getLivedDay);
         await thunk(dispatchMock, getStateMock, {});
         expect(StoreAPIMock.getTask).toHaveBeenCalled();
         expect(dispatchMock).toBeCalledTimes(3);
@@ -164,7 +164,10 @@ describe('tasksSlice', () => {
           1,
           setTasks(getTaskResult)
         );
-        expect(dispatchMock).toHaveBeenNthCalledWith(2, setDoneDay(getDoneDay));
+        expect(dispatchMock).toHaveBeenNthCalledWith(
+          2,
+          setLivedDay(getLivedDay)
+        );
         expect(dispatchMock).toHaveBeenNthCalledWith(3, setInitStatus(true));
       });
     });

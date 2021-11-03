@@ -6,8 +6,10 @@ import ChangeTagForm from '../../../Forms/ChangeTagForm/ChangeTagForm';
 import ChangeScoreForm from '../../../Forms/ChangeScoreForm/ChangeScoreForm';
 
 const DayScoreComponent = () => {
-  const score = useSelector((state: AppStateType) => state.tasks.doneDay.score);
-  const tag = useSelector((state: AppStateType) => state.tasks.doneDay.tag);
+  const score = useSelector(
+    (state: AppStateType) => state.tasks.livedDay.score
+  );
+  const tag = useSelector((state: AppStateType) => state.tasks.livedDay.tag);
   const dispatch = useDispatch();
 
   const addTagHandler = (tag: string) => {

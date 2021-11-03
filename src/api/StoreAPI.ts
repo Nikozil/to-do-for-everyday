@@ -12,8 +12,8 @@ import {
   arrayRemove,
 } from 'firebase/firestore';
 import {
-  DoneDay,
-  DoneTask,
+  LivedDay,
+  LivedTask,
   PartialTaskData,
   Task,
   TaskData,
@@ -77,12 +77,12 @@ export const StoreAPI = {
       }
     }
   },
-  updateDoneDay: async (date: string, doneDay: Partial<DoneDay>) => {
+  updateLivedDay: async (date: string, livedDay: Partial<LivedDay>) => {
     const userid = auth.currentUser?.uid;
 
     if (userid) {
       try {
-        await setDoc(doc(db, `users/${userid}/days`, date), doneDay, {
+        await setDoc(doc(db, `users/${userid}/days`, date), livedDay, {
           merge: true,
         });
       } catch (err) {
@@ -90,12 +90,12 @@ export const StoreAPI = {
       }
     }
   },
-  // updateDoneDay: async (date: string, doneDay: DoneDay, merge: boolean) => {
+  // updateLivedDay: async (date: string, livedDay: LivedDay, merge: boolean) => {
   //   const userid = auth.currentUser?.uid;
 
   //   if (userid) {
   //     try {
-  //       await setDoc(doc(db, `users/${userid}/day`, date), doneDay, {
+  //       await setDoc(doc(db, `users/${userid}/day`, date), livedDay, {
   //         merge: merge,
   //       });
   //     } catch (err) {
@@ -103,7 +103,7 @@ export const StoreAPI = {
   //     }
   //   }
   // },
-  getDoneDay: async (date: string) => {
+  getLivedDay: async (date: string) => {
     const userid = auth.currentUser?.uid;
 
     if (userid) {
@@ -113,11 +113,11 @@ export const StoreAPI = {
         if (docSnap.exists()) {
           //return doneTaskList
 
-          return docSnap.data() as DoneDay;
+          return docSnap.data() as LivedDay;
         } else {
           // doc.data() will be undefined in this case
           //return empty object as doneTaskList
-          return {} as DoneDay;
+          return {} as LivedDay;
         }
       } catch (err) {
         console.log(err);
@@ -125,12 +125,12 @@ export const StoreAPI = {
       }
     }
   },
-  deleteDoneDay: async (doneDayDate: string) => {
+  deleteLivedDay: async (livedDayDate: string) => {
     const userid = auth.currentUser?.uid;
 
     if (userid) {
       try {
-        const task = doc(db, `users/${userid}/days`, doneDayDate);
+        const task = doc(db, `users/${userid}/days`, livedDayDate);
 
         await deleteDoc(task);
       } catch (err) {
@@ -153,15 +153,15 @@ export const StoreAPI = {
         const task = doc(db, `users/${userid}/tasks`, taskId);
         batch.update(task, taskData);
         //updateDoneTask
-        let updatedDoneTask = doneTaskRemove
+        let updatedLivedTask = doneTaskRemove
           ? arrayRemove(doneTask)
           : arrayUnion(doneTask);
-        let doneDay = { doneTasksList: updatedDoneTask };
-        const doneDayDoc = doc(db, `users/${userid}/days`, doneTaskDate);
+        let livedDay = { doneTasksList: updatedLivedTask };
+        const livedDayDoc = doc(db, `users/${userid}/days`, doneTaskDate);
         //if we add a task, we must use 'set', because doc can be undefined in db
         doneTaskRemove
-          ? batch.update(doneDayDoc, doneDay)
-          : batch.set(doneDayDoc, doneDay, { merge: true });
+          ? batch.update(livedDayDoc, livedDay)
+          : batch.set(livedDayDoc, livedDay, { merge: true });
 
         await batch.commit();
       } catch (err) {
@@ -177,6 +177,6 @@ interface TaskApi {
 }
 interface DoneTaskApiData {
   doneTaskDate: string;
-  doneTask: Partial<DoneTask>;
+  doneTask: Partial<LivedTask>;
   doneTaskRemove: boolean;
 }

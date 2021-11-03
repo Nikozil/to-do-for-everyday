@@ -1,6 +1,6 @@
 import React from 'react';
 import { ImCheckboxChecked } from 'react-icons/im';
-import { DoneTask } from '../../../../../Redux/modules/tasksSlice';
+import { LivedTask } from '../../../../../Redux/modules/tasksSlice';
 import styles from './DoneTaskComponent.module.scss';
 
 const DoneTaskComponent: React.FC<PropsType> = ({ task, uncheckHandler }) => {
@@ -29,6 +29,6 @@ const DoneTaskComponent: React.FC<PropsType> = ({ task, uncheckHandler }) => {
 export default DoneTaskComponent;
 
 interface PropsType {
-  task: DoneTask;
-  uncheckHandler: (task: DoneTask) => void;
+  task: LivedTask;
+  uncheckHandler: (task: LivedTask) => void;
 }

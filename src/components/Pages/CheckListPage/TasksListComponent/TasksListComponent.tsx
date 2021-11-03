@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   checkTask,
   deleteTask,
-  DoneTask,
+  LivedTask,
   PartialTaskData,
   Task,
   uncheckTask,
@@ -21,7 +21,7 @@ const TasksListComponent = () => {
     (i) => !i.data.done && i.data.time <= getTime(endOfToday())
   );
   const doneTasks = useSelector(
-    (state: AppStateType) => state.tasks.doneDay.doneTasksList
+    (state: AppStateType) => state.tasks.livedDay.doneTasksList
   );
 
   const dispatch = useDispatch();
@@ -29,7 +29,7 @@ const TasksListComponent = () => {
   const taskComponentCheckHandler = (task: Task) => {
     dispatch(checkTask(task));
   };
-  const taskComponentUncheckHandler = (task: DoneTask) => {
+  const taskComponentUncheckHandler = (task: LivedTask) => {
     dispatch(uncheckTask(task));
   };
   const taskComponentRepeatHandler = (id: string, data: PartialTaskData) => {
@@ -48,7 +48,7 @@ const TasksListComponent = () => {
       deleteHandler={taskComponentDeleteHandler}
     />
   );
-  const mapDoneTaskComponent = (task: DoneTask) => (
+  const mapDoneTaskComponent = (task: LivedTask) => (
     <DoneTaskComponent
       task={task}
       key={task.id}
