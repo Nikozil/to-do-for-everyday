@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import SpinComponent from '../../../assets/SpinComponent/SpinComponent';
-import { addTask, getTasks } from '../../../Redux/modules/tasksSlice';
+import { addTask } from '../../../Redux/modules/tasksSlice';
 import { AppStateType } from '../../../Redux/store';
 import NewTaskForm from '../../Forms/NewTaskForm/NewTaskForm';
 import styles from './CheckListPage.module.scss';
@@ -14,9 +14,6 @@ const CheckListPage = () => {
     (state: AppStateType) => state.tasks.initStatus
   );
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getTasks());
-  }, [dispatch]);
 
   const newTaskSubmit = (task: string) => {
     dispatch(addTask(task, time));
@@ -32,14 +29,14 @@ const CheckListPage = () => {
           {initTasksStatus ? (
             <TasksListComponent />
           ) : (
-            <SpinComponent style={styles.spinner} />
+            <SpinComponent styleClass={styles.spinner} />
           )}
         </div>
         <div className={styles.dayScore}>
           {initTasksStatus ? (
             <DayScoreComponent />
           ) : (
-            <SpinComponent style={styles.spinner} />
+            <SpinComponent styleClass={styles.spinner} />
           )}
         </div>
       </div>

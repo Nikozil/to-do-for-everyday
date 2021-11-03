@@ -1,4 +1,18 @@
+@import '../../App.scss';
+
 .content {
   grid-area: c;
   background-color: #f8f9fa;
+}
+.spin__container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+.spin__spinner {
+  color: $primary-color;
+  font-size: 50px;
+  width: 100px !important;
+  height: 100px !important;
 }

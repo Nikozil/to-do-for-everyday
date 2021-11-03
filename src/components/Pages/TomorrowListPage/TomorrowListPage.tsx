@@ -1,11 +1,10 @@
-import cn from 'classnames';
 import { add, endOfToday, getTime } from 'date-fns';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import SpinComponent from '../../../assets/SpinComponent/SpinComponent';
 import {
   addTask,
   deleteTask,
-  getTasks,
   PartialTaskData,
   Task,
   updateTask,
@@ -27,9 +26,6 @@ const TomorrowListPage = () => {
   );
 
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getTasks());
-  }, [dispatch]);
 
   const newTaskSubmit = (task: string) => {
     let tomorrowTime = getTime(add(time, { days: 1 }));
@@ -70,9 +66,7 @@ const TomorrowListPage = () => {
             )}
           </>
         ) : (
-          <div className={cn('spinner-border ', styles.spinner)} role="status">
-            <span className="visually-hidden">Loading...</span>
-          </div>
+          <SpinComponent styleClass={styles.spinner} />
         )}
       </div>
     </div>

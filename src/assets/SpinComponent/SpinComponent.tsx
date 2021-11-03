@@ -1,9 +1,9 @@
 import React from 'react';
 import cn from 'classnames';
 
-const SpinComponent: React.FC<PropsType> = ({ style }) => {
+const SpinComponent: React.FC<PropsType> = ({ styleClass }) => {
   return (
-    <div className={cn('spinner-border ', style)} role="status">
+    <div className={cn('spinner-border', styleClass)} role="status">
       <span className="visually-hidden">Loading...</span>
     </div>
   );
@@ -12,5 +12,5 @@ const SpinComponent: React.FC<PropsType> = ({ style }) => {
 export default SpinComponent;
 
 interface PropsType {
-  style: string;
+  styleClass: string;
 }

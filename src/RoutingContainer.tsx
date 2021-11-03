@@ -1,12 +1,17 @@
-import React, { useEffect } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 import PreloaderPage from './assets/PreloaderPage/PreloaderPage';
-import AppPage from './components/AppPage/AppPage';
-import LoginPage from './components/Pages/LoginPage/LoginPage';
+// import AppPage from './components/AppPage/AppPage';
+// import LoginPage from './components/Pages/LoginPage/LoginPage';
 import { useRequireAuth } from './hooks/useRequireAuth';
 import { updateUserData } from './Redux/modules/userSlice';
 import { AppStateType } from './Redux/store';
+
+const AppPage = React.lazy(() => import('./components/AppPage/AppPage'));
+const LoginPage = React.lazy(
+  () => import('./components/Pages/LoginPage/LoginPage')
+);
 
 const RoutingContainer: React.FC = () => {
   const dispatch = useDispatch();
@@ -24,14 +29,16 @@ const RoutingContainer: React.FC = () => {
   }
 
   return (
-    <Switch>
-      <Route path="/login">
-        <LoginPage />
-      </Route>
-      <Route path="/">
-        <AppPage />
-      </Route>
-    </Switch>
+    <Suspense fallback={<PreloaderPage />}>
+      <Switch>
+        <Route path="/login">
+          <LoginPage />
+        </Route>
+        <Route path="/">
+          <AppPage />
+        </Route>
+      </Switch>
+    </Suspense>
   );
 };
 export default RoutingContainer;

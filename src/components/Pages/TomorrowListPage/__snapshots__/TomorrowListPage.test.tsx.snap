@@ -30,7 +30,7 @@ exports[`TomorrowListPage render correct 1`] = `
         </form>
       </div>
       <div
-        class="spinner-border  spinner"
+        class="spinner-border spinner"
         role="status"
       >
         <span

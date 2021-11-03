@@ -7,6 +7,7 @@ import { startClock, stopClock } from '../../Redux/modules/clockSlice';
 import { AppStateType } from '../../Redux/store';
 import styles from './AppHeader.module.scss';
 import { format, getDay } from 'date-fns';
+import { days } from '../../constants/clock';
 
 const AppHeader = () => {
   const user = useSelector((state: AppStateType) => state.user);
@@ -19,15 +20,7 @@ const AppHeader = () => {
     };
   }, [dispatch]);
   const time = useSelector((state: AppStateType) => state.clock.time);
-  let days = [
-    'Воскресенье',
-    'Понедельник',
-    'Вторник',
-    'Среда',
-    'Четверг',
-    'Пятница',
-    'Суббота',
-  ];
+
   return (
     <header className={styles.header}>
       <div className={styles.pagename}>{PageNames[pathname]}</div>
