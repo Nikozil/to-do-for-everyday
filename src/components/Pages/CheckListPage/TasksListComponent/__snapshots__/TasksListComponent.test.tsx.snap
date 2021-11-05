@@ -5,21 +5,27 @@ exports[`TasksListComponent render correct 1`] = `
   <span>
     Задачи
   </span>
-  <span
-    class="taskList__comment"
+  <ul
+    class="list"
   >
-    Нет новых задач
-  </span>
+    <span
+      class="taskList__comment"
+    >
+      Нет новых задач
+    </span>
+  </ul>
   <span>
     Выполнено
   </span>
-  <div>
+  <ul
+    class="list"
+  >
     <span
       class="taskList__comment"
     >
       Задачи не выполнены
     </span>
-  </div>
+  </ul>
    
 </DocumentFragment>
 `;

@@ -84,8 +84,9 @@ export const getTasks = (): AppThunk => async (dispatch, getState) => {
   }
 };
 export const addTask =
-  (taskName: string, time: number, repeat = 0): AppThunk =>
-  async (dispatch) => {
+  (taskName: string, duration: Duration, repeat = 0): AppThunk =>
+  async (dispatch,getState) => {
+    const time=getTime(add(getState().clock.time, duration))
     const taskData = { name: taskName, done: false, time, repeat } as TaskData;
     try {
       await StoreAPI.setTask(taskData);

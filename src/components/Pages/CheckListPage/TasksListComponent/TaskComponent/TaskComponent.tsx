@@ -29,7 +29,7 @@ const TaskComponent: React.FC<PropsType> = ({
   };
 
   return (
-    <div className={styles.content}>
+    <li className={styles.content}>
       <span className={styles.task}>
         <button
           aria-label={'delete task'}
@@ -60,7 +60,7 @@ const TaskComponent: React.FC<PropsType> = ({
           <ImCheckboxUnchecked />
         </button>
       </span>
-    </div>
+    </li>
   );
 };
 

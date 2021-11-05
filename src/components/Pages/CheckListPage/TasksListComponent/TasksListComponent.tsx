@@ -59,13 +59,16 @@ const TasksListComponent = () => {
   return (
     <>
       <span>Задачи</span>
-      {undoneTasks.length ? (
-        undoneTasks.map(mapTaskComponent)
-      ) : (
-        <span className={styles['taskList__comment']}>Нет новых задач</span>
-      )}
+      <ul className={styles.list}>
+        {undoneTasks.length ? (
+          undoneTasks.map(mapTaskComponent)
+        ) : (
+          <span className={styles['taskList__comment']}>Нет новых задач</span>
+        )}
+      </ul>
+
       <span>Выполнено</span>
-      <div>
+      <ul className={styles.list}>
         {doneTasks.length ? (
           doneTasks.map(mapDoneTaskComponent)
         ) : (
@@ -73,7 +76,7 @@ const TasksListComponent = () => {
             Задачи не выполнены
           </span>
         )}
-      </div>
+      </ul>
     </>
   );
 };

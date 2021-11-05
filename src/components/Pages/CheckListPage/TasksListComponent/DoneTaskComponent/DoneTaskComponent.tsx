@@ -11,7 +11,7 @@ const DoneTaskComponent: React.FC<PropsType> = ({ task, uncheckHandler }) => {
   };
 
   return (
-    <div className={styles.content}>
+    <li className={styles.content}>
       <span className={styles.task}>
         <span className={styles.taskName}>{name}</span>
       </span>
@@ -23,7 +23,7 @@ const DoneTaskComponent: React.FC<PropsType> = ({ task, uncheckHandler }) => {
         data-testid="uncheck-button">
         <ImCheckboxChecked />
       </button>
-    </div>
+    </li>
   );
 };
 

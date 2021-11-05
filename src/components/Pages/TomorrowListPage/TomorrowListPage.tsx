@@ -1,4 +1,4 @@
-import { add, endOfToday, getTime } from 'date-fns';
+import { endOfToday, getTime } from 'date-fns';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import SpinComponent from '../../../assets/SpinComponent/SpinComponent';
@@ -18,7 +18,6 @@ const TomorrowListPage = () => {
   const initTasksStatus = useSelector(
     (state: AppStateType) => state.tasks.initStatus
   );
-  const time = useSelector((state: AppStateType) => state.clock.time);
 
   const tasks = useSelector((state: AppStateType) => state.tasks.tasksList);
   const tomorrowTasks = tasks.filter(
@@ -28,8 +27,7 @@ const TomorrowListPage = () => {
   const dispatch = useDispatch();
 
   const newTaskSubmit = (task: string) => {
-    let tomorrowTime = getTime(add(time, { days: 1 }));
-    dispatch(addTask(task, tomorrowTime));
+    dispatch(addTask(task, { days: 1 }));
   };
 
   const taskComponentRepeatHandler = (id: string, data: PartialTaskData) => {
@@ -57,13 +55,15 @@ const TomorrowListPage = () => {
         {initTasksStatus ? (
           <>
             <span>Задачи на завтра</span>
-            {tomorrowTasks.length ? (
-              tomorrowTasks.map(mapTaskComponent)
-            ) : (
-              <span className={styles['taskList__comment']}>
-                Нет новых задач
-              </span>
-            )}
+            <ul className={styles.list}>
+              {tomorrowTasks.length ? (
+                tomorrowTasks.map(mapTaskComponent)
+              ) : (
+                <span className={styles['taskList__comment']}>
+                  Нет новых задач
+                </span>
+              )}
+            </ul>
           </>
         ) : (
           <SpinComponent styleClass={styles.spinner} />

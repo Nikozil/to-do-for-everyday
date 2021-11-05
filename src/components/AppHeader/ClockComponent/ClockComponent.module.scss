@@ -1,0 +1,19 @@
+.clock {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  @media screen and (max-width: 767px) {
+    font-size: 0.9em;
+  }
+}
+
+.clock__date {
+  font-size: 0.8em;
+  @media screen and (max-width: 350px) {
+    display: none;
+  }
+}
+.clock__time {
+  font-weight: 500;
+}

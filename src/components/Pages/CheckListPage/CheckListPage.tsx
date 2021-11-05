@@ -9,14 +9,13 @@ import DayScoreComponent from './DayScoreComponent/DayScoreComponent';
 import TasksListComponent from './TasksListComponent/TasksListComponent';
 
 const CheckListPage = () => {
-  const time = useSelector((state: AppStateType) => state.clock.time);
   const initTasksStatus = useSelector(
     (state: AppStateType) => state.tasks.initStatus
   );
   const dispatch = useDispatch();
 
   const newTaskSubmit = (task: string) => {
-    dispatch(addTask(task, time));
+    dispatch(addTask(task, {}));
   };
 
   return (

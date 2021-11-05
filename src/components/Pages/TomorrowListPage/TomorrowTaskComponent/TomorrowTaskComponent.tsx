@@ -21,7 +21,7 @@ const TomorrowTaskComponent: React.FC<PropsType> = ({
   };
 
   return (
-    <div className={styles.content}>
+    <li className={styles.content}>
       <span className={styles.task}>
         <button
           aria-label={'delete task'}
@@ -40,7 +40,7 @@ const TomorrowTaskComponent: React.FC<PropsType> = ({
         data-testid="repeat-button">
         {repeat ? <RiPushpinFill /> : <RiPushpinLine />}
       </button>
-    </div>
+    </li>
   );
 };
 

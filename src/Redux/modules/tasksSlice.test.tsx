@@ -175,7 +175,9 @@ describe('tasksSlice', () => {
     });
     describe('addTask', () => {
       it('addTask completed', async () => {
-        const thunk = addTask('Задача', 1635606187350);
+        getStateMock.mockReturnValue({ clock: { time: 1635606187350 } });
+
+        const thunk = addTask('Задача', {});
         await thunk(dispatchMock, getStateMock, {});
         expect(StoreAPIMock.setTask).toHaveBeenCalled();
         expect(StoreAPIMock.setTask).toHaveBeenCalledWith({
@@ -188,7 +190,7 @@ describe('tasksSlice', () => {
         expect(dispatchMock).toHaveBeenCalled();
       });
       it('addTask uncompleted', async () => {
-        const thunk = addTask('Задача', 1635606187350);
+        const thunk = addTask('Задача', {});
         StoreAPIMock.setTask.mockRejectedValue(new Error('Ошибка'));
         const result = await thunk(dispatchMock, getStateMock, {});
         expect(result).toBe('Ошибка');
