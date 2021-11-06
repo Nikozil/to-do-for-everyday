@@ -1,6 +1,6 @@
 import { Field, Form, Formik } from 'formik';
 import React, { useState } from 'react';
-import { ImStarEmpty, ImStarFull } from 'react-icons/im';
+import RaitingStarComponent from '../../../assets/RaitingStarComponent/RaitingStarComponent';
 import styles from './ChangeScoreForm.module.scss';
 
 const ChangeScoreForm: React.FC<PropsType> = ({ score, handleSubmit }) => {
@@ -40,12 +40,10 @@ const ChangeScoreForm: React.FC<PropsType> = ({ score, handleSubmit }) => {
                         className={styles.radio}
                         onClick={handleSubmit}
                       />
-
-                      {(hover || score) >= scoreValue ? (
-                        <ImStarFull size={29} />
-                      ) : (
-                        <ImStarEmpty size={29} />
-                      )}
+                      <RaitingStarComponent
+                        active={(hover || score) >= scoreValue}
+                        size={29}
+                      />
                     </label>
                   );
                 })}
