@@ -20,7 +20,7 @@ const DayScoreComponent = () => {
   };
   return (
     <div>
-      Итоги дня
+      <div className="mb-1">Итоги дня</div>
       <ChangeTagForm tag={tag} handleSubmit={addTagHandler} />
       <ChangeScoreForm score={score} handleSubmit={addScoreHandler} />
     </div>

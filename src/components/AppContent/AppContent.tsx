@@ -15,6 +15,9 @@ const CheckListPage = React.lazy(
 const TomorrowListPage = React.lazy(
   () => import('../Pages/TomorrowListPage/TomorrowListPage')
 );
+const HistoryPage = React.lazy(
+  () => import('../Pages/HistoryPage/HistoryPage')
+);
 const Settings = React.lazy(() => import('../Pages/SettingsPage/SettingsPage'));
 const AppContent = () => {
   const dispatch = useDispatch();
@@ -42,6 +45,9 @@ const AppContent = () => {
           </Route>
           <Route path="/table">
             <Table />
+          </Route>
+          <Route path="/history">
+            <HistoryPage />
           </Route>
           <Route path="/settings">
             <Settings />

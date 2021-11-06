@@ -3,7 +3,11 @@
 exports[`DayScoreComponent render correct 1`] = `
 <DocumentFragment>
   <div>
-    Итоги дня
+    <div
+      class="mb-1"
+    >
+      Итоги дня
+    </div>
     <form
       action="#"
     >

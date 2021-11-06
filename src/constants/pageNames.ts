@@ -1,8 +1,12 @@
 import React from 'react';
 // import { AiOutlineBorderlessTable } from 'react-icons/ai';
-import { RiCheckboxBlankLine, RiCheckboxFill } from 'react-icons/ri';
+import {
+  RiCheckboxBlankLine,
+  RiCheckboxFill,
+  RiFolderHistoryFill,
+} from 'react-icons/ri';
 
-export const NavLinks: NavLinkType[] = [
+export const NavLinksStart: NavLinkType[] = [
   {
     name: 'Checklist',
     nameRus: 'Список дел',
@@ -21,6 +25,14 @@ export const NavLinks: NavLinkType[] = [
   //   link: '/table',
   //   Icon: AiOutlineBorderlessTable,
   // },
+];
+export const NavLinksEnd: NavLinkType[] = [
+  {
+    name: 'History',
+    nameRus: 'История',
+    link: '/history',
+    Icon: RiFolderHistoryFill,
+  },
 ];
 interface NavLinkType {
   name: string;

@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HistoryPage render correct 1`] = `
+<DocumentFragment>
+  <div>
+    History
+  </div>
+   
+</DocumentFragment>
+`;
