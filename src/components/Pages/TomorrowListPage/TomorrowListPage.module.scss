@@ -35,3 +35,11 @@
 .list {
   padding: 0;
 }
+.task {
+  display: flex;
+  align-items: center;
+}
+.taskName {
+  margin-left: 10px;
+  margin-bottom: 4px;
+}

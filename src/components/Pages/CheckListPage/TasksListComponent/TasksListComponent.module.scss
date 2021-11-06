@@ -7,3 +7,22 @@
 .list {
   padding: 0;
 }
+
+.task {
+  display: flex;
+  align-items: center;
+}
+.taskName {
+  margin-left: 10px;
+  margin-bottom: 4px;
+}
+.doneTaskName {
+  margin-bottom: 4px;
+}
+.buttons {
+  display: flex;
+  align-items: center;
+}
+.buttons-margin {
+  margin-left: 5px;
+}

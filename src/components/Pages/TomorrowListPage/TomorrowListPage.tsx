@@ -12,7 +12,8 @@ import {
 import { AppStateType } from '../../../Redux/store';
 import NewTaskForm from '../../Forms/NewTaskForm/NewTaskForm';
 import styles from './TomorrowListPage.module.scss';
-import TomorrowTaskComponent from './TomorrowTaskComponent/TomorrowTaskComponent';
+import TaskComponent from '../../../assets/TaskComponent/TaskComponent';
+import { DeleteButton, RepeatButton } from '../../../assets/Buttons/Buttons';
 
 const TomorrowListPage = () => {
   const initTasksStatus = useSelector(
@@ -38,12 +39,13 @@ const TomorrowListPage = () => {
   };
 
   const mapTaskComponent = (task: Task) => (
-    <TomorrowTaskComponent
-      task={task}
-      key={task.id}
-      repeatHandler={taskComponentRepeatHandler}
-      deleteHandler={taskComponentDeleteHandler}
-    />
+    <TaskComponent key={task.id}>
+      <span className={styles.task}>
+        <DeleteButton task={task} clickHandler={taskComponentDeleteHandler} />
+        <span className={styles.taskName}>{task.data.name}</span>
+      </span>
+      <RepeatButton task={task} clickHandler={taskComponentRepeatHandler} />
+    </TaskComponent>
   );
 
   return (

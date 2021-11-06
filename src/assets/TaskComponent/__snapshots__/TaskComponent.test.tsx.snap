@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Task Component tests rendering and click delete 1`] = `
+<DocumentFragment>
+  <li
+    class="content"
+  >
+    Hello
+  </li>
+   
+</DocumentFragment>
+`;

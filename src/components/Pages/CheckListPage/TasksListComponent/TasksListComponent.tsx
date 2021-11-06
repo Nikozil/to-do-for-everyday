@@ -2,6 +2,13 @@ import { endOfToday, getTime } from 'date-fns';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
+  CheckButton,
+  DeleteButton,
+  RepeatButton,
+  UncheckButton,
+} from '../../../../assets/Buttons/Buttons';
+import TaskComponent from '../../../../assets/TaskComponent/TaskComponent';
+import {
   checkTask,
   deleteTask,
   LivedTask,
@@ -11,8 +18,6 @@ import {
   updateTask,
 } from '../../../../Redux/modules/tasksSlice';
 import { AppStateType } from '../../../../Redux/store';
-import DoneTaskComponent from './DoneTaskComponent/DoneTaskComponent';
-import TaskComponent from './TaskComponent/TaskComponent';
 import styles from './TasksListComponent.module.scss';
 
 const TasksListComponent = () => {
@@ -40,20 +45,30 @@ const TasksListComponent = () => {
   };
 
   const mapTaskComponent = (task: Task) => (
-    <TaskComponent
-      task={task}
-      key={task.id}
-      checkHandler={taskComponentCheckHandler}
-      repeatHandler={taskComponentRepeatHandler}
-      deleteHandler={taskComponentDeleteHandler}
-    />
+    <TaskComponent key={task.id}>
+      <span className={styles.task}>
+        <DeleteButton task={task} clickHandler={taskComponentDeleteHandler} />
+        <span className={styles.taskName}>{task.data.name}</span>
+      </span>
+      <span className={styles.buttons}>
+        <RepeatButton task={task} clickHandler={taskComponentRepeatHandler} />
+        <CheckButton
+          task={task}
+          clickHandler={taskComponentCheckHandler}
+          className={styles['buttons-margin']}
+        />
+      </span>
+    </TaskComponent>
   );
   const mapDoneTaskComponent = (task: LivedTask) => (
-    <DoneTaskComponent
-      task={task}
-      key={task.id}
-      uncheckHandler={taskComponentUncheckHandler}
-    />
+    <TaskComponent key={task.id}>
+      <span className={styles.task}>
+        <span className={styles.doneTaskName}>{task.name}</span>
+      </span>
+      <span className={styles.buttons}>
+        <UncheckButton task={task} clickHandler={taskComponentUncheckHandler} />
+      </span>
+    </TaskComponent>
   );
 
   return (
