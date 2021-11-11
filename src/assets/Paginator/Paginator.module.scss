@@ -1,0 +1,18 @@
+@import '../../App.scss';
+
+.name {
+  color: $primary-color;
+  &:hover {
+    color: unset !important;
+  }
+}
+.button {
+  cursor: pointer;
+}
+.active {
+  background-color: $secondary-color !important;
+  border-color: $secondary-color !important;
+  &:hover {
+    color: white !important;
+  }
+}

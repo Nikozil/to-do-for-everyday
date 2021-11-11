@@ -20,6 +20,10 @@ import tasksSlice, {
   Task,
   uncheckTask,
   updateTask,
+  setTimestamp,
+  addTag,
+  addScore,
+  checkupTimestamp,
 } from './tasksSlice';
 const reducer = tasksSlice.reducer;
 const getStateMock = jest.fn();
@@ -47,6 +51,7 @@ let testInitialState = {
     score: 3,
     tag: 'Печальный День',
     doneTasksList: [{ id: '1234', name: 'Task' }],
+    timestamp: 1636630400590,
   } as LivedDay,
   initStatus: false as boolean,
 };
@@ -94,6 +99,7 @@ describe('tasksSlice', () => {
         score: 3,
         tag: 'Бе',
         doneTasksList: [{ id: '1234', name: 'Task' }],
+        timestamp: 1636630400590,
       } as LivedDay;
       expect(reducer(undefined, setLivedDay(livedDay))).toEqual({
         ...initialState,
@@ -115,6 +121,7 @@ describe('tasksSlice', () => {
             { id: '1234', name: 'Task' },
             { id: '12345', name: 'Task2' },
           ],
+          timestamp: 1636630400590,
         },
       });
     });
@@ -127,6 +134,7 @@ describe('tasksSlice', () => {
           score: 3,
           tag: 'Печальный День',
           doneTasksList: [],
+          timestamp: 1636630400590,
         },
       });
     });
@@ -137,6 +145,7 @@ describe('tasksSlice', () => {
           score: 3,
           tag: 'Чудесный День',
           doneTasksList: [{ id: '1234', name: 'Task' }],
+          timestamp: 1636630400590,
         },
       });
     });
@@ -147,6 +156,18 @@ describe('tasksSlice', () => {
           score: 2,
           tag: 'Печальный День',
           doneTasksList: [{ id: '1234', name: 'Task' }],
+          timestamp: 1636630400590,
+        },
+      });
+    });
+    it('should set Timestamp', () => {
+      expect(reducer(testInitialState, setTimestamp(1636630400595))).toEqual({
+        ...testInitialState,
+        livedDay: {
+          score: 3,
+          tag: 'Печальный День',
+          doneTasksList: [{ id: '1234', name: 'Task' }],
+          timestamp: 1636630400595,
         },
       });
     });
@@ -251,13 +272,14 @@ describe('tasksSlice', () => {
           taskApiData,
           doneTaskApiData
         );
-        expect(dispatchMock).toBeCalledTimes(2);
+        expect(dispatchMock).toBeCalledTimes(3);
+        expect(dispatchMock).toHaveBeenNthCalledWith(1, expect.any(Function));
         expect(dispatchMock).toHaveBeenNthCalledWith(
-          1,
+          2,
           editTask({ id: '123', data: { done: true } })
         );
         expect(dispatchMock).toHaveBeenNthCalledWith(
-          2,
+          3,
           addTaskToDoneTasksList({ id: '123', name: 'task0' })
         );
       });
@@ -283,13 +305,14 @@ describe('tasksSlice', () => {
           taskApiData,
           doneTaskApiData
         );
-        expect(dispatchMock).toBeCalledTimes(2);
+        expect(dispatchMock).toBeCalledTimes(3);
+        expect(dispatchMock).toHaveBeenNthCalledWith(1, expect.any(Function));
         expect(dispatchMock).toHaveBeenNthCalledWith(
-          1,
+          2,
           editTask({ id: '123', data: { time: date + 86400000 } })
         );
         expect(dispatchMock).toHaveBeenNthCalledWith(
-          2,
+          3,
           addTaskToDoneTasksList({ id: '123', name: 'task0' })
         );
       });
@@ -380,6 +403,76 @@ describe('tasksSlice', () => {
         const thunk = uncheckTask({ id: '123', name: 'Task' });
         const result = await thunk(dispatchMock, getStateMock, {});
         expect(result).toBe('Нет такой задачи');
+      });
+    });
+    describe('addTag', () => {
+      it('addTag completed', async () => {
+        const thunk = addTag('Тэг');
+        await thunk(dispatchMock, getStateMock, {});
+        expect(StoreAPIMock.updateLivedDay).toHaveBeenCalled();
+
+        expect(dispatchMock).toBeCalledTimes(2);
+        expect(dispatchMock).toHaveBeenNthCalledWith(1, expect.any(Function));
+        expect(dispatchMock).toHaveBeenNthCalledWith(2, setTag('Тэг'));
+      });
+      it('addTag uncompleted', async () => {
+        const thunk = addTag('Тэг');
+        StoreAPIMock.updateLivedDay.mockRejectedValue(new Error('Ошибка'));
+        const result = await thunk(dispatchMock, getStateMock, {});
+        expect(result).toBe('Ошибка');
+      });
+    });
+    describe('addScore', () => {
+      it('addScore completed', async () => {
+        const thunk = addScore(2);
+        await thunk(dispatchMock, getStateMock, {});
+        expect(StoreAPIMock.updateLivedDay).toHaveBeenCalled();
+
+        expect(dispatchMock).toBeCalledTimes(2);
+        expect(dispatchMock).toHaveBeenNthCalledWith(1, expect.any(Function));
+        expect(dispatchMock).toHaveBeenNthCalledWith(2, setScore(2));
+      });
+      it('addScore uncompleted', async () => {
+        const thunk = addScore(2);
+        StoreAPIMock.updateLivedDay.mockRejectedValue(new Error('Ошибка'));
+        const result = await thunk(dispatchMock, getStateMock, {});
+        expect(result).toBe('Ошибка');
+      });
+    });
+    describe('checkupTimestamp', () => {
+      it('checkupTimestamp not be called', async () => {
+        getStateMock.mockReturnValue({
+          tasks: { livedDay: { timestamp: 1635606187350 } },
+        });
+
+        const thunk = checkupTimestamp();
+        await thunk(dispatchMock, getStateMock, {});
+        expect(StoreAPIMock.updateLivedDay).not.toHaveBeenCalled();
+
+        expect(dispatchMock).not.toBeCalled();
+      });
+      it('checkupTimestamp completed', async () => {
+        getStateMock.mockReturnValue({
+          clock: { time: 1635606187350 },
+          tasks: { livedDay: { timestamp: null } },
+        });
+
+        const thunk = checkupTimestamp();
+        await thunk(dispatchMock, getStateMock, {});
+        expect(StoreAPIMock.updateLivedDay).toHaveBeenCalled();
+
+        expect(dispatchMock).toBeCalled();
+        expect(dispatchMock).toHaveBeenCalledWith(setTimestamp(1635541200000));
+      });
+      it('checkupTimestamp uncompleted', async () => {
+        getStateMock.mockReturnValue({
+          clock: { time: 1635606187350 },
+          tasks: { livedDay: { timestamp: null } },
+        });
+        const thunk = checkupTimestamp();
+        StoreAPIMock.updateLivedDay.mockRejectedValue(new Error('Ошибка'));
+        const result = await thunk(dispatchMock, getStateMock, {});
+        expect(result).toBe('Ошибка');
       });
     });
   });

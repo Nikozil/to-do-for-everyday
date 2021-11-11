@@ -46,6 +46,7 @@ export const PageNames: PageNamesType = {
   '/table': 'Таблица',
   '/settings': 'Настройки',
   '/tomorrowList': 'Дела на завтра',
+  '/history': 'История',
 };
 interface PageNamesType {
   [key: string]: string;

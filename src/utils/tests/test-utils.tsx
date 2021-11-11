@@ -1,11 +1,13 @@
+import React, { ReactElement } from 'react';
 import { configureStore } from '@reduxjs/toolkit';
 import { render as rtlRender, RenderOptions } from '@testing-library/react';
 import { createMemoryHistory, MemoryHistory } from 'history';
-import React, { ReactElement } from 'react';
 import { Provider } from 'react-redux';
 import { Router } from 'react-router-dom';
 import reduxThunk from 'redux-thunk';
+
 import clockSlice from '../../Redux/modules/clockSlice';
+import historySlice from '../../Redux/modules/historySlice';
 import tasksSlice from '../../Redux/modules/tasksSlice';
 import userSlice from '../../Redux/modules/userSlice';
 
@@ -13,6 +15,7 @@ const reducer = {
   user: userSlice.reducer,
   tasks: tasksSlice.reducer,
   clock: clockSlice.reducer,
+  history: historySlice.reducer,
 };
 const render = (
   ui: ReactElement,

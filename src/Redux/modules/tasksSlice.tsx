@@ -1,11 +1,24 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { add, endOfToday, format, getTime, milliseconds } from 'date-fns';
+import {
+  add,
+  endOfToday,
+  format,
+  getTime,
+  milliseconds,
+  startOfDay,
+} from 'date-fns';
+
 import { StoreAPI } from '../../api/StoreAPI';
 import { AppThunk } from '../store';
 
 export const initialState = {
   tasksList: [] as Task[],
-  livedDay: { score: 0, tag: '', doneTasksList: [] } as LivedDay,
+  livedDay: {
+    score: 0,
+    tag: '',
+    doneTasksList: [],
+    timestamp: null,
+  } as LivedDay,
   initStatus: false as boolean,
 };
 
@@ -51,6 +64,9 @@ const tasksSlice = createSlice({
     setScore: (state, action: PayloadAction<Score>) => {
       state.livedDay.score = action.payload;
     },
+    setTimestamp: (state, action: PayloadAction<number>) => {
+      state.livedDay.timestamp = action.payload;
+    },
   },
 });
 
@@ -64,6 +80,7 @@ export const {
   removeTaskToDoneTasksList,
   setTag,
   setScore,
+  setTimestamp,
 } = tasksSlice.actions;
 
 export const getTasks = (): AppThunk => async (dispatch, getState) => {
@@ -85,8 +102,8 @@ export const getTasks = (): AppThunk => async (dispatch, getState) => {
 };
 export const addTask =
   (taskName: string, duration: Duration, repeat = 0): AppThunk =>
-  async (dispatch,getState) => {
-    const time=getTime(add(getState().clock.time, duration))
+  async (dispatch, getState) => {
+    const time = getTime(add(getState().clock.time, duration));
     const taskData = { name: taskName, done: false, time, repeat } as TaskData;
     try {
       await StoreAPI.setTask(taskData);
@@ -129,6 +146,7 @@ export const checkTask =
         newData = { done: !done };
       }
       // add task to done list
+      dispatch(checkupTimestamp());
       const doneTasks = {
         id: id,
         name: name,
@@ -199,6 +217,7 @@ export const addTag =
   (tag: string): AppThunk =>
   async (dispatch, getState) => {
     try {
+      dispatch(checkupTimestamp());
       const time = format(getState().clock.time, 'dd.MM.yyyy');
       const livedDay = { tag };
       await StoreAPI.updateLivedDay(time, livedDay);
@@ -211,6 +230,7 @@ export const addScore =
   (score: Score): AppThunk =>
   async (dispatch, getState) => {
     try {
+      dispatch(checkupTimestamp());
       const date = format(getState().clock.time, 'dd.MM.yyyy');
       const livedDay = { score };
       await StoreAPI.updateLivedDay(date, livedDay);
@@ -219,6 +239,20 @@ export const addScore =
       return err.message as string;
     }
   };
+export const checkupTimestamp = (): AppThunk => async (dispatch, getState) => {
+  if (!getState().tasks.livedDay.timestamp) {
+    try {
+      const date = format(getState().clock.time, 'dd.MM.yyyy');
+
+      const timestamp = getTime(startOfDay(getState().clock.time));
+      const livedDay = { timestamp };
+      await StoreAPI.updateLivedDay(date, livedDay);
+      dispatch(setTimestamp(timestamp));
+    } catch (err: any) {
+      return err.message as string;
+    }
+  }
+};
 
 export default tasksSlice;
 
@@ -245,5 +279,6 @@ export interface LivedDay {
   tag: string;
   score: Score;
   doneTasksList: LivedTask[];
+  timestamp: null | number;
 }
 export type Score = 0 | 1 | 2 | 3 | 4 | 5;

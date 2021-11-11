@@ -1,0 +1,46 @@
+@import '../../../../App.scss';
+.container {
+  margin: 5px;
+  padding: 5px;
+
+  border-radius: 5px;
+
+  // background-color: $background-color;
+  // background: linear-gradient($background-color, #fff);
+
+  box-shadow: 3px 3px 10px 1px $secondary-color;
+
+  overflow: hidden;
+
+  // background-color: $secondary-color;
+  // color: $header-color;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.date {
+  font-weight: 500;
+  background-color: $secondary-color;
+  color: $header-color;
+  margin: -10px -10px 0 -10px;
+  padding-top: 10px;
+  padding-bottom: 15px;
+  height: 40px;
+}
+
+.task-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5px;
+}
+
+.tag {
+  padding: 5px;
+  margin-top: 5px;
+  font-size: 0.8em;
+  font-style: italic;
+}

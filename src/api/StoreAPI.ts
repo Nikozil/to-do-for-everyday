@@ -10,7 +10,10 @@ import {
   updateDoc,
   arrayUnion,
   arrayRemove,
+  query,
+  where,
 } from 'firebase/firestore';
+import { HistoryDay } from '../Redux/modules/historySlice';
 import {
   LivedDay,
   LivedTask,
@@ -166,6 +169,30 @@ export const StoreAPI = {
         await batch.commit();
       } catch (err) {
         console.log(err);
+      }
+    }
+  },
+  getDays: async (start: number, end: number) => {
+    const userid = auth.currentUser?.uid;
+
+    if (userid) {
+      try {
+        const q = query(
+          collection(db, `users/${userid}/days`),
+          where('timestamp', '>=', start),
+          where('timestamp', '<=', end)
+        );
+
+        // where('timestamp', '>=', new Date('11.06.2021').getTime()),
+        //   where('timestamp', '<=', new Date('11.07.2021').getTime())
+        const querySnapshot = await getDocs(q);
+        let days = querySnapshot.docs.map((i) => {
+          return { ...i.data() } as HistoryDay;
+        });
+        return days;
+      } catch (err) {
+        console.log(err);
+        throw new Error('Не удалось получить данные с сервера');
       }
     }
   },
