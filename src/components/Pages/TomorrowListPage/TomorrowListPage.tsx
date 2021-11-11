@@ -1,29 +1,42 @@
-import { endOfToday, getTime } from 'date-fns';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import SpinComponent from '../../../assets/SpinComponent/SpinComponent';
+import { endOfToday, getTime } from 'date-fns';
+import { createSelector } from 'reselect';
+
 import {
   addTask,
   deleteTask,
+  doAgainTask,
   PartialTaskData,
   Task,
   updateTask,
 } from '../../../Redux/modules/tasksSlice';
-import { AppStateType } from '../../../Redux/store';
+import SpinComponent from '../../../assets/SpinComponent/SpinComponent';
 import NewTaskForm from '../../Forms/NewTaskForm/NewTaskForm';
-import styles from './TomorrowListPage.module.scss';
 import TaskComponent from '../../../assets/TaskComponent/TaskComponent';
-import { DeleteButton, RepeatButton } from '../../../assets/Buttons/Buttons';
+import {
+  DeleteButton,
+  DoItAgainButton,
+  RepeatButton,
+} from '../../../assets/Buttons/Buttons';
+import { AppStateType } from '../../../Redux/store';
+import styles from './TomorrowListPage.module.scss';
 
 const TomorrowListPage = () => {
   const initTasksStatus = useSelector(
     (state: AppStateType) => state.tasks.initStatus
   );
-
-  const tasks = useSelector((state: AppStateType) => state.tasks.tasksList);
-  const tomorrowTasks = tasks.filter(
-    (i) => !i.data.done && i.data.time > getTime(endOfToday())
+  const tomorrowTasksSelector = createSelector(
+    (state: AppStateType) => state.tasks.tasksList,
+    (tasks) =>
+      tasks.filter((i) => !i.data.done && i.data.time > getTime(endOfToday()))
   );
+  const completedTasksSelector = createSelector(
+    (state: AppStateType) => state.tasks.tasksList,
+    (tasks) => tasks.filter((i) => i.data.done)
+  );
+  const tomorrowTasks = useSelector(tomorrowTasksSelector);
+  const completedTasks = useSelector(completedTasksSelector);
 
   const dispatch = useDispatch();
 
@@ -34,11 +47,14 @@ const TomorrowListPage = () => {
   const taskComponentRepeatHandler = (id: string, data: PartialTaskData) => {
     dispatch(updateTask(id, data));
   };
+  const taskComponentAgainHandler = (task: Task) => {
+    dispatch(doAgainTask(task));
+  };
   const taskComponentDeleteHandler = (id: string) => {
     dispatch(deleteTask(id));
   };
 
-  const mapTaskComponent = (task: Task) => (
+  const mapTomorrowTask = (task: Task) => (
     <TaskComponent key={task.id}>
       <span className={styles.task}>
         <DeleteButton task={task} clickHandler={taskComponentDeleteHandler} />
@@ -47,29 +63,58 @@ const TomorrowListPage = () => {
       <RepeatButton task={task} clickHandler={taskComponentRepeatHandler} />
     </TaskComponent>
   );
+  const mapCompletedTask = (task: Task) => (
+    <TaskComponent key={task.id}>
+      <span className={styles.task}>
+        <DeleteButton task={task} clickHandler={taskComponentDeleteHandler} />
+        <span className={styles.taskName}>{task.data.name}</span>
+      </span>
+      <DoItAgainButton task={task} clickHandler={taskComponentAgainHandler} />
+    </TaskComponent>
+  );
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.content}>
-        <div className={'my-4'}>
-          <NewTaskForm handleSubmit={newTaskSubmit} />
+        <div className={styles['tomorrow-tasks']}>
+          <div className={'my-4'}>
+            <NewTaskForm handleSubmit={newTaskSubmit} />
+          </div>
+          {initTasksStatus ? (
+            <>
+              <span>Задачи на завтра</span>
+              <ul className={styles.list}>
+                {tomorrowTasks.length ? (
+                  tomorrowTasks.map(mapTomorrowTask)
+                ) : (
+                  <span className={styles['taskList__comment']}>
+                    Нет новых задач
+                  </span>
+                )}
+              </ul>
+            </>
+          ) : (
+            <SpinComponent styleClass={styles.spinner} />
+          )}
         </div>
-        {initTasksStatus ? (
-          <>
-            <span>Задачи на завтра</span>
-            <ul className={styles.list}>
-              {tomorrowTasks.length ? (
-                tomorrowTasks.map(mapTaskComponent)
-              ) : (
-                <span className={styles['taskList__comment']}>
-                  Нет новых задач
-                </span>
-              )}
-            </ul>
-          </>
-        ) : (
-          <SpinComponent styleClass={styles.spinner} />
-        )}
+        <div className={styles['completed-tasks']}>
+          {initTasksStatus ? (
+            <>
+              <span>Выполненые задачи</span>
+              <ul className={styles.list}>
+                {completedTasks.length ? (
+                  completedTasks.map(mapCompletedTask)
+                ) : (
+                  <span className={styles['taskList__comment']}>
+                    Нет выполненых задач
+                  </span>
+                )}
+              </ul>
+            </>
+          ) : (
+            <SpinComponent styleClass={styles.spinner} />
+          )}
+        </div>
       </div>
     </div>
   );

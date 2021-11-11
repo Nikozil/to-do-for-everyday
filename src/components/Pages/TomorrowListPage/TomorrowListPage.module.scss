@@ -9,6 +9,7 @@
 .content {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 
   height: 95%;
   width: 100%;
@@ -42,4 +43,7 @@
 .taskName {
   margin-left: 10px;
   margin-bottom: 4px;
+}
+.completed-tasks {
+  opacity: 0.8;
 }

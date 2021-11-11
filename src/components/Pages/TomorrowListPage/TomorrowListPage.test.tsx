@@ -11,13 +11,22 @@ const testTask = {
     time: new Date().getTime() + 86400000,
   },
 } as Task;
+const testDoneTask = {
+  id: '123',
+  data: {
+    name: 'done task',
+    repeat: 0,
+    done: true,
+    time: new Date().getTime(),
+  },
+} as Task;
 describe('TomorrowListPage', () => {
   it('render correct with tasks', async () => {
     const { asFragment } = render(<TomorrowListPage />, {
       preloadedState: {
         tasks: {
           ...initialState,
-          tasksList: [testTask],
+          tasksList: [testTask, testDoneTask],
           initStatus: true,
         },
       },

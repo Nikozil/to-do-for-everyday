@@ -5,6 +5,7 @@ import { render, screen, waitFor } from '../../utils/tests/test-utils';
 import {
   CheckButton,
   DeleteButton,
+  DoItAgainButton,
   RepeatButton,
   UncheckButton,
 } from './Buttons';
@@ -58,6 +59,18 @@ describe('Buttons tests', () => {
         expect(clickHandler).toHaveBeenCalled();
 
         expect(clickHandler).toHaveBeenCalledWith(testDoneTask);
+      });
+    });
+    describe('DoItAgain button', () => {
+      it('rendering and click again', async () => {
+        render(<DoItAgainButton task={testTask} clickHandler={clickHandler} />);
+        userEvent.click(screen.getByTestId('again-button'));
+
+        await waitFor(() => {
+          expect(clickHandler).toHaveBeenCalled();
+
+          expect(clickHandler).toHaveBeenCalledWith(testTask);
+        });
       });
     });
   });

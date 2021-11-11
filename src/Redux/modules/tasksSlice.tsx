@@ -180,7 +180,10 @@ export const uncheckTask =
           //move date to past
           newData = { time: getTime(add(time, { days: -repeat })) };
         } else {
-          newData = { done: !done };
+          //return task time and status
+          newData = done
+            ? { done: !done }
+            : { done: false, time: getState().clock.time };
         }
         const taskApiData = { taskId: id, taskData: newData };
         const doneTask = {
@@ -254,6 +257,27 @@ export const checkupTimestamp = (): AppThunk => async (dispatch, getState) => {
   }
 };
 
+export const doAgainTask =
+  (task: Task): AppThunk =>
+  async (dispatch, getState) => {
+    try {
+      const { id, data } = task;
+      const { done } = data;
+
+      //set date of tomorrow task
+      const currentTime = getState().clock.time;
+      const newTime = getTime(add(currentTime, { days: 1 }));
+
+      const newData = { time: newTime, done: !done };
+
+      await StoreAPI.updateTask(id, newData);
+      //update store
+      dispatch(editTask({ id, data: newData }));
+    } catch (err: any) {
+      return err.message as string;
+    }
+  };
+
 export default tasksSlice;
 
 export interface Task {
@@ -267,7 +291,7 @@ export interface TaskData {
   repeat: number;
 }
 export type PartialTaskData = Partial<TaskData>;
-interface PartialTask {
+export interface PartialTask {
   id: string;
   data: PartialTaskData;
 }

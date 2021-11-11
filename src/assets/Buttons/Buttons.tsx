@@ -1,11 +1,15 @@
-import cn from 'classnames';
 import React from 'react';
+import cn from 'classnames';
 import {
   ImCheckboxUnchecked,
   ImCross,
   ImCheckboxChecked,
 } from 'react-icons/im';
-import { RiPushpinFill, RiPushpinLine } from 'react-icons/ri';
+import {
+  RiPushpinFill,
+  RiPushpinLine,
+  RiArrowGoForwardFill,
+} from 'react-icons/ri';
 
 import {
   LivedTask,
@@ -102,6 +106,28 @@ export const UncheckButton: React.FC<UncheckPropsType> = ({
   );
 };
 
+export const DoItAgainButton: React.FC<DoItAgainPropsType> = ({
+  task,
+  className = '',
+  clickHandler,
+}) => {
+  const clickAgainHandler = (event: React.MouseEvent) => {
+    event.preventDefault();
+    clickHandler(task);
+  };
+
+  return (
+    <button
+      aria-label={'again task'}
+      name={'again task'}
+      onClick={clickAgainHandler}
+      className={cn(styles.button, className)}
+      data-testid="again-button">
+      <RiArrowGoForwardFill />
+    </button>
+  );
+};
+
 interface CheckPropsType {
   task: Task;
   className?: string;
@@ -121,4 +147,9 @@ interface RepeatPropsType {
   task: Task;
   className?: string;
   clickHandler: (id: string, data: PartialTaskData) => void;
+}
+interface DoItAgainPropsType {
+  task: Task;
+  className?: string;
+  clickHandler: (task: Task) => void;
 }

@@ -24,6 +24,8 @@ import tasksSlice, {
   addTag,
   addScore,
   checkupTimestamp,
+  doAgainTask,
+  PartialTask,
 } from './tasksSlice';
 const reducer = tasksSlice.reducer;
 const getStateMock = jest.fn();
@@ -471,6 +473,42 @@ describe('tasksSlice', () => {
         });
         const thunk = checkupTimestamp();
         StoreAPIMock.updateLivedDay.mockRejectedValue(new Error('Ошибка'));
+        const result = await thunk(dispatchMock, getStateMock, {});
+        expect(result).toBe('Ошибка');
+      });
+    });
+    describe('doAgainTask', () => {
+      it('doAgainTask completed', async () => {
+        const testTask = {
+          id: '123',
+          data: { name: 'task0', done: true },
+        } as Task;
+        getStateMock.mockReturnValue({
+          clock: { time: 1635606187350 },
+        });
+
+        const thunk = doAgainTask(testTask);
+        await thunk(dispatchMock, getStateMock, {});
+        expect(StoreAPIMock.updateTask).toHaveBeenCalled();
+
+        const newData = {
+          id: '123',
+          data: { done: false, time: 1635692587350 },
+        } as PartialTask;
+        expect(dispatchMock).toBeCalled();
+        expect(dispatchMock).toHaveBeenCalledWith(editTask(newData));
+      });
+      it('checkupTimestamp uncompleted', async () => {
+        const testTask = {
+          id: '123',
+          data: { name: 'task0', done: true },
+        } as Task;
+        getStateMock.mockReturnValue({
+          clock: { time: 1635606187350 },
+        });
+        const thunk = doAgainTask(testTask);
+
+        StoreAPIMock.updateTask.mockRejectedValue(new Error('Ошибка'));
         const result = await thunk(dispatchMock, getStateMock, {});
         expect(result).toBe('Ошибка');
       });
