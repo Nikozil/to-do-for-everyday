@@ -22,7 +22,7 @@ describe('ChangeNameForm tests', () => {
     await waitFor(() => {
       expect(handleSubmit).toHaveBeenCalled();
 
-      expect(handleSubmit).toHaveBeenCalledWith('newDisplayName');
+      expect(handleSubmit).toHaveBeenCalledWith('NewDisplayName');
     });
   });
 });

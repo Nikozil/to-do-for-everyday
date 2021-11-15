@@ -1,33 +1,42 @@
-import React from 'react';
-import { Field, Form, Formik } from 'formik';
 import cn from 'classnames';
+import { Field, Form, Formik } from 'formik';
+import React, { ChangeEvent } from 'react';
+import { toUpperCase } from '../../../utils/FormFunctions/FormFunctions';
 import styles from './NewTaskForm.module.scss';
 
 const NewTaskForm: React.FC<PropsType> = ({ handleSubmit }) => {
   const initialValues: MyFormValues = {
     newTask: '',
   };
+
   return (
     <Formik
       initialValues={initialValues}
-      onSubmit={async (values, { setStatus, resetForm }) => {
+      onSubmit={async (values, { resetForm }) => {
         await handleSubmit(values.newTask);
         resetForm();
       }}>
-      {({ errors, touched, isValidating, status }) => (
-        <Form>
-          <div className="mb-1">
-            <Field
-              id="newTask"
-              name="newTask"
-              placeholder="Новая Задача"
-              type="text"
-              className={cn('form-control', styles.newTask)}
-              autoComplete="off"
-            />
-          </div>
-        </Form>
-      )}
+      {({ setFieldValue }) => {
+        const HandleInput = (e: ChangeEvent<HTMLInputElement>) => {
+          const { value } = e.target;
+          setFieldValue('newTask', toUpperCase(value));
+        };
+        return (
+          <Form>
+            <div className="mb-1">
+              <Field
+                id="newTask"
+                name="newTask"
+                placeholder="Новая Задача"
+                type="text"
+                className={cn('form-control', styles.newTask)}
+                autoComplete="off"
+                onKeyUp={HandleInput}
+              />
+            </div>
+          </Form>
+        );
+      }}
     </Formik>
   );
 };

@@ -14,7 +14,7 @@
 
   @media screen and (max-width: 767px) {
     font-size: 1.1rem;
-    width: 130px;
+    width: auto;
   }
 }
 
@@ -25,7 +25,7 @@
   justify-content: flex-end;
   @media screen and (max-width: 767px) {
     font-size: 0.9rem;
-    width: 130px;
+    width: auto;
   }
 }
 .username {

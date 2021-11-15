@@ -27,14 +27,14 @@ exports[`DayScoreComponent render correct 1`] = `
         <div
           class="col"
         >
-          <input
+          <textarea
             autocomplete="off"
-            class="form-control form-control-sm"
+            class="form-control form-control-sm textarea"
             id="tag"
             name="tag"
             placeholder="Tag"
+            rows="1"
             type="text"
-            value=""
           />
         </div>
       </div>
