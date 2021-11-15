@@ -45,7 +45,7 @@ const TasksListComponent = () => {
   };
 
   const mapTaskComponent = (task: Task) => (
-    <TaskComponent key={task.id}>
+    <TaskComponent key={task.id} border={true}>
       <span className={styles.task}>
         <DeleteButton task={task} clickHandler={taskComponentDeleteHandler} />
         <span className={styles.taskName}>{task.data.name}</span>
@@ -61,7 +61,7 @@ const TasksListComponent = () => {
     </TaskComponent>
   );
   const mapDoneTaskComponent = (task: LivedTask) => (
-    <TaskComponent key={task.id}>
+    <TaskComponent key={task.id} border={true}>
       <span className={styles.task}>
         <span className={styles.doneTaskName}>{task.name}</span>
       </span>
@@ -73,7 +73,7 @@ const TasksListComponent = () => {
 
   return (
     <>
-      <span>Задачи</span>
+      <div className="mb-3">Задачи</div>
       <ul className={styles.list}>
         {undoneTasks.length ? (
           undoneTasks.map(mapTaskComponent)
@@ -82,7 +82,7 @@ const TasksListComponent = () => {
         )}
       </ul>
 
-      <span>Выполнено</span>
+      <div className="mb-3">Выполнено</div>
       <ul className={styles.list}>
         {doneTasks.length ? (
           doneTasks.map(mapDoneTaskComponent)

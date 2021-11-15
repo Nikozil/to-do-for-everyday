@@ -32,14 +32,16 @@ exports[`TomorrowListPage render correct with tasks 1`] = `
             </div>
           </form>
         </div>
-        <span>
+        <div
+          class="mb-3"
+        >
           Задачи на завтра
-        </span>
+        </div>
         <ul
           class="list"
         >
           <li
-            class="content"
+            class="content content_border"
           >
             <span
               class="task"
@@ -103,14 +105,16 @@ exports[`TomorrowListPage render correct with tasks 1`] = `
       <div
         class="completed-tasks"
       >
-        <span>
+        <div
+          class="mb-3"
+        >
           Выполненые задачи
-        </span>
+        </div>
         <ul
           class="list"
         >
           <li
-            class="content"
+            class="content content_border"
           >
             <span
               class="task"
@@ -272,9 +276,11 @@ exports[`TomorrowListPage render correct without tasks 1`] = `
             </div>
           </form>
         </div>
-        <span>
+        <div
+          class="mb-3"
+        >
           Задачи на завтра
-        </span>
+        </div>
         <ul
           class="list"
         >
@@ -288,9 +294,11 @@ exports[`TomorrowListPage render correct without tasks 1`] = `
       <div
         class="completed-tasks"
       >
-        <span>
+        <div
+          class="mb-3"
+        >
           Выполненые задачи
-        </span>
+        </div>
         <ul
           class="list"
         >

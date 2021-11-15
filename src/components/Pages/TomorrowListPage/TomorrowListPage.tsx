@@ -55,7 +55,7 @@ const TomorrowListPage = () => {
   };
 
   const mapTomorrowTask = (task: Task) => (
-    <TaskComponent key={task.id}>
+    <TaskComponent key={task.id} border={true}>
       <span className={styles.task}>
         <DeleteButton task={task} clickHandler={taskComponentDeleteHandler} />
         <span className={styles.taskName}>{task.data.name}</span>
@@ -64,7 +64,7 @@ const TomorrowListPage = () => {
     </TaskComponent>
   );
   const mapCompletedTask = (task: Task) => (
-    <TaskComponent key={task.id}>
+    <TaskComponent key={task.id} border={true}>
       <span className={styles.task}>
         <DeleteButton task={task} clickHandler={taskComponentDeleteHandler} />
         <span className={styles.taskName}>{task.data.name}</span>
@@ -82,7 +82,7 @@ const TomorrowListPage = () => {
           </div>
           {initTasksStatus ? (
             <>
-              <span>Задачи на завтра</span>
+              <div className="mb-3">Задачи на завтра</div>
               <ul className={styles.list}>
                 {tomorrowTasks.length ? (
                   tomorrowTasks.map(mapTomorrowTask)
@@ -100,7 +100,7 @@ const TomorrowListPage = () => {
         <div className={styles['completed-tasks']}>
           {initTasksStatus ? (
             <>
-              <span>Выполненые задачи</span>
+              <div className="mb-3">Выполненые задачи</div>
               <ul className={styles.list}>
                 {completedTasks.length ? (
                   completedTasks.map(mapCompletedTask)

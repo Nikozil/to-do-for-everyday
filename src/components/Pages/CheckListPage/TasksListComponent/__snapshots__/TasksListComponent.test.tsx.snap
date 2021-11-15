@@ -2,14 +2,16 @@
 
 exports[`TasksListComponent render correct with tasks 1`] = `
 <DocumentFragment>
-  <span>
+  <div
+    class="mb-3"
+  >
     Задачи
-  </span>
+  </div>
   <ul
     class="list"
   >
     <li
-      class="content"
+      class="content content_border"
     >
       <span
         class="task"
@@ -94,14 +96,16 @@ exports[`TasksListComponent render correct with tasks 1`] = `
       </span>
     </li>
   </ul>
-  <span>
+  <div
+    class="mb-3"
+  >
     Выполнено
-  </span>
+  </div>
   <ul
     class="list"
   >
     <li
-      class="content"
+      class="content content_border"
     >
       <span
         class="task"
@@ -145,9 +149,11 @@ exports[`TasksListComponent render correct with tasks 1`] = `
 
 exports[`TasksListComponent render correct without tasks 1`] = `
 <DocumentFragment>
-  <span>
+  <div
+    class="mb-3"
+  >
     Задачи
-  </span>
+  </div>
   <ul
     class="list"
   >
@@ -157,9 +163,11 @@ exports[`TasksListComponent render correct without tasks 1`] = `
       Нет новых задач
     </span>
   </ul>
-  <span>
+  <div
+    class="mb-3"
+  >
     Выполнено
-  </span>
+  </div>
   <ul
     class="list"
   >
