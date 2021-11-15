@@ -30,6 +30,9 @@ const tasksSlice = createSlice({
     setTasks: (state, action: PayloadAction<Task[]>) => {
       return { ...state, tasksList: action.payload };
     },
+    appendNewTask: (state, action: PayloadAction<Task>) => {
+      state.tasksList.push(action.payload);
+    },
     editTask: (state, action: PayloadAction<PartialTask>) => {
       const task = state.tasksList.find(
         (task) => task.id === action.payload.id
@@ -49,7 +52,7 @@ const tasksSlice = createSlice({
     setLivedDay: (state, action: PayloadAction<LivedDay>) => {
       state.livedDay = { ...state.livedDay, ...action.payload };
     },
-    addTaskToDoneTasksList: (state, action: PayloadAction<LivedTask>) => {
+    appendTaskToDoneTasksList: (state, action: PayloadAction<LivedTask>) => {
       state.livedDay.doneTasksList.push(action.payload);
     },
     removeTaskToDoneTasksList: (state, action: PayloadAction<string>) => {
@@ -72,11 +75,12 @@ const tasksSlice = createSlice({
 
 export const {
   setTasks,
+  appendNewTask,
   editTask,
   removeTask,
   setInitStatus,
   setLivedDay,
-  addTaskToDoneTasksList,
+  appendTaskToDoneTasksList,
   removeTaskToDoneTasksList,
   setTag,
   setScore,
@@ -106,8 +110,9 @@ export const addTask =
     const time = getTime(add(getState().clock.time, duration));
     const taskData = { name: taskName, done: false, time, repeat } as TaskData;
     try {
-      await StoreAPI.setTask(taskData);
-      dispatch(getTasks());
+      const newTask = await StoreAPI.setTask(taskData);
+      if (!newTask) throw new Error('Не удалось создать задачу');
+      dispatch(appendNewTask(newTask));
     } catch (err: any) {
       return err.message as string;
     }
@@ -161,7 +166,7 @@ export const checkTask =
       await StoreAPI.setBatchDoneTask(taskApiData, doneTaskApiData);
       //update store
       dispatch(editTask({ id, data: newData }));
-      dispatch(addTaskToDoneTasksList(doneTasks));
+      dispatch(appendTaskToDoneTasksList(doneTasks));
     } catch (err: any) {
       return err.message as string;
     }

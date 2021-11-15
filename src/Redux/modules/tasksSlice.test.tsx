@@ -3,7 +3,7 @@ import { AnyAction } from 'redux';
 import { StoreAPI } from '../../api/StoreAPI';
 import tasksSlice, {
   addTask,
-  addTaskToDoneTasksList,
+  appendTaskToDoneTasksList,
   checkTask,
   deleteTask,
   LivedDay,
@@ -112,7 +112,7 @@ describe('tasksSlice', () => {
       expect(
         reducer(
           testInitialState,
-          addTaskToDoneTasksList({ id: '12345', name: 'Task2' })
+          appendTaskToDoneTasksList({ id: '12345', name: 'Task2' })
         )
       ).toEqual({
         ...testInitialState,
@@ -199,6 +199,7 @@ describe('tasksSlice', () => {
     describe('addTask', () => {
       it('addTask completed', async () => {
         getStateMock.mockReturnValue({ clock: { time: 1635606187350 } });
+        StoreAPIMock.setTask.mockResolvedValue({} as Task);
 
         const thunk = addTask('Задача', {});
         await thunk(dispatchMock, getStateMock, {});
@@ -282,7 +283,7 @@ describe('tasksSlice', () => {
         );
         expect(dispatchMock).toHaveBeenNthCalledWith(
           3,
-          addTaskToDoneTasksList({ id: '123', name: 'task0' })
+          appendTaskToDoneTasksList({ id: '123', name: 'task0' })
         );
       });
       it('checkTask completed with repeat', async () => {
@@ -315,7 +316,7 @@ describe('tasksSlice', () => {
         );
         expect(dispatchMock).toHaveBeenNthCalledWith(
           3,
-          addTaskToDoneTasksList({ id: '123', name: 'task0' })
+          appendTaskToDoneTasksList({ id: '123', name: 'task0' })
         );
       });
       it('updateTask uncompleted', async () => {

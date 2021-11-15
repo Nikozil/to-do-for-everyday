@@ -1,17 +1,16 @@
 import {
-  addDoc,
+  arrayRemove,
+  arrayUnion,
   collection,
   deleteDoc,
   doc,
   getDoc,
   getDocs,
-  setDoc,
-  writeBatch,
-  updateDoc,
-  arrayUnion,
-  arrayRemove,
   query,
+  setDoc,
+  updateDoc,
   where,
+  writeBatch,
 } from 'firebase/firestore';
 import { HistoryDay } from '../Redux/modules/historySlice';
 import {
@@ -29,9 +28,12 @@ export const StoreAPI = {
 
     if (userid) {
       try {
-        await addDoc(collection(db, `users/${userid}/tasks`), TaskData);
+        const newTask = doc(collection(db, `users/${userid}/tasks`));
+        await setDoc(newTask, TaskData);
+        return { id: newTask.id, data: TaskData } as Task;
       } catch (err) {
         console.log(err);
+        throw new Error('Не удалось получить данные с сервера');
       }
     }
   },
