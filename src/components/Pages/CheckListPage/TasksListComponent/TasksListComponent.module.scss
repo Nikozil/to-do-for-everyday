@@ -1,13 +1,5 @@
 @import '../../../../App.scss';
 
-.taskList__comment {
-  color: $comment-color;
-  font-size: 0.8em;
-}
-.list {
-  padding: 0;
-}
-
 .task {
   display: flex;
   align-items: center;

@@ -2,11 +2,11 @@
 
 exports[`Task Component tests rendering and click delete 1`] = `
 <DocumentFragment>
-  <li
+  <div
     class="content"
   >
     Hello
-  </li>
+  </div>
    
 </DocumentFragment>
 `;

@@ -4,9 +4,9 @@ import cn from 'classnames';
 
 const TaskComponent: React.FC<PropsType> = ({ children, border = false }) => {
   return (
-    <li className={cn(styles.content, border ? styles['content_border'] : '')}>
+    <div className={cn(styles.content, border ? styles['content_border'] : '')}>
       {children}
-    </li>
+    </div>
   );
 };
 

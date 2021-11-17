@@ -1,0 +1,29 @@
+@import '../../App.scss';
+
+.content_enter {
+  opacity: 1;
+  transition: opacity 400ms ease-in;
+}
+.content_enter-active {
+  opacity: 0;
+}
+.content_exit {
+  opacity: 1;
+}
+.content_exit-active {
+  opacity: 0;
+  transition: all 400ms ease-out;
+}
+
+.list {
+  padding: 0;
+}
+.li {
+  list-style-type: none;
+  margin-bottom: 6px;
+}
+
+.taskList__comment {
+  color: $comment-color;
+  font-size: 0.8em;
+}

@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Task Component tests rendering empty list 1`] = `
+<DocumentFragment>
+  <span
+    class="taskList__comment"
+  >
+    Empty
+  </span>
+   
+</DocumentFragment>
+`;
+
+exports[`Task Component tests rendering full list 1`] = `
+<DocumentFragment>
+  <ul
+    class="list"
+  >
+    <li
+      class="li"
+    >
+      <div>
+        task1
+      </div>
+    </li>
+    <li
+      class="li"
+    >
+      <div>
+        task2
+      </div>
+    </li>
+  </ul>
+   
+</DocumentFragment>
+`;

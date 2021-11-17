@@ -8,6 +8,7 @@ import {
   UncheckButton,
 } from '../../../../assets/Buttons/Buttons';
 import TaskComponent from '../../../../assets/TaskComponent/TaskComponent';
+import TaskMapComponent from '../../../../assets/TaskMapComponent/TaskMapComponent';
 import {
   checkTask,
   deleteTask,
@@ -45,7 +46,7 @@ const TasksListComponent = () => {
   };
 
   const mapTaskComponent = (task: Task) => (
-    <TaskComponent key={task.id} border={true}>
+    <TaskComponent border={true}>
       <span className={styles.task}>
         <DeleteButton task={task} clickHandler={taskComponentDeleteHandler} />
         <span className={styles.taskName}>{task.data.name}</span>
@@ -74,24 +75,18 @@ const TasksListComponent = () => {
   return (
     <>
       <div className="mb-3">Задачи</div>
-      <ul className={styles.list}>
-        {undoneTasks.length ? (
-          undoneTasks.map(mapTaskComponent)
-        ) : (
-          <span className={styles['taskList__comment']}>Нет новых задач</span>
-        )}
-      </ul>
+      <TaskMapComponent
+        list={undoneTasks}
+        stub={'Нет новых задач'}
+        callback={mapTaskComponent}
+      />
 
       <div className="mb-3">Выполнено</div>
-      <ul className={styles.list}>
-        {doneTasks.length ? (
-          doneTasks.map(mapDoneTaskComponent)
-        ) : (
-          <span className={styles['taskList__comment']}>
-            Задачи не выполнены
-          </span>
-        )}
-      </ul>
+      <TaskMapComponent
+        list={doneTasks}
+        stub={'Задачи не выполнены'}
+        callback={mapDoneTaskComponent}
+      />
     </>
   );
 };

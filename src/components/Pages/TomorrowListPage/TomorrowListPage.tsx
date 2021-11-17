@@ -21,6 +21,7 @@ import {
 } from '../../../assets/Buttons/Buttons';
 import { AppStateType } from '../../../Redux/store';
 import styles from './TomorrowListPage.module.scss';
+import TaskMapComponent from '../../../assets/TaskMapComponent/TaskMapComponent';
 
 const TomorrowListPage = () => {
   const initTasksStatus = useSelector(
@@ -83,15 +84,11 @@ const TomorrowListPage = () => {
           {initTasksStatus ? (
             <>
               <div className="mb-3">Задачи на завтра</div>
-              <ul className={styles.list}>
-                {tomorrowTasks.length ? (
-                  tomorrowTasks.map(mapTomorrowTask)
-                ) : (
-                  <span className={styles['taskList__comment']}>
-                    Нет новых задач
-                  </span>
-                )}
-              </ul>
+              <TaskMapComponent
+                list={tomorrowTasks}
+                stub={'Нет новых задач'}
+                callback={mapTomorrowTask}
+              />
             </>
           ) : (
             <SpinComponent styleClass={styles.spinner} />
@@ -101,15 +98,11 @@ const TomorrowListPage = () => {
           {initTasksStatus ? (
             <>
               <div className="mb-3">Выполненые задачи</div>
-              <ul className={styles.list}>
-                {completedTasks.length ? (
-                  completedTasks.map(mapCompletedTask)
-                ) : (
-                  <span className={styles['taskList__comment']}>
-                    Нет выполненых задач
-                  </span>
-                )}
-              </ul>
+              <TaskMapComponent
+                list={completedTasks}
+                stub={'Нет выполненых задач'}
+                callback={mapCompletedTask}
+              />
             </>
           ) : (
             <SpinComponent styleClass={styles.spinner} />

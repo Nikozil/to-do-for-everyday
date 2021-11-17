@@ -10,23 +10,27 @@ exports[`DayComponent render correct 1`] = `
     >
       26.10.2021
     </div>
-    <div
+    <ul
       class="task-list"
     >
       <li
-        class="content"
+        class="task-li"
       >
-        <span
-          class="task"
+        <div
+          class="content"
         >
           <span
-            class="doneTaskName"
+            class="task"
           >
-            do
+            <span
+              class="doneTaskName"
+            >
+              do
+            </span>
           </span>
-        </span>
+        </div>
       </li>
-    </div>
+    </ul>
     <div
       class="tag"
     >

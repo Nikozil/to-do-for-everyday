@@ -9,21 +9,23 @@ import styles from './DayComponent.module.scss';
 const DayComponent: React.FC<PropsType> = ({ day }) => {
   const { doneTasksList, score, timestamp, tag } = day;
   const mapDoneTaskComponent = (task: LivedTask) => (
-    <TaskComponent key={task.id}>
-      <span className={styles.task}>
-        <span className={styles.doneTaskName}>{task.name}</span>
-      </span>
-    </TaskComponent>
+    <li className={styles['task-li']} key={task.id}>
+      <TaskComponent>
+        <span className={styles.task}>
+          <span className={styles.doneTaskName}>{task.name}</span>
+        </span>
+      </TaskComponent>
+    </li>
   );
   const date = format(timestamp, 'dd.MM.yyyy');
   return (
     <div className={styles.container}>
       <div className={styles.date}>{date}</div>
-      <div className={styles['task-list']}>
+      <ul className={styles['task-list']}>
         {doneTasksList &&
           doneTasksList.length &&
           doneTasksList.map(mapDoneTaskComponent)}
-      </div>
+      </ul>
       <div className={styles.tag}>{tag && <>{tag}</>}</div>
       <div className={styles.score}>
         {[...Array(5)].map((star, index) => {
