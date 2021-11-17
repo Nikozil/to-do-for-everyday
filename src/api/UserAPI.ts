@@ -1,5 +1,5 @@
 import { updateProfile } from 'firebase/auth';
-import { auth } from './AuthAPI';
+import { auth } from '../firebase';
 
 export const UserAPI = {
   updateProfile: async (displayName: string) => {

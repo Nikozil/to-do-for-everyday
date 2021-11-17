@@ -1,5 +1,8 @@
+import { getAuth } from '@firebase/auth';
 import { FirebaseApp, initializeApp } from 'firebase/app';
 import { initializeAppCheck, ReCaptchaV3Provider } from 'firebase/app-check';
+import { getFirestore } from 'firebase/firestore';
+
 export const firebaseConfig = {
   apiKey: 'AIzaSyA3ZapvdJhr2ye50e1csF6QSen1_Pc-Oiw',
   authDomain: 'to-do-for-everyday.firebaseapp.com',
@@ -30,3 +33,11 @@ export function getReCaptcha(app: FirebaseApp) {
     isTokenAutoRefreshEnabled: true,
   });
 }
+//Initialization
+export const firebaseApp = getFirebase();
+if (!firebaseApp) throw new Error('Firebase not initialized');
+
+export const auth = getAuth();
+
+export const appCheck = getReCaptcha(firebaseApp);
+export const db = getFirestore();

@@ -12,6 +12,7 @@ import {
   where,
   writeBatch,
 } from 'firebase/firestore';
+import { auth, db } from '../firebase';
 import { HistoryDay } from '../Redux/modules/historySlice';
 import {
   LivedDay,
@@ -20,7 +21,6 @@ import {
   Task,
   TaskData,
 } from '../Redux/modules/tasksSlice';
-import { auth, db } from './AuthAPI';
 
 export const StoreAPI = {
   setTask: async (TaskData: TaskData) => {
