@@ -175,7 +175,7 @@ exports[`TasksListComponent render correct without tasks 1`] = `
   <span
     class="taskList__comment"
   >
-    Задачи не выполнены
+    Список пуст
   </span>
    
 </DocumentFragment>

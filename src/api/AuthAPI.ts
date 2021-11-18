@@ -1,3 +1,4 @@
+import { auth, firebaseApp } from '../firebase';
 import {
   browserLocalPersistence,
   browserSessionPersistence,
@@ -5,6 +6,7 @@ import {
   EmailAuthProvider,
   onAuthStateChanged,
   reauthenticateWithCredential,
+  sendPasswordResetEmail,
   setPersistence,
   signInWithEmailAndPassword,
   signOut,
@@ -12,7 +14,6 @@ import {
   User,
 } from '@firebase/auth';
 import { Dispatch } from 'react';
-import { auth, firebaseApp } from '../firebase';
 
 export const AuthAPI = {
   signUp: async (email: string, password: string, remember: boolean) => {
@@ -30,8 +31,10 @@ export const AuthAPI = {
         );
         const responseUser = userCredential.user;
         return responseUser;
-      } catch (error) {
-        throw new Error('Такой пользователь уже существует');
+      } catch (error: any) {
+        if (error.message === 'Firebase: Error (auth/email-already-in-use).')
+          throw new Error('Такой пользователь уже существует');
+        else throw new Error(error.message);
       }
     }
   },
@@ -51,8 +54,13 @@ export const AuthAPI = {
         );
         const responseUser = userCredential.user;
         return responseUser;
-      } catch (error) {
-        throw new Error('Неверный логин или пароль');
+      } catch (error: any) {
+        if (
+          error.message === 'Firebase: Error (auth/user-not-found).' ||
+          error.message === 'Firebase: Error (auth/wrong-password).'
+        )
+          throw new Error('Неверный логин или пароль');
+        else throw new Error(error.message);
       }
     }
   },
@@ -86,6 +94,20 @@ export const AuthAPI = {
       }
     } else throw new Error('Пользователь не авторизован');
   },
+
+  resetPassword: async (email: string) => {
+    if (firebaseApp) {
+      try {
+        await sendPasswordResetEmail(auth, email);
+        return 'Письмо отправлено на указанную почту';
+      } catch (error: any) {
+        if (error.message === 'Firebase: Error (auth/user-not-found).')
+          throw new Error('Пользователь не найден, зарегистрируйтесь');
+        else throw new Error(error.message);
+      }
+    } else throw new Error('Что-то пошло не так');
+  },
+
   updateUserStatus: (
     dispatch: Dispatch<any>,
     setUserCallback: (user: User) => void,

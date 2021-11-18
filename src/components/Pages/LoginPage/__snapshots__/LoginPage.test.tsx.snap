@@ -37,8 +37,7 @@ exports[`Login Page tests render correct 1`] = `
             value=""
           />
           <div
-            class="form-text"
-            style="height: 21px;"
+            class="form-text error"
           />
         </div>
         <div
@@ -59,8 +58,7 @@ exports[`Login Page tests render correct 1`] = `
             value=""
           />
           <div
-            class="form-text"
-            style="height: 21px;"
+            class="form-text error"
           />
         </div>
         <div
@@ -79,14 +77,30 @@ exports[`Login Page tests render correct 1`] = `
           </label>
         </div>
         <div
-          class="text-center mb-1"
+          class="d-flex flex-column mt-1 "
         >
           <button
-            class="btn btn-success center-block"
+            class="btn btn-success center-block "
             type="submit"
           >
             Войти
           </button>
+          <div
+            class="d-flex justify-content-between my-2"
+          >
+            <button
+              class="btn btn-secondary"
+              type="button"
+            >
+              Регистрация
+            </button>
+            <button
+              class="btn btn-secondary"
+              type="button"
+            >
+              Восстановить пароль
+            </button>
+          </div>
         </div>
       </form>
     </div>

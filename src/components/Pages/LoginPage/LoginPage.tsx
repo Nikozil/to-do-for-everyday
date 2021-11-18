@@ -1,7 +1,13 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
+
+import {
+  resetPassword,
+  signIn,
+  signUp,
+} from '../../../Redux/modules/userSlice';
 import LogoComponent from '../../../assets/LogoComponent/LogoComponent';
-import { signIn } from '../../../Redux/modules/userSlice';
+
 import LoginForm from '../../Forms/LoginForm/LoginForm';
 import styles from './LoginPage.module.scss';
 
@@ -16,11 +22,27 @@ const LoginPage: React.FC = () => {
     const response = await dispatch(signIn(email, password, remember));
     return response;
   };
+  const handleRegistration = async (
+    email: string,
+    password: string,
+    remember: boolean
+  ) => {
+    const response = await dispatch(signUp(email, password, remember));
+    return response;
+  };
+  const handleResetPassword = async (email: string) => {
+    const response = await dispatch(resetPassword(email));
+    return response;
+  };
   return (
     <div className={styles.wrapper}>
       <div className={styles.content}>
         <LogoComponent className={styles.logo} />
-        <LoginForm handleSubmit={handleSubmit} />
+        <LoginForm
+          handleSubmit={handleSubmit}
+          handleRegistration={handleRegistration}
+          handleResetPassword={handleResetPassword}
+        />
       </div>
     </div>
   );

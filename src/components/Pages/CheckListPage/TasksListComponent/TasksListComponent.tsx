@@ -1,14 +1,7 @@
-import { endOfToday, getTime } from 'date-fns';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  CheckButton,
-  DeleteButton,
-  RepeatButton,
-  UncheckButton,
-} from '../../../../assets/Buttons/Buttons';
-import TaskComponent from '../../../../assets/TaskComponent/TaskComponent';
-import TaskMapComponent from '../../../../assets/TaskMapComponent/TaskMapComponent';
+import { endOfToday, getTime } from 'date-fns';
+
 import {
   checkTask,
   deleteTask,
@@ -18,8 +11,17 @@ import {
   uncheckTask,
   updateTask,
 } from '../../../../Redux/modules/tasksSlice';
-import { AppStateType } from '../../../../Redux/store';
+
+import TaskComponent from '../../../../assets/TaskComponent/TaskComponent';
+import TaskMapComponent from '../../../../assets/TaskMapComponent/TaskMapComponent';
+import {
+  CheckButton,
+  DeleteButton,
+  RepeatButton,
+  UncheckButton,
+} from '../../../../assets/Buttons/Buttons';
 import styles from './TasksListComponent.module.scss';
+import { AppStateType } from '../../../../Redux/store';
 
 const TasksListComponent = () => {
   const tasks = useSelector((state: AppStateType) => state.tasks.tasksList);
@@ -84,7 +86,7 @@ const TasksListComponent = () => {
       <div className="mb-3">Выполнено</div>
       <TaskMapComponent
         list={doneTasks}
-        stub={'Задачи не выполнены'}
+        stub={'Список пуст'}
         callback={mapDoneTaskComponent}
       />
     </>

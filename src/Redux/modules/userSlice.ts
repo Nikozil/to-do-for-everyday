@@ -30,6 +30,17 @@ const userSlice = createSlice({
 
 export const { setUserData, setAuthStatus, setInitStatus } = userSlice.actions;
 
+export const signUp =
+  (email: string, password: string, remember: boolean): AppThunk =>
+  async (dispatch) => {
+    try {
+      await AuthAPI.signUp(email, password, remember);
+      return 'Регистрация выполнена';
+    } catch (err: any) {
+      return err.message as string;
+    }
+  };
+
 export const signIn =
   (email: string, password: string, remember: boolean): AppThunk =>
   async (dispatch) => {
@@ -40,6 +51,7 @@ export const signIn =
       return err.message as string;
     }
   };
+
 export const signOut = (): AppThunk => async (dispatch) => {
   try {
     await AuthAPI.signOut();
@@ -49,6 +61,7 @@ export const signOut = (): AppThunk => async (dispatch) => {
     return err.message as string;
   }
 };
+
 export const updateUserData = (): AppThunk => async (dispatch) => {
   await AuthAPI.updateUserStatus(
     dispatch,
@@ -57,6 +70,7 @@ export const updateUserData = (): AppThunk => async (dispatch) => {
     setInitStatus
   );
 };
+
 export const updateProfile =
   (displayName: string): AppThunk<Promise<string>> =>
   async (dispatch) => {
@@ -67,11 +81,23 @@ export const updateProfile =
     }
     dispatch(updateUserData());
   };
+
 export const updatePassword =
   (oldPassword: string, newPassword: string): AppThunk<Promise<string>> =>
   async (dispatch) => {
     try {
       let responce = await AuthAPI.updatePassword(oldPassword, newPassword);
+      return responce;
+    } catch (err: any) {
+      return err.message as string;
+    }
+  };
+
+export const resetPassword =
+  (email: string): AppThunk<Promise<string>> =>
+  async (dispatch) => {
+    try {
+      let responce = await AuthAPI.resetPassword(email);
       return responce;
     } catch (err: any) {
       return err.message as string;

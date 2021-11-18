@@ -9,8 +9,12 @@ export const validateEmail = (value: string): string | undefined => {
 };
 export const validatePassword = (value: string): string | undefined => {
   let error;
+
   if (!value) {
     error = 'Пароль не указан';
+  }
+  if (value && value.length < 6) {
+    error = 'Пароль меньше 6 символов';
   }
 
   return error;
@@ -20,6 +24,7 @@ export const validateConfirmPassword = (
   confirmValue: string
 ): string | undefined => {
   let error;
+
   if (value !== confirmValue) {
     error = 'Пароль не совпадает';
   }
