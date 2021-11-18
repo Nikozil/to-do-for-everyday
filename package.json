@@ -1,5 +1,6 @@
 {
   "name": "to-do-for-everyday",
+  "homepage": "https://to-do-for-everyday.web.app/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -36,9 +37,9 @@
     "coverage": "react-scripts test --coverage",
     "coverageAllFiles": "react-scripts test a --coverage",
     "eject": "react-scripts eject",
-    "login": "firebase login",
-    "init": "firebase init",
-    "deploy": "firebase deploy"
+    "firebase-login": "firebase login",
+    "firebase-init": "firebase init",
+    "firebase-deploy": "firebase deploy"
   },
   "eslintConfig": {
     "extends": [
