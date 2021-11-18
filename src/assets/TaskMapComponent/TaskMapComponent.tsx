@@ -56,7 +56,7 @@ interface PropsType {
 
 interface WrapperPropsType {
   task: UnionTask;
-  callback: (task: any) => JSX.Element;
+  callback: (task: UnionTask) => JSX.Element;
 }
 
 type UnionTask = Task | LivedTask;

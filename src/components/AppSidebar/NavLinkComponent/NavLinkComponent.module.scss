@@ -21,6 +21,9 @@
 
   &:hover {
     background-color: $button-color-hover !important;
+    @media (pointer: coarse) {
+      background-color: $button-color-selected !important;
+    }
   }
 }
 .selected {

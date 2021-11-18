@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react';
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, EnhancedStore } from '@reduxjs/toolkit';
 import { render as rtlRender, RenderOptions } from '@testing-library/react';
 import { createMemoryHistory, MemoryHistory } from 'history';
 import { Provider } from 'react-redux';
@@ -10,6 +10,7 @@ import clockSlice from '../../Redux/modules/clockSlice';
 import historySlice from '../../Redux/modules/historySlice';
 import tasksSlice from '../../Redux/modules/tasksSlice';
 import userSlice from '../../Redux/modules/userSlice';
+import { AppStateType } from '../../Redux/store';
 
 const reducer = {
   user: userSlice.reducer,
@@ -47,8 +48,8 @@ export { render };
 
 //Types
 interface WrapperOptions {
-  preloadedState?: any;
-  store?: any;
+  preloadedState?: AppStateType;
+  store?: EnhancedStore<AppStateType>;
   route?: string;
   history?: MemoryHistory<unknown>;
 }

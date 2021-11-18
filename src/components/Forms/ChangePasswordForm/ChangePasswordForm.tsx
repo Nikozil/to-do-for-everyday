@@ -1,5 +1,6 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import React from 'react';
+import { AppThunk } from '../../../Redux/store';
 import {
   validateConfirmPassword,
   validatePassword,
@@ -98,5 +99,8 @@ interface MyFormValues {
   confirmNewPassword: string;
 }
 interface PropsType {
-  handleSubmit: (oldPassword: string, newPassword: string) => any;
+  handleSubmit: (
+    oldPassword: string,
+    newPassword: string
+  ) => Promise<AppThunk<Promise<string>>>;
 }

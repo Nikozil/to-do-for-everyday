@@ -17,4 +17,7 @@
 }
 .buttons-margin {
   margin-left: 5px;
+  @media screen and (max-width: 767px) {
+    margin-left: 25px;
+  }
 }
