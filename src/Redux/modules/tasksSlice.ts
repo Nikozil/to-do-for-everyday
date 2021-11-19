@@ -1,14 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import {
-  add,
-  endOfToday,
-  format,
-  getTime,
-  milliseconds,
-  startOfDay,
-} from 'date-fns';
-
 import { StoreAPI } from '../../api/StoreAPI';
+import { add, endOfToday, getTime, milliseconds, startOfDay } from 'date-fns';
+import { formatDate } from '../../utils/TimeFunctions/TimeFunctions';
 import { AppThunk } from '../store';
 
 export const initialState = {
@@ -89,10 +82,10 @@ export const {
 
 export const getTasks = (): AppThunk => async (dispatch, getState) => {
   try {
-    let tasks = await StoreAPI.getTask();
-    let time = getState().clock.time;
+    const tasks = await StoreAPI.getTask();
+    const time = getState().clock.time;
 
-    let livedDay = await StoreAPI.getLivedDay(format(time, 'dd.MM.yyyy'));
+    const livedDay = await StoreAPI.getLivedDay(formatDate(time));
 
     if (!tasks) throw new Error('Не удалось получить данные');
     if (!livedDay) throw new Error('Не удалось получить данные');
@@ -104,11 +97,13 @@ export const getTasks = (): AppThunk => async (dispatch, getState) => {
     return err.message as string;
   }
 };
+
 export const addTask =
-  (taskName: string, duration: Duration, repeat = 0): AppThunk =>
+  (taskName: string, duration: Duration): AppThunk =>
   async (dispatch, getState) => {
     const time = getTime(add(getState().clock.time, duration));
-    const taskData = { name: taskName, done: false, time, repeat } as TaskData;
+    const taskData = new TaskDataObj(taskName, time);
+
     try {
       const newTask = await StoreAPI.setTask(taskData);
       if (!newTask) throw new Error('Не удалось создать задачу');
@@ -117,6 +112,7 @@ export const addTask =
       return err.message as string;
     }
   };
+
 export const updateTask =
   (id: string, data: PartialTaskData): AppThunk =>
   async (dispatch) => {
@@ -127,6 +123,7 @@ export const updateTask =
       return err.message as string;
     }
   };
+
 export const checkTask =
   (task: Task): AppThunk =>
   async (dispatch, getState) => {
@@ -152,31 +149,32 @@ export const checkTask =
       }
       // add task to done list
       dispatch(checkupTimestamp());
-      const doneTasks = {
-        id: id,
-        name: name,
-      };
+
+      const doneTask = new LivedTaskObj(id, name);
       //send data as batch
       const taskApiData = { taskId: id, taskData: newData };
       const doneTaskApiData = {
-        doneTaskDate: format(getState().clock.time, 'dd.MM.yyyy'),
-        doneTask: doneTasks,
+        doneTaskDate: formatDate(getState().clock.time),
+        doneTask: doneTask,
         doneTaskRemove: false,
       };
+
       await StoreAPI.setBatchDoneTask(taskApiData, doneTaskApiData);
       //update store
       dispatch(editTask({ id, data: newData }));
-      dispatch(appendTaskToDoneTasksList(doneTasks));
+      dispatch(appendTaskToDoneTasksList(doneTask));
     } catch (err: any) {
       return err.message as string;
     }
   };
+
 export const uncheckTask =
   (task: LivedTask): AppThunk =>
   async (dispatch, getState) => {
     const { id, name } = task;
     try {
       let task = getState().tasks.tasksList.find((task) => task.id === id);
+
       if (task) {
         const { done, time, repeat } = task.data;
         let newData;
@@ -190,13 +188,12 @@ export const uncheckTask =
             ? { done: !done }
             : { done: false, time: getState().clock.time };
         }
+
         const taskApiData = { taskId: id, taskData: newData };
-        const doneTask = {
-          id: id,
-          name: name,
-        };
+        const doneTask = new LivedTaskObj(id, name);
+
         const doneTaskApiData = {
-          doneTaskDate: format(getState().clock.time, 'dd.MM.yyyy'),
+          doneTaskDate: formatDate(getState().clock.time),
           doneTask: doneTask,
           doneTaskRemove: true,
         };
@@ -211,6 +208,7 @@ export const uncheckTask =
       return err.message as string;
     }
   };
+
 export const deleteTask =
   (id: string): AppThunk =>
   async (dispatch) => {
@@ -221,12 +219,13 @@ export const deleteTask =
       return err.message as string;
     }
   };
+
 export const addTag =
   (tag: string): AppThunk =>
   async (dispatch, getState) => {
     try {
       dispatch(checkupTimestamp());
-      const time = format(getState().clock.time, 'dd.MM.yyyy');
+      const time = formatDate(getState().clock.time);
       const livedDay = { tag };
       await StoreAPI.updateLivedDay(time, livedDay);
       dispatch(setTag(tag));
@@ -234,12 +233,13 @@ export const addTag =
       return err.message as string;
     }
   };
+
 export const addScore =
   (score: Score): AppThunk =>
   async (dispatch, getState) => {
     try {
       dispatch(checkupTimestamp());
-      const date = format(getState().clock.time, 'dd.MM.yyyy');
+      const date = formatDate(getState().clock.time);
       const livedDay = { score };
       await StoreAPI.updateLivedDay(date, livedDay);
       dispatch(setScore(score));
@@ -247,10 +247,11 @@ export const addScore =
       return err.message as string;
     }
   };
+
 export const checkupTimestamp = (): AppThunk => async (dispatch, getState) => {
   if (!getState().tasks.livedDay.timestamp) {
     try {
-      const date = format(getState().clock.time, 'dd.MM.yyyy');
+      const date = formatDate(getState().clock.time);
 
       const timestamp = getTime(startOfDay(getState().clock.time));
       const livedDay = { timestamp };
@@ -311,3 +312,26 @@ export interface LivedDay {
   timestamp: null | number;
 }
 export type Score = 0 | 1 | 2 | 3 | 4 | 5;
+
+export class TaskDataObj implements TaskData {
+  name: string;
+  done: boolean;
+  time: number;
+  repeat: number;
+
+  constructor(name: string, time: number) {
+    this.name = name;
+    this.done = false;
+    this.time = time;
+    this.repeat = 0;
+  }
+}
+export class LivedTaskObj implements LivedTask {
+  id: string;
+  name: string;
+
+  constructor(id: string, name: string) {
+    this.id = id;
+    this.name = name;
+  }
+}
