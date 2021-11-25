@@ -45,7 +45,7 @@ const MonthPaginator = () => {
   };
 
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.paginators}>
       <Paginator
         pageNames={yearsNames}
         currentPage={year}

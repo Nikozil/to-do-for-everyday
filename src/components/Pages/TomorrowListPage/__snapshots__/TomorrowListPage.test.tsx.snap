@@ -3,10 +3,10 @@
 exports[`TomorrowListPage render correct with tasks 1`] = `
 <DocumentFragment>
   <div
-    class="wrapper"
+    class="tomorrow-page"
   >
     <div
-      class="content"
+      class="tomorrow-page__content"
     >
       <div
         class="tomorrow-tasks"
@@ -41,7 +41,7 @@ exports[`TomorrowListPage render correct with tasks 1`] = `
           class="list"
         >
           <li
-            class="li"
+            class="content__li"
           >
             <div
               class="content content_border"
@@ -71,7 +71,7 @@ exports[`TomorrowListPage render correct with tasks 1`] = `
                   </svg>
                 </button>
                 <span
-                  class="taskName"
+                  class="task__task-name"
                 >
                   task0
                 </span>
@@ -118,7 +118,7 @@ exports[`TomorrowListPage render correct with tasks 1`] = `
           class="list"
         >
           <li
-            class="li"
+            class="content__li"
           >
             <div
               class="content content_border"
@@ -148,7 +148,7 @@ exports[`TomorrowListPage render correct with tasks 1`] = `
                   </svg>
                 </button>
                 <span
-                  class="taskName"
+                  class="task__task-name"
                 >
                   done task
                 </span>
@@ -192,10 +192,10 @@ exports[`TomorrowListPage render correct with tasks 1`] = `
 exports[`TomorrowListPage render correct without init 1`] = `
 <DocumentFragment>
   <div
-    class="wrapper"
+    class="tomorrow-page"
   >
     <div
-      class="content"
+      class="tomorrow-page__content"
     >
       <div
         class="tomorrow-tasks"
@@ -255,10 +255,10 @@ exports[`TomorrowListPage render correct without init 1`] = `
 exports[`TomorrowListPage render correct without tasks 1`] = `
 <DocumentFragment>
   <div
-    class="wrapper"
+    class="tomorrow-page"
   >
     <div
-      class="content"
+      class="tomorrow-page__content"
     >
       <div
         class="tomorrow-tasks"
@@ -290,7 +290,7 @@ exports[`TomorrowListPage render correct without tasks 1`] = `
           Задачи на завтра
         </div>
         <span
-          class="taskList__comment"
+          class="stub"
         >
           Нет новых задач
         </span>
@@ -304,7 +304,7 @@ exports[`TomorrowListPage render correct without tasks 1`] = `
           Выполненые задачи
         </div>
         <span
-          class="taskList__comment"
+          class="stub"
         >
           Нет выполненых задач
         </span>

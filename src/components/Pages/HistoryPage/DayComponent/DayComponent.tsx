@@ -11,9 +11,7 @@ const DayComponent: React.FC<PropsType> = ({ day }) => {
   const mapDoneTaskComponent = (task: LivedTask) => (
     <li className={styles['task-li']} key={task.id}>
       <TaskComponent>
-        <span className={styles.task}>
-          <span className={styles.doneTaskName}>{task.name}</span>
-        </span>
+        <span>{task.name}</span>
       </TaskComponent>
     </li>
   );

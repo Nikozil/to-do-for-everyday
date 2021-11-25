@@ -4,13 +4,13 @@
   grid-area: c;
   background-color: #f8f9fa;
 }
-.spin__container {
+.preloader {
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100%;
 }
-.spin__spinner {
+.preloader__spinner {
   color: $primary-color;
   font-size: 50px;
   width: 100px !important;

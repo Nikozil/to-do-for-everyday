@@ -17,7 +17,7 @@ const TaskMapComponent: React.FC<PropsType> = ({ list, stub, callback }) => {
           ))}
         </TransitionGroup>
       ) : (
-        <span className={styles['taskList__comment']}>{stub}</span>
+        <span className={styles.stub}>{stub}</span>
       )}
     </>
   );
@@ -41,7 +41,7 @@ const CSSTransitionWrapper: React.FC<WrapperPropsType> = ({
         exitActive: styles['content_exit-active'],
         exitDone: styles['content_exit'],
       }}>
-      <li ref={nodeRef} className={styles.li}>
+      <li ref={nodeRef} className={styles['content__li']}>
         {callback(task)}
       </li>
     </CSSTransition>

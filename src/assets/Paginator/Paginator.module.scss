@@ -1,18 +1,19 @@
 @import '../../App.scss';
 
-.name {
+.paginator__name {
   color: $primary-color;
   &:hover {
     color: unset !important;
   }
 }
-.button {
-  cursor: pointer;
-}
-.active {
+.paginator__name_active {
   background-color: $secondary-color !important;
   border-color: $secondary-color !important;
   &:hover {
     color: white !important;
   }
+}
+
+.paginator__button {
+  cursor: pointer;
 }

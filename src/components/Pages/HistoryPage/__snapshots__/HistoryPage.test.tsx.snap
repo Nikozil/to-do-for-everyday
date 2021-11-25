@@ -3,32 +3,32 @@
 exports[`HistoryPage render correct 1`] = `
 <DocumentFragment>
   <div
-    class="wrapper"
+    class="history-page"
   >
     <div
-      class="wrapper"
+      class="paginators"
     >
       <nav
         aria-label="paginator "
-        class="nav"
+        class="paginator"
       >
         <ul
           class="pagination pagination-sm flex-wrap justify-content-center mb-1"
         >
           <li
-            class="page-item button"
+            class="page-item paginator__button"
           >
             <span
-              class="page-link name"
+              class="page-link paginator__name"
             >
               2020
             </span>
           </li>
           <li
-            class="page-item button active"
+            class="page-item paginator__button active"
           >
             <span
-              class="page-link name active"
+              class="page-link paginator__name paginator__name_active"
             >
               2021
             </span>
@@ -37,97 +37,97 @@ exports[`HistoryPage render correct 1`] = `
       </nav>
       <nav
         aria-label="paginator "
-        class="nav"
+        class="paginator"
       >
         <ul
           class="pagination pagination-sm flex-wrap justify-content-center mb-1"
         >
           <li
-            class="page-item button"
+            class="page-item paginator__button"
           >
             <span
-              class="page-link name"
+              class="page-link paginator__name"
             >
               1
             </span>
           </li>
           <li
-            class="page-item button"
+            class="page-item paginator__button"
           >
             <span
-              class="page-link name"
+              class="page-link paginator__name"
             >
               2
             </span>
           </li>
           <li
-            class="page-item button"
+            class="page-item paginator__button"
           >
             <span
-              class="page-link name"
+              class="page-link paginator__name"
             >
               3
             </span>
           </li>
           <li
-            class="page-item button"
+            class="page-item paginator__button"
           >
             <span
-              class="page-link name"
+              class="page-link paginator__name"
             >
               4
             </span>
           </li>
           <li
-            class="page-item button"
+            class="page-item paginator__button"
           >
             <span
-              class="page-link name"
+              class="page-link paginator__name"
             >
               5
             </span>
           </li>
           <li
-            class="page-item button"
+            class="page-item paginator__button"
           >
             <span
-              class="page-link name"
+              class="page-link paginator__name"
             >
               6
             </span>
           </li>
           <li
-            class="page-item button"
+            class="page-item paginator__button"
           >
             <span
-              class="page-link name"
+              class="page-link paginator__name"
             >
               7
             </span>
           </li>
           <li
-            class="page-item button"
+            class="page-item paginator__button"
           >
             <span
-              class="page-link name"
+              class="page-link paginator__name"
             >
               8
             </span>
           </li>
           <li
-            class="page-item button"
+            class="page-item paginator__button"
           >
             <span
-              class="page-link name"
+              class="page-link paginator__name"
             >
               9
             </span>
           </li>
           <li
-            class="page-item button active"
+            class="page-item paginator__button active"
           >
             <span
-              class="page-link name active"
+              class="page-link paginator__name paginator__name_active"
             >
               10
             </span>
@@ -136,10 +136,10 @@ exports[`HistoryPage render correct 1`] = `
       </nav>
     </div>
     <div
-      class="spinner-wrapper"
+      class="preloader"
     >
       <div
-        class="spinner-border spinner"
+        class="spinner-border preloader__spinner"
         role="status"
       >
         <span

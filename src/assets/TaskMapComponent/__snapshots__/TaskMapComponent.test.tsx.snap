@@ -3,7 +3,7 @@
 exports[`Task Component tests rendering empty list 1`] = `
 <DocumentFragment>
   <span
-    class="taskList__comment"
+    class="stub"
   >
     Empty
   </span>
@@ -17,14 +17,14 @@ exports[`Task Component tests rendering full list 1`] = `
     class="list"
   >
     <li
-      class="li"
+      class="content__li"
     >
       <div>
         task1
       </div>
     </li>
     <li
-      class="li"
+      class="content__li"
     >
       <div>
         task2

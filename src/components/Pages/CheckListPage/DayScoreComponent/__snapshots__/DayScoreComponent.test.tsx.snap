@@ -66,10 +66,10 @@ exports[`DayScoreComponent render correct 1`] = `
               role="group"
             >
               <label
-                class="label"
+                class="form__label"
               >
                 <input
-                  class="radio"
+                  class="form__radio"
                   name="score"
                   type="radio"
                   value="1"
@@ -90,10 +90,10 @@ exports[`DayScoreComponent render correct 1`] = `
                 </svg>
               </label>
               <label
-                class="label"
+                class="form__label"
               >
                 <input
-                  class="radio"
+                  class="form__radio"
                   name="score"
                   type="radio"
                   value="2"
@@ -114,10 +114,10 @@ exports[`DayScoreComponent render correct 1`] = `
                 </svg>
               </label>
               <label
-                class="label"
+                class="form__label"
               >
                 <input
-                  class="radio"
+                  class="form__radio"
                   name="score"
                   type="radio"
                   value="3"
@@ -138,10 +138,10 @@ exports[`DayScoreComponent render correct 1`] = `
                 </svg>
               </label>
               <label
-                class="label"
+                class="form__label"
               >
                 <input
-                  class="radio"
+                  class="form__radio"
                   name="score"
                   type="radio"
                   value="4"
@@ -162,10 +162,10 @@ exports[`DayScoreComponent render correct 1`] = `
                 </svg>
               </label>
               <label
-                class="label"
+                class="form__label"
               >
                 <input
-                  class="radio"
+                  class="form__radio"
                   name="score"
                   type="radio"
                   value="5"

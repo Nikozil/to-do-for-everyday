@@ -1,5 +1,5 @@
 @import '../../../App.scss';
-.wrapper {
+.history-page {
   height: 100%;
 }
 .days-list {
@@ -9,13 +9,13 @@
   grid-gap: 5px;
   padding: 0 15px;
 }
-.spinner-wrapper {
+.preloader {
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 50px;
 }
 
-.spinner {
+.preloader__spinner {
   color: $primary-color !important;
 }

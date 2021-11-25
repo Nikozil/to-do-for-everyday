@@ -10,8 +10,8 @@ const NavLinkComponent: React.FC<NavLinkProps> = ({ link, Icon }) => {
       aria-label={link}
       to={link}
       className={cn(styles.navlink, 'btn', 'btn-secondary')}
-      activeClassName={styles.selected}>
-      <Icon className={styles['button-icon']} />
+      activeClassName={styles['navlink_selected']}>
+      <Icon className={styles['navlink__button-icon']} />
     </NavLink>
   );
 };

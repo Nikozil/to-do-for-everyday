@@ -1,18 +1,18 @@
-.wrapper {
+.login-page {
   display: flex;
   height: 100vh;
   align-items: center;
   justify-content: center;
   background-color: #354052;
 }
-.content {
+.login-page__content {
   min-width: 200px;
   max-width: 400px;
   width: 100%;
   margin: 0 5px 0 5px;
   color: #fff;
 }
-.logo {
+.login-page__logo {
   display: flex;
   justify-content: center;
 }

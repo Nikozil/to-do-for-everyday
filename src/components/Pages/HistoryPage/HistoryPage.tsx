@@ -14,7 +14,7 @@ const HistoryPage = () => {
   );
 
   return (
-    <div className={styles.wrapper}>
+    <div className={styles['history-page']}>
       <MonthPaginator />
       {initHistoryStatus ? (
         <ul className={styles['days-list']}>
@@ -23,8 +23,8 @@ const HistoryPage = () => {
             : null}
         </ul>
       ) : (
-        <div className={styles['spinner-wrapper']}>
-          <SpinComponent styleClass={styles.spinner} />
+        <div className={styles['preloader']}>
+          <SpinComponent styleClass={styles['preloader__spinner']} />
         </div>
       )}
     </div>

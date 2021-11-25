@@ -13,7 +13,9 @@ describe('Paginator tests', () => {
         clickHandler={clickHandler}
       />
     );
-    expect(screen.getByText(/2/i).classList.contains('active')).toBe(true);
+    expect(
+      screen.getByText(/2/i).classList.contains('paginator__name_active')
+    ).toBe(true);
 
     userEvent.click(screen.getByText(/3/i));
     await waitFor(() => {

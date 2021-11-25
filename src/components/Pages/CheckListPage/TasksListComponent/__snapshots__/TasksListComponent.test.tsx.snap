@@ -11,7 +11,7 @@ exports[`TasksListComponent render correct with tasks 1`] = `
     class="list"
   >
     <li
-      class="li"
+      class="content__li"
     >
       <div
         class="content content_border"
@@ -41,13 +41,13 @@ exports[`TasksListComponent render correct with tasks 1`] = `
             </svg>
           </button>
           <span
-            class="taskName"
+            class="task__taskName"
           >
             task0
           </span>
         </span>
         <span
-          class="buttons"
+          class="task__buttons"
         >
           <button
             aria-label="repeat task"
@@ -77,7 +77,7 @@ exports[`TasksListComponent render correct with tasks 1`] = `
           </button>
           <button
             aria-label="task check"
-            class="button buttons-margin"
+            class="button task__buttons_left-margin"
             data-testid="check-button"
             name="task check"
           >
@@ -109,7 +109,7 @@ exports[`TasksListComponent render correct with tasks 1`] = `
     class="list"
   >
     <li
-      class="li"
+      class="content__li"
     >
       <div
         class="content content_border"
@@ -118,13 +118,13 @@ exports[`TasksListComponent render correct with tasks 1`] = `
           class="task"
         >
           <span
-            class="doneTaskName"
+            class="task__doneTaskName"
           >
             task0
           </span>
         </span>
         <span
-          class="buttons"
+          class="task__buttons"
         >
           <button
             aria-label="task uncheck"
@@ -163,7 +163,7 @@ exports[`TasksListComponent render correct without tasks 1`] = `
     Задачи
   </div>
   <span
-    class="taskList__comment"
+    class="stub"
   >
     Нет новых задач
   </span>
@@ -173,7 +173,7 @@ exports[`TasksListComponent render correct without tasks 1`] = `
     Выполнено
   </div>
   <span
-    class="taskList__comment"
+    class="stub"
   >
     Список пуст
   </span>

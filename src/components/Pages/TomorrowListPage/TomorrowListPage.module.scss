@@ -1,12 +1,12 @@
 @import '../../../App.scss';
 
-.wrapper {
+.tomorrow-page {
   display: flex;
   // align-items: center;
   justify-content: center;
   height: 100%;
 }
-.content {
+.tomorrow-page__content {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -34,7 +34,7 @@
   display: flex;
   align-items: center;
 }
-.taskName {
+.task__task-name {
   margin-left: 10px;
   margin-bottom: 4px;
 }

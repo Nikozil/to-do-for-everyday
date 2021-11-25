@@ -28,8 +28,8 @@ const AppContent = () => {
     <div className={styles.content}>
       <Suspense
         fallback={
-          <div className={styles['spin__container']}>
-            <SpinComponent styleClass={styles['spin__spinner']} />
+          <div className={styles['preloader']}>
+            <SpinComponent styleClass={styles['preloader__spinner']} />
           </div>
         }>
         <Switch>

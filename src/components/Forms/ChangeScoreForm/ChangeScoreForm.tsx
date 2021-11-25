@@ -15,7 +15,7 @@ const ChangeScoreForm: React.FC<PropsType> = ({ score, handleSubmit }) => {
       onSubmit={async (values) => {
         await handleSubmit(values.score);
       }}>
-      {({ errors, touched, isValidating, status, handleSubmit }) => (
+      {({ handleSubmit }) => (
         <Form>
           <div className="row g-2 align-items-center">
             <div className="col-auto">
@@ -30,14 +30,14 @@ const ChangeScoreForm: React.FC<PropsType> = ({ score, handleSubmit }) => {
                   return (
                     <label
                       key={scoreValue}
-                      className={styles.label}
+                      className={styles['form__label']}
                       onMouseEnter={() => setHover(scoreValue)}
                       onMouseLeave={() => setHover(0)}>
                       <Field
                         type="radio"
                         name="score"
                         value={`${scoreValue}`}
-                        className={styles.radio}
+                        className={styles['form__radio']}
                         onClick={handleSubmit}
                       />
                       <RaitingStarComponent

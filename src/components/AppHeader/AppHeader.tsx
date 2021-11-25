@@ -21,10 +21,10 @@ const AppHeader = () => {
 
   return (
     <header className={styles.header}>
-      <div className={styles.pagename}>{PageNames[pathname]}</div>
+      <div className={styles['header__pagename']}>{PageNames[pathname]}</div>
       <ClockComponent />
       <div className={styles.usermenu}>
-        <Link to="/settings" className={styles.username}>
+        <Link to="/settings" className={styles['usermenu__username']}>
           {user.authStatus
             ? user.userData.displayName || user.userData.email
             : 'Аноним'}

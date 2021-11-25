@@ -8,13 +8,13 @@ const Paginator: React.FC<PropsType> = ({
   clickHandler,
 }) => {
   return (
-    <nav className={styles.nav} aria-label="paginator ">
+    <nav className={styles.paginator} aria-label="paginator ">
       <ul className="pagination pagination-sm flex-wrap justify-content-center mb-1">
         {pageNames.map((name) => (
           <li
             className={cn(
               'page-item',
-              styles.button,
+              styles['paginator__button'],
               name === currentPage ? 'active' : ''
             )}
             onClick={() => clickHandler(name)}
@@ -22,8 +22,8 @@ const Paginator: React.FC<PropsType> = ({
             <span
               className={cn(
                 'page-link',
-                styles.name,
-                name === currentPage ? styles.active : ''
+                styles['paginator__name'],
+                name === currentPage ? styles['paginator__name_active'] : ''
               )}>
               {name}
             </span>

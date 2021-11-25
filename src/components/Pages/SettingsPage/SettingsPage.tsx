@@ -31,8 +31,8 @@ const SettingsPage = () => {
   };
 
   return (
-    <div className={styles.wrapper}>
-      <div className={styles.content}>
+    <div className={styles.settings}>
+      <div className={styles['settings__content']}>
         <ChangeNameForm
           displayName={user.userData.displayName}
           handleSubmit={ChangeNameFormHandleSubmit}

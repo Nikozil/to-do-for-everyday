@@ -51,14 +51,14 @@ const TasksListComponent = () => {
     <TaskComponent border={true}>
       <span className={styles.task}>
         <DeleteButton task={task} clickHandler={taskComponentDeleteHandler} />
-        <span className={styles.taskName}>{task.data.name}</span>
+        <span className={styles['task__taskName']}>{task.data.name}</span>
       </span>
-      <span className={styles.buttons}>
+      <span className={styles['task__buttons']}>
         <RepeatButton task={task} clickHandler={taskComponentRepeatHandler} />
         <CheckButton
           task={task}
           clickHandler={taskComponentCheckHandler}
-          className={styles['buttons-margin']}
+          className={styles['task__buttons_left-margin']}
         />
       </span>
     </TaskComponent>
@@ -66,9 +66,9 @@ const TasksListComponent = () => {
   const mapDoneTaskComponent = (task: LivedTask) => (
     <TaskComponent key={task.id} border={true}>
       <span className={styles.task}>
-        <span className={styles.doneTaskName}>{task.name}</span>
+        <span className={styles['task__doneTaskName']}>{task.name}</span>
       </span>
-      <span className={styles.buttons}>
+      <span className={styles['task__buttons']}>
         <UncheckButton task={task} clickHandler={taskComponentUncheckHandler} />
       </span>
     </TaskComponent>

@@ -1,12 +1,11 @@
 @import '../../../App.scss';
 
-.wrapper {
+.check-list {
   display: flex;
-  // align-items: center;
   justify-content: center;
   height: 100%;
 }
-.content {
+.check-list__content {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -24,7 +23,7 @@
     margin: 0 15px 0 10px;
   }
 }
-.dayScore {
+.day-score {
   font-size: 0.8em;
 }
 .spinner {

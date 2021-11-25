@@ -44,7 +44,7 @@ const LoginForm: React.FC<PropsType> = ({
               validate={validateEmail}
               className="form-control"
             />
-            <div className={cn('form-text', styles.error)}>
+            <div className={cn('form-text', styles['login-form__error'])}>
               <ErrorMessage name="email" />
             </div>
           </div>
@@ -61,9 +61,11 @@ const LoginForm: React.FC<PropsType> = ({
               validate={validatePassword}
               className="form-control"
             />
-            <div className={cn('form-text', styles.error)}>
+            <div className={cn('form-text', styles['login-form__error'])}>
               <ErrorMessage name="password" />
-              {status && <div className={styles.status}>{status}</div>}
+              {status && (
+                <div className={styles['login-form__status']}>{status}</div>
+              )}
             </div>
           </div>
 

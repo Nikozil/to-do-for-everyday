@@ -35,9 +35,9 @@ const LoginPage: React.FC = () => {
     return response;
   };
   return (
-    <div className={styles.wrapper}>
-      <div className={styles.content}>
-        <LogoComponent className={styles.logo} />
+    <div className={styles['login-page']}>
+      <div className={styles['login-page__content']}>
+        <LogoComponent className={styles['login-page__logo']} />
         <LoginForm
           handleSubmit={handleSubmit}
           handleRegistration={handleRegistration}

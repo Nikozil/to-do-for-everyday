@@ -3,13 +3,13 @@
 exports[`App render correct 1`] = `
 <DocumentFragment>
   <div
-    class="wrapper"
+    class="preloader"
   >
     <div
-      class="content"
+      class="preloader__content"
     >
       <div
-        class="logo"
+        class="preloader__logo"
       >
         <img
           alt="Logo"

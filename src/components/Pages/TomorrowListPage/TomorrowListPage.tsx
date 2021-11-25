@@ -59,7 +59,7 @@ const TomorrowListPage = () => {
     <TaskComponent key={task.id} border={true}>
       <span className={styles.task}>
         <DeleteButton task={task} clickHandler={taskComponentDeleteHandler} />
-        <span className={styles.taskName}>{task.data.name}</span>
+        <span className={styles['task__task-name']}>{task.data.name}</span>
       </span>
       <RepeatButton task={task} clickHandler={taskComponentRepeatHandler} />
     </TaskComponent>
@@ -68,15 +68,15 @@ const TomorrowListPage = () => {
     <TaskComponent key={task.id} border={true}>
       <span className={styles.task}>
         <DeleteButton task={task} clickHandler={taskComponentDeleteHandler} />
-        <span className={styles.taskName}>{task.data.name}</span>
+        <span className={styles['task__task-name']}>{task.data.name}</span>
       </span>
       <DoItAgainButton task={task} clickHandler={taskComponentAgainHandler} />
     </TaskComponent>
   );
 
   return (
-    <div className={styles.wrapper}>
-      <div className={styles.content}>
+    <div className={styles['tomorrow-page']}>
+      <div className={styles['tomorrow-page__content']}>
         <div className={styles['tomorrow-tasks']}>
           <div className={'my-4'}>
             <NewTaskForm handleSubmit={newTaskSubmit} />

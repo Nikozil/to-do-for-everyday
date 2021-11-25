@@ -1,5 +1,13 @@
 @import '../../App.scss';
 
+.list {
+  padding: 0;
+}
+.stub {
+  color: $comment-color;
+  font-size: 0.8em;
+}
+
 .content_enter {
   opacity: 1;
   transition: opacity 400ms ease-in;
@@ -15,15 +23,7 @@
   transition: all 400ms ease-out;
 }
 
-.list {
-  padding: 0;
-}
-.li {
+.content__li {
   list-style-type: none;
   margin-bottom: 6px;
-}
-
-.taskList__comment {
-  color: $comment-color;
-  font-size: 0.8em;
 }

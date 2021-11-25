@@ -1,8 +1,8 @@
 @import '../../../App.scss';
-.error {
+.login-form__error {
   min-height: 21px;
 }
-.status {
+.login-form__status {
   color: $white-text-color;
   animation: blinker 3s linear infinite;
 }

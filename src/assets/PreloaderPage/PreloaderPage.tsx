@@ -4,9 +4,9 @@ import styles from './PreloaderPage.module.scss';
 
 const PreloaderPage = () => {
   return (
-    <div className={styles.wrapper}>
-      <div className={styles.content}>
-        <LogoComponent className={styles.logo} />
+    <div className={styles['preloader']}>
+      <div className={styles['preloader__content']}>
+        <LogoComponent className={styles['preloader__logo']} />
       </div>
     </div>
   );
