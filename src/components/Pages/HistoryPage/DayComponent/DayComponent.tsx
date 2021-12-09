@@ -2,7 +2,6 @@ import React from 'react';
 import { format } from 'date-fns';
 
 import RaitingStarComponent from '../../../../assets/RaitingStarComponent/RaitingStarComponent';
-import TaskComponent from '../../../../assets/TaskComponent/TaskComponent';
 import { HistoryDay } from '../../../../Redux/modules/historySlice';
 import { LivedTask } from '../../../../Redux/modules/tasksSlice';
 import styles from './DayComponent.module.scss';
@@ -10,9 +9,7 @@ const DayComponent: React.FC<PropsType> = ({ day }) => {
   const { doneTasksList, score, timestamp, tag } = day;
   const mapDoneTaskComponent = (task: LivedTask) => (
     <li className={styles['task-li']} key={task.id}>
-      <TaskComponent>
-        <span>{task.name}</span>
-      </TaskComponent>
+      <span>{task.name}</span>
     </li>
   );
   const date = format(timestamp, 'dd.MM.yyyy');

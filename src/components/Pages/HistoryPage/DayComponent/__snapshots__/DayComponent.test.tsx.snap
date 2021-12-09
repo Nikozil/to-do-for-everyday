@@ -16,13 +16,9 @@ exports[`DayComponent render correct 1`] = `
       <li
         class="task-li"
       >
-        <div
-          class="content"
-        >
-          <span>
-            do
-          </span>
-        </div>
+        <span>
+          do
+        </span>
       </li>
     </ul>
     <div
