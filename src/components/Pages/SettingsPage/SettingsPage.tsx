@@ -5,19 +5,20 @@ import {
   updatePassword,
   updateProfile,
 } from '../../../Redux/modules/userSlice';
-import { AppStateType } from '../../../Redux/store';
+import { selectUser } from '../../../Redux/selectors/userSelector';
 import ChangeNameForm from '../../Forms/ChangeNameForm/ChangeNameForm';
 import ChangePasswordForm from '../../Forms/ChangePasswordForm/ChangePasswordForm';
-
 import styles from './SettingsPage.module.scss';
 
 const SettingsPage = () => {
-  const user = useSelector((state: AppStateType) => state.user);
   const dispatch = useDispatch();
+
+  const user = useSelector(selectUser);
 
   const ChangeNameFormHandleSubmit = async (displayName: string) => {
     await dispatch(updateProfile(displayName));
   };
+
   const ChangePasswordFormHandleSubmit = async (
     oldPassword: string,
     newPassword: string
@@ -25,6 +26,7 @@ const SettingsPage = () => {
     const response = await dispatch(updatePassword(oldPassword, newPassword));
     return response;
   };
+
   const signoutHandler = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     dispatch(signOut());

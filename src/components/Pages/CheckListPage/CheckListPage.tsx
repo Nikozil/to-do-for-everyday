@@ -2,17 +2,16 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import SpinComponent from '../../../assets/SpinComponent/SpinComponent';
 import { addTask } from '../../../Redux/modules/tasksSlice';
-import { AppStateType } from '../../../Redux/store';
+import { selectInitTasksStatus } from '../../../Redux/selectors/tasksSelector';
 import NewTaskForm from '../../Forms/NewTaskForm/NewTaskForm';
 import styles from './CheckListPage.module.scss';
 import DayScoreComponent from './DayScoreComponent/DayScoreComponent';
 import TasksListComponent from './TasksListComponent/TasksListComponent';
 
 const CheckListPage = () => {
-  const initTasksStatus = useSelector(
-    (state: AppStateType) => state.tasks.initStatus
-  );
   const dispatch = useDispatch();
+
+  const initTasksStatus = useSelector(selectInitTasksStatus);
 
   const newTaskSubmit = (task: string) => {
     dispatch(addTask(task, {}));

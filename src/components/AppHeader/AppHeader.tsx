@@ -1,17 +1,20 @@
 import React, { useEffect } from 'react';
-import ClockComponent from './ClockComponent/ClockComponent';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router';
 import { Link } from 'react-router-dom';
 import { PageNames } from '../../constants/pageNames';
 import { startClock, stopClock } from '../../Redux/modules/clockSlice';
-import { AppStateType } from '../../Redux/store';
+import { selectUser } from '../../Redux/selectors/userSelector';
 import styles from './AppHeader.module.scss';
+import ClockComponent from './ClockComponent/ClockComponent';
 
 const AppHeader = () => {
-  const user = useSelector((state: AppStateType) => state.user);
-  const pathname = useLocation().pathname;
   const dispatch = useDispatch();
+
+  const user = useSelector(selectUser);
+
+  const pathname = useLocation().pathname;
+
   useEffect(() => {
     dispatch(startClock());
     return () => {

@@ -1,28 +1,20 @@
 import React from 'react';
-import { format, getDay } from 'date-fns';
-import { days } from '../../../constants/clock';
-import { createSelector } from 'reselect';
-import styles from './ClockComponent.module.scss';
-import { AppStateType } from '../../../Redux/store';
 import { useSelector } from 'react-redux';
+import { days } from '../../../constants/clock';
+import {
+  selectDate,
+  selectDay,
+  selectTime,
+} from '../../../Redux/selectors/clockSelector';
+import styles from './ClockComponent.module.scss';
 
 const ClockComponent = () => {
-  const ReselectTime = createSelector(
-    (state: AppStateType) => state.clock.time,
+  const time = useSelector(selectTime);
 
-    (time) => format(time, 'HH:mm')
-  );
-  const ReselectDate = createSelector(
-    (state: AppStateType) => state.clock.time,
-    (time) => format(time, 'dd.MM.yyyy')
-  );
-  const ReselectDay = createSelector(
-    (state: AppStateType) => state.clock.time,
-    (time) => getDay(time)
-  );
-  const time = useSelector(ReselectTime);
-  const date = useSelector(ReselectDate);
-  const day = useSelector(ReselectDay);
+  const date = useSelector(selectDate);
+
+  const day = useSelector(selectDay);
+
   return (
     <div className={styles.clock}>
       <div className={styles['clock__date']}>

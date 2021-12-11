@@ -6,7 +6,7 @@ import PreloaderPage from './assets/PreloaderPage/PreloaderPage';
 // import LoginPage from './components/Pages/LoginPage/LoginPage';
 import { useRequireAuth } from './hooks/useRequireAuth';
 import { updateUserData } from './Redux/modules/userSlice';
-import { AppStateType } from './Redux/store';
+import { selectUserInitStatus } from './Redux/selectors/userSelector';
 
 const AppPage = React.lazy(() => import('./components/AppPage/AppPage'));
 const LoginPage = React.lazy(
@@ -15,16 +15,16 @@ const LoginPage = React.lazy(
 
 const RoutingContainer: React.FC = () => {
   const dispatch = useDispatch();
+
+  const initUserStatus = useSelector(selectUserInitStatus);
+
   useRequireAuth();
-  const initStatus = useSelector(
-    (state: AppStateType) => state.user.initStatus
-  );
 
   useEffect(() => {
     dispatch(updateUserData());
   }, [dispatch]);
 
-  if (!initStatus) {
+  if (!initUserStatus) {
     return <PreloaderPage />;
   }
 

@@ -1,7 +1,13 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { endOfToday, getTime } from 'date-fns';
-
+import {
+  CheckButton,
+  DeleteButton,
+  RepeatButton,
+  UncheckButton,
+} from '../../../../assets/Buttons/Buttons';
+import TaskComponent from '../../../../assets/TaskComponent/TaskComponent';
+import TaskMapComponent from '../../../../assets/TaskMapComponent/TaskMapComponent';
 import {
   checkTask,
   deleteTask,
@@ -11,38 +17,31 @@ import {
   uncheckTask,
   updateTask,
 } from '../../../../Redux/modules/tasksSlice';
-
-import TaskComponent from '../../../../assets/TaskComponent/TaskComponent';
-import TaskMapComponent from '../../../../assets/TaskMapComponent/TaskMapComponent';
 import {
-  CheckButton,
-  DeleteButton,
-  RepeatButton,
-  UncheckButton,
-} from '../../../../assets/Buttons/Buttons';
+  selectCurrentTasks,
+  selectDoneTasks,
+} from '../../../../Redux/selectors/tasksSelector';
 import styles from './TasksListComponent.module.scss';
-import { AppStateType } from '../../../../Redux/store';
 
 const TasksListComponent = () => {
-  const tasks = useSelector((state: AppStateType) => state.tasks.tasksList);
-  const undoneTasks = tasks.filter(
-    (i) => !i.data.done && i.data.time <= getTime(endOfToday())
-  );
-  const doneTasks = useSelector(
-    (state: AppStateType) => state.tasks.livedDay.doneTasksList
-  );
-
   const dispatch = useDispatch();
+
+  const currentTasks = useSelector(selectCurrentTasks);
+
+  const doneTasks = useSelector(selectDoneTasks);
 
   const taskComponentCheckHandler = (task: Task) => {
     dispatch(checkTask(task));
   };
+
   const taskComponentUncheckHandler = (task: LivedTask) => {
     dispatch(uncheckTask(task));
   };
+
   const taskComponentRepeatHandler = (id: string, data: PartialTaskData) => {
     dispatch(updateTask(id, data));
   };
+
   const taskComponentDeleteHandler = (id: string) => {
     dispatch(deleteTask(id));
   };
@@ -63,6 +62,7 @@ const TasksListComponent = () => {
       </span>
     </TaskComponent>
   );
+
   const mapDoneTaskComponent = (task: LivedTask) => (
     <TaskComponent key={task.id} border={true}>
       <span className={styles.task}>
@@ -78,7 +78,7 @@ const TasksListComponent = () => {
     <>
       <div className="mb-3">Задачи</div>
       <TaskMapComponent
-        list={undoneTasks}
+        list={currentTasks}
         stub={'Нет новых задач'}
         callback={mapTaskComponent}
       />

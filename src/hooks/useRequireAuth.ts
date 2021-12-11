@@ -1,15 +1,17 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory, useLocation } from 'react-router';
-import { AppStateType } from '../Redux/store';
+import { selectAuthStatus } from '../Redux/selectors/userSelector';
 
 export const useRequireAuth = (redirectUrl = '/login') => {
   const [firstPath, setFirstPath] = useState('/');
+
   const pathname = useLocation().pathname;
-  const authStatus = useSelector(
-    (state: AppStateType) => state.user.authStatus
-  );
+
+  const authStatus = useSelector(selectAuthStatus);
+
   const history = useHistory();
+
   useEffect(() => {
     if (!authStatus) {
       if (pathname !== redirectUrl) setFirstPath(pathname);

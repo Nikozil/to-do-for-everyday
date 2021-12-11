@@ -1,23 +1,28 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addScore, addTag, Score } from '../../../../Redux/modules/tasksSlice';
-import { AppStateType } from '../../../../Redux/store';
-import ChangeTagForm from '../../../Forms/ChangeTagForm/ChangeTagForm';
+import {
+  selectScore,
+  selectTag,
+} from '../../../../Redux/selectors/tasksSelector';
 import ChangeScoreForm from '../../../Forms/ChangeScoreForm/ChangeScoreForm';
+import ChangeTagForm from '../../../Forms/ChangeTagForm/ChangeTagForm';
 
 const DayScoreComponent = () => {
-  const score = useSelector(
-    (state: AppStateType) => state.tasks.livedDay.score
-  );
-  const tag = useSelector((state: AppStateType) => state.tasks.livedDay.tag);
   const dispatch = useDispatch();
+
+  const score = useSelector(selectScore);
+
+  const tag = useSelector(selectTag);
 
   const addTagHandler = (tag: string) => {
     dispatch(addTag(tag));
   };
+
   const addScoreHandler = (score: Score) => {
     dispatch(addScore(score));
   };
+
   return (
     <div>
       <div>Итоги дня</div>

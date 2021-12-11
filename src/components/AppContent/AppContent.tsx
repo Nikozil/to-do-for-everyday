@@ -1,11 +1,9 @@
-import { endOfDay, getTime } from 'date-fns';
 import React, { Suspense, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, Route, Switch } from 'react-router-dom';
-import { createSelector } from 'reselect';
 import SpinComponent from '../../assets/SpinComponent/SpinComponent';
+import { selectEndOfDay } from '../../Redux/selectors/clockSelector';
 import { getTasks } from '../../Redux/modules/tasksSlice';
-import { AppStateType } from '../../Redux/store';
 // import CheckListPage from '../Pages/CheckListPage/CheckListPage';
 // import Settings from '../Pages/SettingsPage/SettingsPage';
 import Table from '../Pages/Table/TablePage';
@@ -23,13 +21,9 @@ const HistoryPage = React.lazy(
 );
 const Settings = React.lazy(() => import('../Pages/SettingsPage/SettingsPage'));
 const AppContent = () => {
-  const selectEndOfDay = createSelector(
-    (state: AppStateType) => state.clock.time,
-    (time) => getTime(endOfDay(time))
-  );
-  const today = useSelector(selectEndOfDay);
-
   const dispatch = useDispatch();
+
+  const today = useSelector(selectEndOfDay);
 
   useEffect(() => {
     dispatch(getTasks());
