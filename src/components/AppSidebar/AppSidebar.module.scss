@@ -9,9 +9,15 @@
   padding-bottom: 10px;
 
   @media screen and (max-width: 767px) {
+    position: sticky;
+    bottom: 0;
+    z-index: 9999;
     display: flex;
     flex-direction: row;
     padding-bottom: 0;
+  }
+  @media (min-aspect-ratio: 25/38) and (max-width: 767px) {
+    display: none;
   }
 }
 

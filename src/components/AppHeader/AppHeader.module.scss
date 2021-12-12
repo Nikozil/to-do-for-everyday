@@ -6,6 +6,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  @media screen and (max-width: 767px) {
+    position: sticky;
+    top: 0;
+    z-index: 9999;
+  }
 }
 .header__pagename {
   margin-left: 5px;

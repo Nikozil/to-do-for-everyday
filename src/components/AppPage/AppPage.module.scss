@@ -11,10 +11,17 @@
   grid-template-columns: 60px 1fr;
   @media screen and (max-width: 767px) {
     grid-template-areas:
-      's'
+      'h'
+      'c'
+      's';
+    grid-template-rows: 35px 1fr 44px;
+    grid-template-columns: 1fr;
+  }
+  @media (min-aspect-ratio: 25/38) and (max-width: 767px) {
+    grid-template-areas:
       'h'
       'c';
-    grid-template-rows: 44px 35px 1fr;
+    grid-template-rows: 35px 1fr;
     grid-template-columns: 1fr;
   }
 }
