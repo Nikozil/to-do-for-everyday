@@ -32,3 +32,12 @@ $C-color: #86a2cf;
     box-shadow: 0 0 0 0.25rem rgba(130, 138, 145, 0.5) !important;
   }
 }
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+}

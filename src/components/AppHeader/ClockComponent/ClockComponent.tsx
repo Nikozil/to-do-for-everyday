@@ -17,11 +17,11 @@ const ClockComponent = () => {
 
   return (
     <div className={styles.clock}>
-      <div className={styles['clock__date']}>
+      <time className={styles['clock__date']}>
         {`${days[day]}, `}
         {time ? date : null}
-      </div>
-      <div className={styles['clock__time']}> {time ? time : null}</div>
+      </time>
+      <time className={styles['clock__time']}> {time ? time : null}</time>
     </div>
   );
 };

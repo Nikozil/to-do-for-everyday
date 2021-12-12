@@ -2,10 +2,10 @@
 
 exports[`HistoryPage render correct 1`] = `
 <DocumentFragment>
-  <div
+  <section
     class="history-page"
   >
-    <div
+    <header
       class="paginators"
     >
       <nav
@@ -134,7 +134,7 @@ exports[`HistoryPage render correct 1`] = `
           </li>
         </ul>
       </nav>
-    </div>
+    </header>
     <div
       class="preloader"
     >
@@ -149,7 +149,7 @@ exports[`HistoryPage render correct 1`] = `
         </span>
       </div>
     </div>
-  </div>
+  </section>
    
 </DocumentFragment>
 `;

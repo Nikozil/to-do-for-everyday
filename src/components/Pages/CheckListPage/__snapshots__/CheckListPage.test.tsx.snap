@@ -2,13 +2,13 @@
 
 exports[`CheckListPage render correct 1`] = `
 <DocumentFragment>
-  <div
+  <section
     class="check-list"
   >
     <div
       class="check-list__content"
     >
-      <div
+      <section
         class="tasks"
       >
         <div
@@ -42,8 +42,8 @@ exports[`CheckListPage render correct 1`] = `
             Loading...
           </span>
         </div>
-      </div>
-      <div
+      </section>
+      <section
         class="day-score"
       >
         <div
@@ -56,9 +56,9 @@ exports[`CheckListPage render correct 1`] = `
             Loading...
           </span>
         </div>
-      </div>
+      </section>
     </div>
-  </div>
+  </section>
    
 </DocumentFragment>
 `;

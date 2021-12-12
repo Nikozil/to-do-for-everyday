@@ -76,14 +76,14 @@ const TasksListComponent = () => {
 
   return (
     <>
-      <div className="mb-3">Задачи</div>
+      <h2 className="mb-3">Задачи</h2>
       <TaskMapComponent
         list={currentTasks}
         stub={'Нет новых задач'}
         callback={mapTaskComponent}
       />
 
-      <div className="mb-3">Выполнено</div>
+      <h2 className="mb-3">Выполнено</h2>
       <TaskMapComponent
         list={doneTasks}
         stub={'Список пуст'}

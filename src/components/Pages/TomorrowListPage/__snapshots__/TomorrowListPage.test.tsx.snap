@@ -8,7 +8,7 @@ exports[`TomorrowListPage render correct with tasks 1`] = `
     <div
       class="tomorrow-page__content"
     >
-      <div
+      <section
         class="tomorrow-tasks"
       >
         <div
@@ -32,11 +32,11 @@ exports[`TomorrowListPage render correct with tasks 1`] = `
             </div>
           </form>
         </div>
-        <div
+        <h2
           class="mb-3"
         >
           Задачи на завтра
-        </div>
+        </h2>
         <ul
           class="list"
         >
@@ -105,15 +105,15 @@ exports[`TomorrowListPage render correct with tasks 1`] = `
             </div>
           </li>
         </ul>
-      </div>
-      <div
+      </section>
+      <section
         class="completed-tasks"
       >
-        <div
+        <h2
           class="mb-3"
         >
           Выполненые задачи
-        </div>
+        </h2>
         <ul
           class="list"
         >
@@ -182,7 +182,7 @@ exports[`TomorrowListPage render correct with tasks 1`] = `
             </div>
           </li>
         </ul>
-      </div>
+      </section>
     </div>
   </div>
    
@@ -197,7 +197,7 @@ exports[`TomorrowListPage render correct without init 1`] = `
     <div
       class="tomorrow-page__content"
     >
-      <div
+      <section
         class="tomorrow-tasks"
       >
         <div
@@ -231,8 +231,8 @@ exports[`TomorrowListPage render correct without init 1`] = `
             Loading...
           </span>
         </div>
-      </div>
-      <div
+      </section>
+      <section
         class="completed-tasks"
       >
         <div
@@ -245,7 +245,7 @@ exports[`TomorrowListPage render correct without init 1`] = `
             Loading...
           </span>
         </div>
-      </div>
+      </section>
     </div>
   </div>
    
@@ -260,7 +260,7 @@ exports[`TomorrowListPage render correct without tasks 1`] = `
     <div
       class="tomorrow-page__content"
     >
-      <div
+      <section
         class="tomorrow-tasks"
       >
         <div
@@ -284,31 +284,31 @@ exports[`TomorrowListPage render correct without tasks 1`] = `
             </div>
           </form>
         </div>
-        <div
+        <h2
           class="mb-3"
         >
           Задачи на завтра
-        </div>
+        </h2>
         <span
           class="stub"
         >
           Нет новых задач
         </span>
-      </div>
-      <div
+      </section>
+      <section
         class="completed-tasks"
       >
-        <div
+        <h2
           class="mb-3"
         >
           Выполненые задачи
-        </div>
+        </h2>
         <span
           class="stub"
         >
           Нет выполненых задач
         </span>
-      </div>
+      </section>
     </div>
   </div>
    

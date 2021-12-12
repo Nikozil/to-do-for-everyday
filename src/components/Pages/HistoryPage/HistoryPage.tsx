@@ -13,7 +13,7 @@ const HistoryPage = () => {
   const initHistoryStatus = useSelector(selectInitHistoryStatus);
 
   return (
-    <div className={styles['history-page']}>
+    <section className={styles['history-page']}>
       <MonthPaginator />
       {initHistoryStatus ? (
         <ul className={styles['days-list']}>
@@ -26,7 +26,7 @@ const HistoryPage = () => {
           <SpinComponent styleClass={styles['preloader__spinner']} />
         </div>
       )}
-    </div>
+    </section>
   );
 };
 

@@ -2,11 +2,11 @@
 
 exports[`TasksListComponent render correct with tasks 1`] = `
 <DocumentFragment>
-  <div
+  <h2
     class="mb-3"
   >
     Задачи
-  </div>
+  </h2>
   <ul
     class="list"
   >
@@ -100,11 +100,11 @@ exports[`TasksListComponent render correct with tasks 1`] = `
       </div>
     </li>
   </ul>
-  <div
+  <h2
     class="mb-3"
   >
     Выполнено
-  </div>
+  </h2>
   <ul
     class="list"
   >
@@ -157,21 +157,21 @@ exports[`TasksListComponent render correct with tasks 1`] = `
 
 exports[`TasksListComponent render correct without tasks 1`] = `
 <DocumentFragment>
-  <div
+  <h2
     class="mb-3"
   >
     Задачи
-  </div>
+  </h2>
   <span
     class="stub"
   >
     Нет новых задач
   </span>
-  <div
+  <h2
     class="mb-3"
   >
     Выполнено
-  </div>
+  </h2>
   <span
     class="stub"
   >

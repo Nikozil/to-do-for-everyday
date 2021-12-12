@@ -7,7 +7,7 @@ import styles from './AppSidebar.module.scss';
 
 const AppSidebar: React.FC = () => {
   return (
-    <div className={styles.sidebar}>
+    <aside className={styles.sidebar}>
       <div className={styles.logo}>
         <img src={Logo} alt="Logo" />
       </div>
@@ -23,7 +23,7 @@ const AppSidebar: React.FC = () => {
           ))}
         </nav>
       </div>
-    </div>
+    </aside>
   );
 };
 

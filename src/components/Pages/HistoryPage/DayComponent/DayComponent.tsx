@@ -14,14 +14,14 @@ const DayComponent: React.FC<PropsType> = ({ day }) => {
   );
   const date = format(timestamp, 'dd.MM.yyyy');
   return (
-    <div className={styles.container}>
-      <div className={styles.date}>{date}</div>
+    <section className={styles.container}>
+      <h3 className={styles.date}>{date}</h3>
       <ul className={styles['task-list']}>
         {doneTasksList &&
           doneTasksList.length &&
           doneTasksList.map(mapDoneTaskComponent)}
       </ul>
-      <div className={styles.tag}>{tag && <>{tag}</>}</div>
+      <span className={styles.tag}>{tag && <>{tag}</>}</span>
       <div className={styles.score}>
         {[...Array(5)].map((star, index) => {
           let scoreValue = index + 1;
@@ -34,7 +34,7 @@ const DayComponent: React.FC<PropsType> = ({ day }) => {
           );
         })}
       </div>
-    </div>
+    </section>
   );
 };
 

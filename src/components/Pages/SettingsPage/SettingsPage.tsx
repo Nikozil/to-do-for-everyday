@@ -34,7 +34,7 @@ const SettingsPage = () => {
 
   return (
     <div className={styles.settings}>
-      <div className={styles['settings__content']}>
+      <section className={styles['settings__content']}>
         <ChangeNameForm
           displayName={user.userData.displayName}
           handleSubmit={ChangeNameFormHandleSubmit}
@@ -43,7 +43,7 @@ const SettingsPage = () => {
         <button className={'btn btn-secondary  my-5'} onClick={signoutHandler}>
           Выйти
         </button>
-      </div>
+      </section>
     </div>
   );
 };

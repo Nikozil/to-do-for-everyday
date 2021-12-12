@@ -2,14 +2,14 @@
 
 exports[`DayComponent render correct 1`] = `
 <DocumentFragment>
-  <div
+  <section
     class="container"
   >
-    <div
+    <h3
       class="date"
     >
       26.10.2021
-    </div>
+    </h3>
     <ul
       class="task-list"
     >
@@ -21,11 +21,11 @@ exports[`DayComponent render correct 1`] = `
         </span>
       </li>
     </ul>
-    <div
+    <span
       class="tag"
     >
       hi
-    </div>
+    </span>
     <div
       class="score"
     >
@@ -100,7 +100,7 @@ exports[`DayComponent render correct 1`] = `
         />
       </svg>
     </div>
-  </div>
+  </section>
    
 </DocumentFragment>
 `;

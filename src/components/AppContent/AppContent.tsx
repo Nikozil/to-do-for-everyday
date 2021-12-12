@@ -30,7 +30,7 @@ const AppContent = () => {
   }, [dispatch, today]);
 
   return (
-    <div className={styles.content}>
+    <main className={styles.content}>
       <Suspense
         fallback={
           <div className={styles['preloader']}>
@@ -60,7 +60,7 @@ const AppContent = () => {
           <Route path="*">404</Route>
         </Switch>
       </Suspense>
-    </div>
+    </main>
   );
 };
 

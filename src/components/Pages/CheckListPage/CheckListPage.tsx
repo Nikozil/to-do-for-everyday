@@ -18,9 +18,9 @@ const CheckListPage = () => {
   };
 
   return (
-    <div className={styles['check-list']}>
+    <section className={styles['check-list']}>
       <div className={styles['check-list__content']}>
-        <div className={styles.tasks}>
+        <section className={styles.tasks}>
           <div className={'my-4'}>
             <NewTaskForm handleSubmit={newTaskSubmit} />
           </div>
@@ -29,16 +29,16 @@ const CheckListPage = () => {
           ) : (
             <SpinComponent styleClass={styles.spinner} />
           )}
-        </div>
-        <div className={styles['day-score']}>
+        </section>
+        <section className={styles['day-score']}>
           {initTasksStatus ? (
             <DayScoreComponent />
           ) : (
             <SpinComponent styleClass={styles.spinner} />
           )}
-        </div>
+        </section>
       </div>
-    </div>
+    </section>
   );
 };
 

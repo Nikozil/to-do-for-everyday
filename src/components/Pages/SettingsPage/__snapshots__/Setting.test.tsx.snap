@@ -5,7 +5,7 @@ exports[`Settings Page tests render correct 1`] = `
   <div
     class="settings"
   >
-    <div
+    <section
       class="settings__content"
     >
       <form
@@ -125,7 +125,7 @@ exports[`Settings Page tests render correct 1`] = `
       >
         Выйти
       </button>
-    </div>
+    </section>
   </div>
    
 </DocumentFragment>

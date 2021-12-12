@@ -3,9 +3,9 @@
 exports[`DayScoreComponent render correct 1`] = `
 <DocumentFragment>
   <div>
-    <div>
+    <h2>
       Итоги дня
-    </div>
+    </h2>
     <div
       class="my-1"
     >

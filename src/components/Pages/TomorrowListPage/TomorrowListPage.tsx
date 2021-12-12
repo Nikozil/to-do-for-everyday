@@ -71,13 +71,13 @@ const TomorrowListPage = () => {
   return (
     <div className={styles['tomorrow-page']}>
       <div className={styles['tomorrow-page__content']}>
-        <div className={styles['tomorrow-tasks']}>
+        <section className={styles['tomorrow-tasks']}>
           <div className={'my-4'}>
             <NewTaskForm handleSubmit={newTaskSubmit} />
           </div>
           {initTasksStatus ? (
             <>
-              <div className="mb-3">Задачи на завтра</div>
+              <h2 className="mb-3">Задачи на завтра</h2>
               <TaskMapComponent
                 list={tomorrowTasks}
                 stub={'Нет новых задач'}
@@ -87,11 +87,11 @@ const TomorrowListPage = () => {
           ) : (
             <SpinComponent styleClass={styles.spinner} />
           )}
-        </div>
-        <div className={styles['completed-tasks']}>
+        </section>
+        <section className={styles['completed-tasks']}>
           {initTasksStatus ? (
             <>
-              <div className="mb-3">Выполненые задачи</div>
+              <h2 className="mb-3">Выполненые задачи</h2>
               <TaskMapComponent
                 list={completedTasks}
                 stub={'Нет выполненых задач'}
@@ -101,7 +101,7 @@ const TomorrowListPage = () => {
           ) : (
             <SpinComponent styleClass={styles.spinner} />
           )}
-        </div>
+        </section>
       </div>
     </div>
   );
