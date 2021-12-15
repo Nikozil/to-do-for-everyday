@@ -1,23 +1,25 @@
 @import '../../App.scss';
 .sidebar {
   grid-area: s;
+
+  position: sticky;
+  top: 0;
+  height: 100vh;
   overflow: hidden;
-  background-color: $primary-color;
   display: flex;
   flex-direction: column;
+
+  background-color: $primary-color;
   align-items: center;
   padding-bottom: 10px;
 
   @media screen and (max-width: 767px) {
-    position: sticky;
     bottom: 0;
     z-index: 9999;
     display: flex;
     flex-direction: row;
+    height: auto;
     padding-bottom: 0;
-  }
-  @media (min-aspect-ratio: 25/38) and (max-width: 767px) {
-    display: none;
   }
 }
 
