@@ -28,15 +28,17 @@ describe('RoutingContainer tests', () => {
         },
       },
     });
-    expect(screen.getByText(/Список дел/i)).toBeInTheDocument();
+    expect(
+      screen.getByRole('heading', { name: /Сегодня/i })
+    ).toBeInTheDocument();
   });
-  it('if  authorized and pathname(/table)  routing must show TablePage', () => {
+  it('if  authorized and pathname(/tomorrowList)  routing must show tomorrow list page', () => {
     render(<RoutingContainer />, {
       preloadedState: {
         user: { ...initialState, initStatus: true, authStatus: true },
       },
-      route: '/table',
+      route: '/tomorrowList',
     });
-    expect(screen.getByText(/Таблица/i)).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /Планы/i })).toBeInTheDocument();
   });
 });

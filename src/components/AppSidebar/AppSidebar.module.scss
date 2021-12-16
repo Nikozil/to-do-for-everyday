@@ -1,53 +1,99 @@
 @import '../../App.scss';
 .sidebar {
   grid-area: s;
-
   position: sticky;
   top: 0;
-  height: 100vh;
-  overflow: hidden;
+
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
 
-  background-color: $primary-color;
-  align-items: center;
+  height: 100vh;
+  width: 60px;
+
   padding-bottom: 10px;
+  background-color: $primary-color;
+  overflow: hidden;
+
+  transition: width 0.4s ease-out 1s;
 
   @media screen and (max-width: 767px) {
     bottom: 0;
     z-index: 9999;
     display: flex;
     flex-direction: row;
+
+    width: 100%;
     height: auto;
     padding-bottom: 0;
+  }
+  &:hover {
+    width: 200px;
+
+    @media screen and (max-width: 767px) {
+      width: auto;
+    }
   }
 }
 
 .logo {
-  width: 56px;
-  height: 56px;
-  margin: 2px;
-  @media screen and (max-width: 767px) {
-    width: 44px;
-    height: 44px;
-    margin-left: 2px;
-  }
-}
+  display: inline-flex;
+  align-items: center;
 
-.logo img {
-  max-width: 100%;
-  max-height: 100%;
+  overflow: hidden;
+
+  &__icon {
+    flex: 1;
+    margin: 2px;
+    width: 56px;
+    height: 56px;
+
+    @media screen and (max-width: 767px) {
+      margin-left: 2px;
+      width: 44px;
+      height: 44px;
+    }
+  }
+
+  &__icon img {
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+  &__name {
+    width: 130px;
+    margin-left: 0.5rem;
+    color: $white-text-color;
+    font-size: 1.1rem;
+    font-weight: 900;
+
+    @media screen and (max-width: 767px) {
+      display: none;
+    }
+  }
 }
 
 .navbar {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
+
   justify-content: space-between;
   height: 100%;
   width: 100%;
+
   @media screen and (max-width: 767px) {
     display: flex;
     flex-direction: row;
+  }
+
+  &__links {
+    display: flex;
+    flex-direction: column;
+    padding-left: 1px;
+    @media screen and (max-width: 767px) {
+      flex-direction: row;
+      padding-left: 5px;
+    }
   }
 }

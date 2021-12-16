@@ -9,22 +9,16 @@ import {
 export const NavLinksStart: NavLinkType[] = [
   {
     name: 'Checklist',
-    nameRus: 'Список дел',
+    nameRus: 'Сегодня',
     link: '/checkList',
     Icon: RiCheckboxFill,
   },
   {
     name: 'Tomorrowlist',
-    nameRus: 'Дела на завтра',
+    nameRus: 'Планы',
     link: '/tomorrowList',
     Icon: RiCheckboxBlankLine,
   },
-  // {
-  //   name: 'Table',
-  //   nameRus: 'Таблица',
-  //   link: '/table',
-  //   Icon: AiOutlineBorderlessTable,
-  // },
 ];
 export const NavLinksEnd: NavLinkType[] = [
   {
@@ -42,10 +36,9 @@ interface NavLinkType {
 }
 
 export const PageNames: PageNamesType = {
-  '/checkList': 'Список дел',
-  '/table': 'Таблица',
+  '/checkList': 'Сегодня',
   '/settings': 'Настройки',
-  '/tomorrowList': 'Дела на завтра',
+  '/tomorrowList': 'Планы',
   '/history': 'История',
 };
 interface PageNamesType {

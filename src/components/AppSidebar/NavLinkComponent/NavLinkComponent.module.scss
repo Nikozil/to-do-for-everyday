@@ -1,42 +1,65 @@
 @import '../../../App.scss';
 
 .navlink {
-  box-sizing: content-box;
-  background-color: $button-color !important;
-  padding: 0 !important;
-  width: 56px;
-  margin: 3px 0 3px 0;
-  @media screen and (max-width: 767px) {
-    margin: 0 2px 0 2px !important;
-    width: 40px;
-    height: 40px;
-    margin: 0;
-  }
+  display: block;
+  overflow-x: hidden;
+  white-space: nowrap;
+  text-decoration: none;
 
-  &:focus,
-  &:active {
-    box-shadow: unset !important;
-  }
-  @include focus-important;
+  &__button {
+    margin: 3px 0 3px 0;
+    width: 56px;
+    box-sizing: content-box;
+    background-color: $button-color !important;
+    padding: 0 !important;
 
-  &:hover {
-    background-color: $button-color-hover !important;
-    @media (pointer: coarse) {
-      background-color: $button-color-selected !important;
+    @media screen and (max-width: 767px) {
+      margin: 0 2px 0 2px !important;
+      width: 40px;
+      height: 40px;
+    }
+
+    &:focus,
+    &:active {
+      box-shadow: unset !important;
+    }
+
+    @include focus-important;
+
+    &:hover {
+      background-color: $button-color-hover !important;
+
+      @media (pointer: coarse) {
+        background-color: $button-color-selected !important;
+      }
     }
   }
-}
-.navlink_selected {
-  background-color: $button-color-selected !important;
-}
-.navlink__button-icon {
-  margin: auto;
-  height: 100%;
-  font-size: 50px;
-  color: $nav-icon-color;
-  line-height: 0;
-  opacity: 0.8;
-  @media screen and (max-width: 767px) {
-    font-size: 30px;
+
+  &_selected div {
+    background-color: $button-color-selected !important;
+  }
+
+  &__button-icon {
+    margin: auto;
+    height: 100%;
+
+    font-size: 50px;
+    color: $nav-icon-color;
+    line-height: 0;
+    opacity: 0.8;
+
+    @media screen and (max-width: 767px) {
+      font-size: 30px;
+    }
+  }
+
+  &__button-name {
+    margin-left: 0.5rem;
+    color: $white-text-color;
+    font-size: 1.1rem;
+
+    @media screen and (max-width: 767px) {
+      display: none;
+    }
   }
 }

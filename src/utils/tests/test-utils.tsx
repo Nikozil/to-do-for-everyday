@@ -48,7 +48,7 @@ export { render };
 
 //Types
 interface WrapperOptions {
-  preloadedState?: AppStateType;
+  preloadedState?: Partial<AppStateType>;
   store?: EnhancedStore<AppStateType>;
   route?: string;
   history?: MemoryHistory<unknown>;
