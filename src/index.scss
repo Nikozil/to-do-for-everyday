@@ -1,5 +1,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 
+@font-face {
+  font-family: 'GothamPro';
+  font-style: normal;
+  font-weight: 400;
+  src: local('GothamPro'), url('/assets/fonts/GothamPro.ttf');
+}
+@font-face {
+  font-family: 'GothamPro-Bold';
+  font-style: normal;
+  font-weight: 400;
+  src: local('GothamPro-Bold'), url('/assets/fonts/GothamPro-Bold.ttf');
+}
+@font-face {
+  font-family: 'GothamPro-Medium';
+  font-style: normal;
+  font-weight: 400;
+  src: local('GothamPro-Medium'), url('/assets/fonts/GothamPro-Medium.ttf');
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Open Sans', 'Segoe UI',

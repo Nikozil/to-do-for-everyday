@@ -19,7 +19,7 @@ exports[`DayScoreComponent render correct 1`] = `
             class="col-auto"
           >
             <label
-              class="col-form-label-sm"
+              class="col-form-label-sm fw-bold"
               for="tag"
             >
               #Tag дня:
@@ -52,7 +52,7 @@ exports[`DayScoreComponent render correct 1`] = `
             class="col-auto"
           >
             <div
-              class="col-form-label-sm"
+              class="col-form-label-sm fw-bold"
               id="my-radio-group"
             >
               Оченка дня

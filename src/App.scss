@@ -19,6 +19,9 @@ $A-color: #97b6e8;
 $B-color: #9fc0f5;
 $C-color: #86a2cf;
 
+body {
+  font-family: 'GothamPro', sans-serif;
+}
 @mixin focus {
   border: none;
   outline: none;
@@ -40,4 +43,10 @@ h3 {
   font-size: inherit;
   font-weight: inherit;
   line-height: inherit;
+}
+h1 {
+  font-family: 'GothamPro-Bold';
+}
+h2 {
+  font-family: 'GothamPro-Medium';
 }

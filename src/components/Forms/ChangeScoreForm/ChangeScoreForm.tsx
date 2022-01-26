@@ -19,7 +19,7 @@ const ChangeScoreForm: React.FC<PropsType> = ({ score, handleSubmit }) => {
         <Form>
           <div className="row g-2 align-items-center">
             <div className="col-auto">
-              <div id="my-radio-group" className="col-form-label-sm">
+              <div id="my-radio-group" className="col-form-label-sm fw-bold">
                 Оченка дня
               </div>
             </div>
@@ -28,23 +28,26 @@ const ChangeScoreForm: React.FC<PropsType> = ({ score, handleSubmit }) => {
                 {[...Array(5)].map((star, index) => {
                   let scoreValue = index + 1;
                   return (
-                    <label
+                    <div
                       key={scoreValue}
-                      className={styles['form__label']}
+                      className={styles['star']}
                       onMouseEnter={() => setHover(scoreValue)}
                       onMouseLeave={() => setHover(0)}>
+                      <label className={styles['star__label']}>
+                        {scoreValue}
+                      </label>
                       <Field
                         type="radio"
                         name="score"
                         value={`${scoreValue}`}
-                        className={styles['form__radio']}
+                        className={styles['star__radio']}
                         onClick={handleSubmit}
                       />
                       <RaitingStarComponent
                         active={(hover || score) >= scoreValue}
                         size={29}
                       />
-                    </label>
+                    </div>
                   );
                 })}
               </div>

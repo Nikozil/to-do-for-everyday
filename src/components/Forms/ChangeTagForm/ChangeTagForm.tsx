@@ -41,7 +41,7 @@ const ChangeTagForm: React.FC<PropsType> = ({ tag, handleSubmit }) => {
           <Form>
             <div className="row g-2 align-items-center">
               <div className="col-auto">
-                <label htmlFor="tag" className="col-form-label-sm">
+                <label htmlFor="tag" className="col-form-label-sm fw-bold">
                   #Tag дня:
                 </label>
               </div>

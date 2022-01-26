@@ -1,7 +1,11 @@
-.form__label {
+.star {
+  display: inline;
   cursor: pointer;
   margin-left: 5px;
 }
-.form__radio {
+.star__radio {
+  display: none;
+}
+.star__label {
   display: none;
 }
