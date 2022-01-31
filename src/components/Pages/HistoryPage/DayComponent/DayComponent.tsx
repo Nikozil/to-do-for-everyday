@@ -1,7 +1,7 @@
 import React from 'react';
 import { format } from 'date-fns';
 
-import RaitingStarComponent from '../../../../assets/RaitingStarComponent/RaitingStarComponent';
+import RaitingStarComponent from '../../../../common_components/RaitingStarComponent/RaitingStarComponent';
 import { HistoryDay } from '../../../../Redux/modules/historySlice';
 import { LivedTask } from '../../../../Redux/modules/tasksSlice';
 import { FaCouch } from 'react-icons/fa';

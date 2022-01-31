@@ -4,10 +4,10 @@ import {
   DeleteButton,
   DoItAgainButton,
   RepeatButton,
-} from '../../../assets/Buttons/Buttons';
-import SpinComponent from '../../../assets/SpinComponent/SpinComponent';
-import TaskComponent from '../../../assets/TaskComponent/TaskComponent';
-import TaskMapComponent from '../../../assets/TaskMapComponent/TaskMapComponent';
+} from '../../../common_components/Buttons/Buttons';
+import SpinComponent from '../../../common_components/SpinComponent/SpinComponent';
+import TaskComponent from '../../../common_components/TaskComponent/TaskComponent';
+import TaskMapComponent from '../../../common_components/TaskMapComponent/TaskMapComponent';
 import {
   addTask,
   deleteTask,

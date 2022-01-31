@@ -1,7 +1,7 @@
 import React, { Suspense, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
-import PreloaderPage from './assets/PreloaderPage/PreloaderPage';
+import PreloaderPage from './common_components/PreloaderPage/PreloaderPage';
 // import AppPage from './components/AppPage/AppPage';
 // import LoginPage from './components/Pages/LoginPage/LoginPage';
 import { useRequireAuth } from './hooks/useRequireAuth';

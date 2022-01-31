@@ -1,7 +1,7 @@
 import React, { Suspense, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, Route, Switch } from 'react-router-dom';
-import SpinComponent from '../../assets/SpinComponent/SpinComponent';
+import SpinComponent from '../../common_components/SpinComponent/SpinComponent';
 import { selectEndOfDay } from '../../Redux/selectors/clockSelector';
 import { getTasks } from '../../Redux/modules/tasksSlice';
 // import CheckListPage from '../Pages/CheckListPage/CheckListPage';

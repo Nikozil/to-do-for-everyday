@@ -6,7 +6,7 @@ import {
   signIn,
   signUp,
 } from '../../../Redux/modules/userSlice';
-import LogoComponent from '../../../assets/LogoComponent/LogoComponent';
+import LogoComponent from '../../../common_components/LogoComponent/LogoComponent';
 
 import LoginForm from '../../Forms/LoginForm/LoginForm';
 import styles from './LoginPage.module.scss';

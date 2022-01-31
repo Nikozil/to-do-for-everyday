@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import Paginator from '../../../../assets/Paginator/Paginator';
+import Paginator from '../../../../common_components/Paginator/Paginator';
 import { getDays } from '../../../../Redux/modules/historySlice';
 import {
   selectMonth,

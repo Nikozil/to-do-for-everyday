@@ -1,5 +1,5 @@
 import React from 'react';
-import Logo from '../Logo.png';
+import Logo from '../../assets/Logo.png';
 
 const LogoComponent: React.FC<{ className?: string }> = ({ className }) => {
   return (

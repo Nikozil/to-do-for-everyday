@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import SpinComponent from '../../../assets/SpinComponent/SpinComponent';
+import SpinComponent from '../../../common_components/SpinComponent/SpinComponent';
 import { selectInitHistoryStatus } from '../../../Redux/selectors/historySelector';
 import { AppStateType } from '../../../Redux/store';
 import DayComponent from './DayComponent/DayComponent';

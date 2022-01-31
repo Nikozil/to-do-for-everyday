@@ -5,9 +5,9 @@ import {
   DeleteButton,
   RepeatButton,
   UncheckButton,
-} from '../../../../assets/Buttons/Buttons';
-import TaskComponent from '../../../../assets/TaskComponent/TaskComponent';
-import TaskMapComponent from '../../../../assets/TaskMapComponent/TaskMapComponent';
+} from '../../../../common_components/Buttons/Buttons';
+import TaskComponent from '../../../../common_components/TaskComponent/TaskComponent';
+import TaskMapComponent from '../../../../common_components/TaskMapComponent/TaskMapComponent';
 import {
   checkTask,
   deleteTask,

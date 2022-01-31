@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import SpinComponent from '../../../assets/SpinComponent/SpinComponent';
+import SpinComponent from '../../../common_components/SpinComponent/SpinComponent';
 import { addTask } from '../../../Redux/modules/tasksSlice';
 import { selectInitTasksStatus } from '../../../Redux/selectors/tasksSelector';
 import NewTaskForm from '../../Forms/NewTaskForm/NewTaskForm';

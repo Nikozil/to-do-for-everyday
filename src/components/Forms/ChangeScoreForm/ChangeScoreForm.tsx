@@ -1,6 +1,6 @@
 import { Field, Form, Formik } from 'formik';
 import React, { useState } from 'react';
-import RaitingStarComponent from '../../../assets/RaitingStarComponent/RaitingStarComponent';
+import RaitingStarComponent from '../../../common_components/RaitingStarComponent/RaitingStarComponent';
 import styles from './ChangeScoreForm.module.scss';
 
 const ChangeScoreForm: React.FC<PropsType> = ({ score, handleSubmit }) => {
