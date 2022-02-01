@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TaskName tests rendering and click delete 1`] = `
+<DocumentFragment>
+  <span
+    class="taskName"
+  >
+    Task
+  </span>
+   
+</DocumentFragment>
+`;

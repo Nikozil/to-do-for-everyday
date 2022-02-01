@@ -5,10 +5,12 @@
   align-items: center;
 }
 .task__taskName {
+  word-break: break-all;
   margin-left: 10px;
   margin-bottom: 4px;
 }
 .task__doneTaskName {
+  word-break: break-all;
   margin-bottom: 4px;
 }
 .task__buttons {
