@@ -1,9 +1,9 @@
 import { render, waitFor } from '../../../utils/tests/test-utils';
-import LoginPage from './LoginPage';
+import RegistrationPage from './RegistrationPage';
 
 describe('Login Page tests', () => {
   it('render correct', async () => {
-    const { asFragment } = render(<LoginPage />);
+    const { asFragment } = render(<RegistrationPage />);
 
     await waitFor(() => {
       expect(asFragment()).toMatchSnapshot();

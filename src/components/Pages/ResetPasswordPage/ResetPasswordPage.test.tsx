@@ -1,9 +1,9 @@
 import { render, waitFor } from '../../../utils/tests/test-utils';
-import LoginPage from './LoginPage';
+import ResetPasswordPage from './ResetPasswordPage';
 
-describe('Login Page tests', () => {
+describe('ResetPasswordPage tests', () => {
   it('render correct', async () => {
-    const { asFragment } = render(<LoginPage />);
+    const { asFragment } = render(<ResetPasswordPage />);
 
     await waitFor(() => {
       expect(asFragment()).toMatchSnapshot();

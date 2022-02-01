@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { useHistory, useLocation } from 'react-router';
 import { selectAuthStatus } from '../Redux/selectors/userSelector';
 
-export const useRequireAuth = (redirectUrl = '/login') => {
+export const useRequireAuth = (redirectUrl: string, exceptionUrl: string[]) => {
   const [firstPath, setFirstPath] = useState('/');
 
   const pathname = useLocation().pathname;
@@ -12,14 +12,17 @@ export const useRequireAuth = (redirectUrl = '/login') => {
 
   const history = useHistory();
 
+  const isExceptionPath = exceptionUrl.includes(pathname);
+
   useEffect(() => {
-    if (!authStatus) {
+    if (!authStatus && !isExceptionPath) {
       if (pathname !== redirectUrl) setFirstPath(pathname);
       history.push(redirectUrl);
     }
 
-    if (authStatus && pathname === redirectUrl) history.push(firstPath);
-  }, [authStatus, redirectUrl, pathname, history, firstPath]);
+    if (authStatus && (pathname === redirectUrl || isExceptionPath))
+      history.push(firstPath);
+  }, [authStatus, redirectUrl, pathname, history, firstPath, isExceptionPath]);
 
   return authStatus;
 };

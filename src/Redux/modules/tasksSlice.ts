@@ -136,10 +136,9 @@ export const checkTask =
         //move task for future
         let newTime = time;
         //count expiration of task + 1 repeat
-        let expiration = Math.round(
+        let expiration = Math.ceil(
           (getTime(endOfToday()) - newTime) /
-            (milliseconds({ days: 1 }) * repeat) +
-            1
+            (milliseconds({ days: 1 }) * repeat)
         );
         //count date of future task
         newTime = getTime(add(newTime, { days: repeat * expiration }));

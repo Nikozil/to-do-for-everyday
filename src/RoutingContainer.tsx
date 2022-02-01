@@ -12,13 +12,22 @@ const AppPage = React.lazy(() => import('./components/AppPage/AppPage'));
 const LoginPage = React.lazy(
   () => import('./components/Pages/LoginPage/LoginPage')
 );
+const RegistrationPage = React.lazy(
+  () => import('./components/Pages/RegistrationPage/RegistrationPage')
+);
+const ResetPasswordPage = React.lazy(
+  () => import('./components/Pages/ResetPasswordPage/ResetPasswordPage')
+);
 
 const RoutingContainer: React.FC = () => {
   const dispatch = useDispatch();
 
   const initUserStatus = useSelector(selectUserInitStatus);
 
-  useRequireAuth();
+  const redirectUrl = '/login';
+  const exceptionUrls = ['/registration', '/resetpassword'];
+
+  useRequireAuth(redirectUrl, exceptionUrls);
 
   useEffect(() => {
     dispatch(updateUserData());
@@ -33,6 +42,12 @@ const RoutingContainer: React.FC = () => {
       <Switch>
         <Route path="/login">
           <LoginPage />
+        </Route>
+        <Route path="/registration">
+          <RegistrationPage />
+        </Route>
+        <Route path="/resetpassword">
+          <ResetPasswordPage />
         </Route>
         <Route path="/">
           <AppPage />

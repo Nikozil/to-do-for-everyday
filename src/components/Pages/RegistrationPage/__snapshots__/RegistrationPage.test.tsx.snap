@@ -87,24 +87,8 @@ exports[`Login Page tests render correct 1`] = `
             class="btn btn-success center-block "
             type="submit"
           >
-            Войти
+            Зарегистрироваться
           </button>
-          <div
-            class="d-flex justify-content-between my-2"
-          >
-            <button
-              class="btn btn-secondary"
-              type="button"
-            >
-              Регистрация
-            </button>
-            <button
-              class="btn btn-secondary"
-              type="button"
-            >
-              Восстановить пароль
-            </button>
-          </div>
         </div>
       </form>
     </div>

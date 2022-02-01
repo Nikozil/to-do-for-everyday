@@ -105,20 +105,10 @@ describe('LoginForm tests', () => {
         />
       );
 
-      userEvent.type(screen.getByLabelText(/email/i), 'test@test.com');
-      userEvent.type(screen.getByLabelText(/password/i), 'password');
-      userEvent.click(screen.getByLabelText(/Запомнить сессию/i));
-
       userEvent.click(screen.getByRole('button', { name: /регистрация/i }));
 
       await waitFor(() => {
         expect(handleRegistration).toHaveBeenCalled();
-
-        expect(handleRegistration).toHaveBeenCalledWith(
-          'test@test.com',
-          'password',
-          true
-        );
       });
     });
 
@@ -132,16 +122,12 @@ describe('LoginForm tests', () => {
           />
         );
 
-        userEvent.type(screen.getByLabelText(/email/i), 'test@test.com');
-
         userEvent.click(
           screen.getByRole('button', { name: /восстановить пароль/i })
         );
 
         await waitFor(() => {
           expect(handleResetPassword).toHaveBeenCalled();
-
-          expect(handleResetPassword).toHaveBeenCalledWith('test@test.com');
         });
       });
     });

@@ -4,14 +4,10 @@ import {
   validateEmail,
   validatePassword,
 } from '../../../utils/validators/authValidators';
-import styles from './LoginForm.module.scss';
+import styles from './RegistrationForm.module.scss';
 import cn from 'classnames';
 
-const LoginForm: React.FC<PropsType> = ({
-  handleSubmit,
-  handleRegistration,
-  handleResetPassword,
-}) => {
+const RegistrationForm: React.FC<PropsType> = ({ handleSubmit }) => {
   const initialValues: MyFormValues = {
     email: '',
     password: '',
@@ -82,26 +78,8 @@ const LoginForm: React.FC<PropsType> = ({
 
           <div className={'d-flex flex-column mt-1 '}>
             <button type="submit" className={'btn btn-success center-block '}>
-              Войти
+              Зарегистрироваться
             </button>
-            <div className={'d-flex justify-content-between my-2'}>
-              <button
-                type="button"
-                className={'btn btn-secondary'}
-                onClick={async () => {
-                  await handleRegistration();
-                }}>
-                Регистрация
-              </button>
-              <button
-                type="button"
-                className={'btn btn-secondary'}
-                onClick={async () => {
-                  await handleResetPassword();
-                }}>
-                Восстановить пароль
-              </button>
-            </div>
           </div>
         </Form>
       )}
@@ -109,7 +87,7 @@ const LoginForm: React.FC<PropsType> = ({
   );
 };
 
-export default LoginForm;
+export default RegistrationForm;
 interface MyFormValues {
   email: string;
   password: string;
@@ -117,6 +95,4 @@ interface MyFormValues {
 }
 interface PropsType {
   handleSubmit: (email: string, password: string, remember: boolean) => void;
-  handleRegistration: () => void;
-  handleResetPassword: () => void;
 }
