@@ -8,6 +8,7 @@ const NewTaskForm: React.FC<PropsType> = ({
   handleSubmit,
   setFocus,
   setFilter,
+  isMounted,
 }) => {
   const initialValues: MyFormValues = {
     newTask: '',
@@ -39,7 +40,11 @@ const NewTaskForm: React.FC<PropsType> = ({
                 autoComplete="off"
                 onKeyUp={HandleInput}
                 onFocus={() => setFocus(true)}
-                onBlur={() => setTimeout(() => setFocus(false), 300)}
+                onBlur={() =>
+                  setTimeout(() => {
+                    if (isMounted) setFocus(false);
+                  }, 300)
+                }
               />
             </div>
           </Form>
@@ -58,4 +63,5 @@ interface PropsType {
   handleSubmit: (newTask: string) => void;
   setFocus: (focus: boolean) => void;
   setFilter: (filter: string) => void;
+  isMounted: boolean;
 }
