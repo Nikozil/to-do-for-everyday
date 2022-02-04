@@ -488,7 +488,7 @@ describe('tasksSlice', () => {
           clock: { time: 1635606187350 },
         });
 
-        const thunk = doAgainTask(testTask);
+        const thunk = doAgainTask(testTask, { days: 1 });
         await thunk(dispatchMock, getStateMock, {});
         expect(StoreAPIMock.updateTask).toHaveBeenCalled();
 
@@ -507,7 +507,7 @@ describe('tasksSlice', () => {
         getStateMock.mockReturnValue({
           clock: { time: 1635606187350 },
         });
-        const thunk = doAgainTask(testTask);
+        const thunk = doAgainTask(testTask, { days: 0 });
 
         StoreAPIMock.updateTask.mockRejectedValue(new Error('Ошибка'));
         const result = await thunk(dispatchMock, getStateMock, {});

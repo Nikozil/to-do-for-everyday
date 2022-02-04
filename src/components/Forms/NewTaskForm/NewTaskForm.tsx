@@ -4,7 +4,11 @@ import React, { ChangeEvent } from 'react';
 import { toUpperCase } from '../../../utils/FormFunctions/FormFunctions';
 import styles from './NewTaskForm.module.scss';
 
-const NewTaskForm: React.FC<PropsType> = ({ handleSubmit }) => {
+const NewTaskForm: React.FC<PropsType> = ({
+  handleSubmit,
+  setFocus,
+  setFilter,
+}) => {
   const initialValues: MyFormValues = {
     newTask: '',
   };
@@ -14,12 +18,14 @@ const NewTaskForm: React.FC<PropsType> = ({ handleSubmit }) => {
       initialValues={initialValues}
       onSubmit={async (values, { resetForm }) => {
         await handleSubmit(values.newTask);
+        setFocus(false);
         resetForm();
       }}>
-      {({ setFieldValue }) => {
+      {({ setFieldValue, handleSubmit, values }) => {
         const HandleInput = (e: ChangeEvent<HTMLInputElement>) => {
           const { value } = e.target;
           setFieldValue('newTask', toUpperCase(value));
+          setFilter(values.newTask);
         };
         return (
           <Form>
@@ -32,6 +38,8 @@ const NewTaskForm: React.FC<PropsType> = ({ handleSubmit }) => {
                 className={cn('form-control', styles.newTask)}
                 autoComplete="off"
                 onKeyUp={HandleInput}
+                onFocus={() => setFocus(true)}
+                onBlur={() => setTimeout(() => setFocus(false), 300)}
               />
             </div>
           </Form>
@@ -48,4 +56,6 @@ interface MyFormValues {
 }
 interface PropsType {
   handleSubmit: (newTask: string) => void;
+  setFocus: (focus: boolean) => void;
+  setFilter: (filter: string) => void;
 }

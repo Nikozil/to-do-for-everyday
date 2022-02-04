@@ -1,0 +1,48 @@
+@import '../../App.scss';
+
+.autocomplete {
+  &__wrapper {
+    position: absolute;
+    left: 60px;
+    z-index: 1000;
+
+    height: calc(100vh - 106px);
+    width: calc(100vw - 60px);
+
+    display: flex;
+    justify-content: center;
+
+    background-color: #f8f9fa;
+    font-size: 0.8em;
+
+    @media screen and (max-width: 767px) {
+      width: 100vw;
+      left: 0px;
+    }
+  }
+
+  &__container {
+    padding-top: 10px;
+    margin: 0 5px 0 5px;
+
+    height: 95%;
+    width: 100%;
+    min-width: 200px;
+    max-width: 600px;
+
+    @media screen and (max-width: 767px) {
+      margin: 0 15px 0 10px;
+    }
+  }
+}
+.again-button {
+  box-sizing: border-box;
+  width: 100%;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  opacity: 0.8;
+  cursor: pointer;
+}

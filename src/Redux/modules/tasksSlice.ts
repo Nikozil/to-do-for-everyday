@@ -263,7 +263,7 @@ export const checkupTimestamp = (): AppThunk => async (dispatch, getState) => {
 };
 
 export const doAgainTask =
-  (task: Task): AppThunk =>
+  (task: Task, duration: Duration): AppThunk =>
   async (dispatch, getState) => {
     try {
       const { id, data } = task;
@@ -271,7 +271,7 @@ export const doAgainTask =
 
       //set date of tomorrow task
       const currentTime = getState().clock.time;
-      const newTime = getTime(add(currentTime, { days: 1 }));
+      const newTime = getTime(add(currentTime, duration));
 
       const newData = { time: newTime, done: !done };
 

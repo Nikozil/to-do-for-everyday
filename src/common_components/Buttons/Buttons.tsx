@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import cn from 'classnames';
 import {
   ImCheckboxUnchecked,
@@ -26,6 +26,7 @@ export const DeleteButton: React.FC<DeletePropsType> = ({
   const { id } = task;
   const clickDeleteHandler = (event: React.MouseEvent) => {
     event.preventDefault();
+    event.stopPropagation();
     clickHandler(id);
   };
 
@@ -106,7 +107,7 @@ export const UncheckButton: React.FC<UncheckPropsType> = ({
   );
 };
 
-export const DoItAgainButton: React.FC<DoItAgainPropsType> = ({
+export const DoItAgainButton: React.FC<DoItAgainButtonPropsType> = ({
   task,
   className = '',
   clickHandler,
@@ -128,6 +129,32 @@ export const DoItAgainButton: React.FC<DoItAgainPropsType> = ({
   );
 };
 
+export const DoItAgain: React.FC<DoItAgainPropsType> = ({
+  task,
+  children,
+  clickHandler,
+}) => {
+  const clickAgainHandler = (event: React.MouseEvent) => {
+    event.preventDefault();
+    clickHandler(task);
+  };
+
+  return (
+    <span
+      aria-label={'again task'}
+      onClick={clickAgainHandler}
+      className={styles['again-button']}
+      data-testid="again">
+      {children}
+    </span>
+  );
+};
+
+interface DoItAgainPropsType {
+  task: Task;
+  children: ReactNode;
+  clickHandler: (task: Task) => void;
+}
 interface CheckPropsType {
   task: Task;
   className?: string;
@@ -148,7 +175,7 @@ interface RepeatPropsType {
   className?: string;
   clickHandler: (id: string, data: PartialTaskData) => void;
 }
-interface DoItAgainPropsType {
+interface DoItAgainButtonPropsType {
   task: Task;
   className?: string;
   clickHandler: (task: Task) => void;

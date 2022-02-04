@@ -4,4 +4,7 @@
   word-break: break-all;
   margin-left: 10px;
   margin-bottom: 4px;
+  @media screen and (max-width: 767px) {
+    margin-left: 1px;
+  }
 }

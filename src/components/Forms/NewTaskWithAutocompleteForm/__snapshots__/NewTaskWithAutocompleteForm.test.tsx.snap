@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NewTaskWithAutocompleteForm tests rendering 1`] = `
+<DocumentFragment>
+  <form
+    action="#"
+  >
+    <div
+      class="mb-1"
+    >
+      <input
+        autocomplete="off"
+        class="form-control newTask"
+        id="newTask"
+        name="newTask"
+        placeholder="Новая Задача"
+        type="text"
+        value="New Task"
+      />
+    </div>
+  </form>
+  <div
+    class="autocomplete__wrapper"
+  >
+    <div
+      class="autocomplete__container"
+    >
+      <span
+        class="stub"
+      >
+        Нет выполненых задач
+      </span>
+    </div>
+  </div>
+   
+</DocumentFragment>
+`;
