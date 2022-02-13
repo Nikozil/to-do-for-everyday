@@ -1,0 +1,18 @@
+@import '../../../App.scss';
+.time {
+  width: 100%;
+  border-top: 1px solid $white-text-color;
+
+  text-align: center;
+
+  &__button {
+    padding: 3px;
+    cursor: pointer;
+
+    &:hover {
+      border-radius: 3px;
+      background-color: $white-text-color;
+      color: $options-color;
+    }
+  }
+}

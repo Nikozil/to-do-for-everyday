@@ -13,6 +13,8 @@ const ChangeScoreForm: React.FC<PropsType> = ({ score, handleSubmit }) => {
     <Formik
       initialValues={initialValues}
       onSubmit={async (values) => {
+        console.log(123);
+
         await handleSubmit(values.score);
       }}>
       {({ handleSubmit }) => (
@@ -23,19 +25,17 @@ const ChangeScoreForm: React.FC<PropsType> = ({ score, handleSubmit }) => {
                 Оченка дня
               </div>
             </div>
+
             <div className="col-auto">
               <div role="group" aria-labelledby="my-radio-group">
                 {[...Array(5)].map((star, index) => {
                   let scoreValue = index + 1;
                   return (
-                    <div
+                    <label
                       key={scoreValue}
                       className={styles['star']}
                       onMouseEnter={() => setHover(scoreValue)}
                       onMouseLeave={() => setHover(0)}>
-                      <label className={styles['star__label']}>
-                        {scoreValue}
-                      </label>
                       <Field
                         type="radio"
                         name="score"
@@ -43,11 +43,12 @@ const ChangeScoreForm: React.FC<PropsType> = ({ score, handleSubmit }) => {
                         className={styles['star__radio']}
                         onClick={handleSubmit}
                       />
+
                       <RaitingStarComponent
                         active={(hover || score) >= scoreValue}
                         size={29}
                       />
-                    </div>
+                    </label>
                   );
                 })}
               </div>

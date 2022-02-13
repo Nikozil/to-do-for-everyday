@@ -1,21 +1,13 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  CheckButton,
-  DeleteButton,
-  RepeatButton,
-  UncheckButton,
-} from '../../../../common_components/Buttons/Buttons';
+import { UncheckButton } from '../../../../common_components/Buttons/Buttons';
 import TaskComponent from '../../../../common_components/TaskComponent/TaskComponent';
 import TaskMapComponent from '../../../../common_components/TaskMapComponent/TaskMapComponent';
+import TaskWithOptionsComponent from '../../../../common_components/TaskWithOptionsComponent/TaskWithOptionsComponent';
 import {
-  checkTask,
-  deleteTask,
   LivedTask,
-  PartialTaskData,
   Task,
   uncheckTask,
-  updateTask,
 } from '../../../../Redux/modules/tasksSlice';
 import {
   selectCurrentTasks,
@@ -30,37 +22,12 @@ const TasksListComponent = () => {
 
   const doneTasks = useSelector(selectDoneTasks);
 
-  const taskComponentCheckHandler = (task: Task) => {
-    dispatch(checkTask(task));
-  };
-
   const taskComponentUncheckHandler = (task: LivedTask) => {
     dispatch(uncheckTask(task));
   };
 
-  const taskComponentRepeatHandler = (id: string, data: PartialTaskData) => {
-    dispatch(updateTask(id, data));
-  };
-
-  const taskComponentDeleteHandler = (id: string) => {
-    dispatch(deleteTask(id));
-  };
-
   const mapTaskComponent = (task: Task) => (
-    <TaskComponent border={true}>
-      <span className={styles.task}>
-        <DeleteButton task={task} clickHandler={taskComponentDeleteHandler} />
-        <span className={styles['task__taskName']}>{task.data.name}</span>
-      </span>
-      <span className={styles['task__buttons']}>
-        <RepeatButton task={task} clickHandler={taskComponentRepeatHandler} />
-        <CheckButton
-          task={task}
-          clickHandler={taskComponentCheckHandler}
-          className={styles['task__buttons_left-margin']}
-        />
-      </span>
-    </TaskComponent>
+    <TaskWithOptionsComponent task={task} />
   );
 
   const mapDoneTaskComponent = (task: LivedTask) => (

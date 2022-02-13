@@ -1,4 +1,4 @@
-export const days = [
+export const weekDays = [
   'Воскресенье',
   'Понедельник',
   'Вторник',
@@ -7,6 +7,9 @@ export const days = [
   'Пятница',
   'Суббота',
 ];
+
+export const shortWeekDays = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
+
 export const months = [
   'Январь',
   'Февраль',

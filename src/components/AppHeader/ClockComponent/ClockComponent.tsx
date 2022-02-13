@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { days } from '../../../constants/clock';
+import { weekDays } from '../../../constants/clock';
 import {
   selectDate,
   selectDay,
@@ -18,7 +18,7 @@ const ClockComponent = () => {
   return (
     <div className={styles.clock}>
       <time className={styles['clock__date']}>
-        {`${days[day]}, `}
+        {`${weekDays[day]}, `}
         {time ? date : null}
       </time>
       <time className={styles['clock__time']}> {time ? time : null}</time>

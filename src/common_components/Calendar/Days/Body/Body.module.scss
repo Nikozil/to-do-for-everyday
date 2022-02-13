@@ -1,0 +1,51 @@
+@import '../../../../App.scss';
+
+.days {
+  &__cell {
+    height: 40px;
+    width: 40px;
+
+    &:first-child {
+      padding-left: 0;
+    }
+
+    &:last-child {
+      padding-right: 0;
+    }
+  }
+
+  &__day {
+    box-sizing: border-box;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin: 3px;
+    border-radius: 3px;
+    box-shadow: 0 0 0 3px $options-color;
+
+    text-align: center;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $white-text-color;
+      color: $options-color;
+    }
+
+    &_selected {
+      background-color: $white-text-color;
+      color: $options-color;
+    }
+
+    &_current {
+      box-shadow: 0 0 0 3px $secondary-color;
+    }
+    @media screen and (max-width: 767px) {
+      padding: 0px;
+
+      height: 35px;
+      width: 35px;
+    }
+  }
+}

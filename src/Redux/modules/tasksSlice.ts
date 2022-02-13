@@ -117,8 +117,8 @@ export const updateTask =
   (id: string, data: PartialTaskData): AppThunk =>
   async (dispatch) => {
     try {
-      await StoreAPI.updateTask(id, data);
       dispatch(editTask({ id, data }));
+      await StoreAPI.updateTask(id, data);
     } catch (err: any) {
       return err.message as string;
     }

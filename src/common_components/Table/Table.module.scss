@@ -1,0 +1,34 @@
+@import '../../App.scss';
+
+.table {
+  text-align: center;
+}
+
+.header {
+  border-top: 1px solid $white-text-color;
+  border-bottom: 1px solid $white-text-color;
+}
+
+.tbody {
+  &:after {
+    line-height: 0.1em;
+    content: '\200C';
+    display: table-row;
+  }
+  &:before {
+    line-height: 0.1em;
+    content: '\200C';
+    display: table-row;
+  }
+}
+
+.cell {
+  font-size: large;
+
+  cursor: pointer;
+  &:hover {
+    border-radius: 3px;
+    background-color: $white-text-color;
+    color: $options-color;
+  }
+}

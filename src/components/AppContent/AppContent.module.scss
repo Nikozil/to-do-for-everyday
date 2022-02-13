@@ -2,7 +2,8 @@
 
 .content {
   grid-area: c;
-  background-color: #f8f9fa;
+  background-color: $content-color;
+  padding-bottom: 30px;
 }
 .preloader {
   display: flex;

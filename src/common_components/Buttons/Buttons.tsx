@@ -4,12 +4,14 @@ import {
   ImCheckboxUnchecked,
   ImCross,
   ImCheckboxChecked,
+  ImEqualizer2,
 } from 'react-icons/im';
 import {
   RiPushpinFill,
   RiPushpinLine,
   RiArrowGoForwardFill,
 } from 'react-icons/ri';
+import { MdNavigateNext, MdNavigateBefore } from 'react-icons/md';
 
 import {
   LivedTask,
@@ -150,6 +152,72 @@ export const DoItAgain: React.FC<DoItAgainPropsType> = ({
   );
 };
 
+export const OptionsButton: React.FC<OptionsPropsType> = ({
+  className = '',
+  clickHandler,
+}) => {
+  const clickOptionsHandler = (event: React.MouseEvent) => {
+    event.preventDefault();
+    event.stopPropagation();
+    clickHandler();
+  };
+
+  return (
+    <button
+      aria-label={'options task'}
+      name={'options task'}
+      onClick={clickOptionsHandler}
+      className={cn(styles.button, className)}
+      data-testid="options-button">
+      <ImEqualizer2 />
+    </button>
+  );
+};
+
+export const NextButton: React.FC<NextPropsType> = ({
+  className = '',
+  clickHandler,
+}) => {
+  const clickNextHandler = (event: React.MouseEvent) => {
+    event.preventDefault();
+    event.stopPropagation();
+    clickHandler();
+  };
+
+  return (
+    <button
+      aria-label={'next'}
+      name={'next'}
+      onClick={clickNextHandler}
+      className={cn(styles.button, className)}
+      data-testid="next-button">
+      <MdNavigateNext />
+    </button>
+  );
+};
+
+export const PrevButton: React.FC<NextPropsType> = ({
+  className = '',
+  clickHandler,
+}) => {
+  const clickPrevHandler = (event: React.MouseEvent) => {
+    event.preventDefault();
+    event.stopPropagation();
+    clickHandler();
+  };
+
+  return (
+    <button
+      aria-label={'prev'}
+      name={'prev'}
+      onClick={clickPrevHandler}
+      className={cn(styles.button, className)}
+      data-testid="prev-button">
+      <MdNavigateBefore />
+    </button>
+  );
+};
+
 interface DoItAgainPropsType {
   task: Task;
   children: ReactNode;
@@ -179,4 +247,12 @@ interface DoItAgainButtonPropsType {
   task: Task;
   className?: string;
   clickHandler: (task: Task) => void;
+}
+interface OptionsPropsType {
+  className?: string;
+  clickHandler: () => void;
+}
+interface NextPropsType {
+  className?: string;
+  clickHandler: () => void;
 }

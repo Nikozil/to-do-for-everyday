@@ -1,0 +1,11 @@
+@import '../../../../App.scss';
+.week-day {
+  padding: 2px;
+}
+
+.header {
+  border-top: 1px solid $white-text-color;
+  border-bottom: 1px solid $white-text-color;
+  border-collapse: separate;
+  border-spacing: 5px 5px;
+}

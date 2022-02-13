@@ -1,18 +1,9 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import {
-  DeleteButton,
-  RepeatButton,
-} from '../../../common_components/Buttons/Buttons';
+import { useSelector } from 'react-redux';
 import SpinComponent from '../../../common_components/SpinComponent/SpinComponent';
-import TaskComponent from '../../../common_components/TaskComponent/TaskComponent';
 import TaskMapComponent from '../../../common_components/TaskMapComponent/TaskMapComponent';
-import {
-  deleteTask,
-  PartialTaskData,
-  Task,
-  updateTask,
-} from '../../../Redux/modules/tasksSlice';
+import TaskWithOptionsComponent from '../../../common_components/TaskWithOptionsComponent/TaskWithOptionsComponent';
+import { Task } from '../../../Redux/modules/tasksSlice';
 import {
   selectInitTasksStatus,
   selectTomorrowTasks,
@@ -21,30 +12,14 @@ import NewTaskWithAutocompleteForm from '../../Forms/NewTaskWithAutocompleteForm
 import styles from './TomorrowListPage.module.scss';
 
 const TomorrowListPage = () => {
-  const dispatch = useDispatch();
-
   const initTasksStatus = useSelector(selectInitTasksStatus);
 
   const tomorrowTasks = useSelector(selectTomorrowTasks);
 
   const duration = { days: 1 };
 
-  const taskComponentRepeatHandler = (id: string, data: PartialTaskData) => {
-    dispatch(updateTask(id, data));
-  };
-
-  const taskComponentDeleteHandler = (id: string) => {
-    dispatch(deleteTask(id));
-  };
-
   const mapTomorrowTask = (task: Task) => (
-    <TaskComponent key={task.id} border={true}>
-      <span className={styles.task}>
-        <DeleteButton task={task} clickHandler={taskComponentDeleteHandler} />
-        <span className={styles['task__task-name']}>{task.data.name}</span>
-      </span>
-      <RepeatButton task={task} clickHandler={taskComponentRepeatHandler} />
-    </TaskComponent>
+    <TaskWithOptionsComponent task={task} />
   );
 
   return (

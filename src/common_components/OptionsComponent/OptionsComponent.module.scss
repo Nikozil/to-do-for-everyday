@@ -1,0 +1,36 @@
+@import '../../App.scss';
+
+.options {
+  display: flex;
+  justify-content: space-between;
+
+  color: inherit;
+  text-align: left;
+
+  height: 400px;
+
+  margin: 0 5px 0 5px;
+  z-index: 1000;
+  overflow: hidden;
+  color: #fff;
+
+  @media screen and (max-width: 767px) {
+    justify-content: center;
+
+    height: 350px;
+
+    padding-right: 15px !important;
+    padding-left: 10px !important;
+  }
+}
+.calendar {
+  display: flex;
+  width: 270px;
+}
+.options_border {
+  background-color: $options-color;
+
+  border-radius: 0px 0px 5px 5px;
+  padding: 2px 6px;
+  border-top: none;
+}

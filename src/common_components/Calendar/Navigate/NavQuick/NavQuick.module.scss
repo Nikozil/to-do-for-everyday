@@ -1,0 +1,20 @@
+@import '../../../../App.scss';
+.quick-nav {
+  padding: 1px;
+  font-size: 0.8em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid $white-text-color;
+
+  &__button {
+    padding: 3px;
+    cursor: pointer;
+
+    &:hover {
+      border-radius: 3px;
+      background-color: $white-text-color;
+      color: $options-color;
+    }
+  }
+}
