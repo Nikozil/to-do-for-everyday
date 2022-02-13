@@ -1,7 +1,10 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import SpinComponent from '../../../common_components/SpinComponent/SpinComponent';
-import TaskMapComponent from '../../../common_components/TaskMapComponent/TaskMapComponent';
+import TaskMapComponent, {
+  CurrentOptions,
+  SetCurrentOptions,
+} from '../../../common_components/TaskMapComponent/TaskMapComponent';
 import TaskWithOptionsComponent from '../../../common_components/TaskWithOptionsComponent/TaskWithOptionsComponent';
 import { Task } from '../../../Redux/modules/tasksSlice';
 import {
@@ -18,8 +21,16 @@ const TomorrowListPage = () => {
 
   const duration = { days: 1 };
 
-  const mapTomorrowTask = (task: Task) => (
-    <TaskWithOptionsComponent task={task} />
+  const mapTomorrowTask = (
+    task: Task,
+    currentOptions: CurrentOptions,
+    setCurrentOptions: SetCurrentOptions
+  ) => (
+    <TaskWithOptionsComponent
+      task={task}
+      currentOptions={currentOptions}
+      setCurrentOptions={setCurrentOptions}
+    />
   );
 
   return (

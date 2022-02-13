@@ -2,7 +2,10 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { UncheckButton } from '../../../../common_components/Buttons/Buttons';
 import TaskComponent from '../../../../common_components/TaskComponent/TaskComponent';
-import TaskMapComponent from '../../../../common_components/TaskMapComponent/TaskMapComponent';
+import TaskMapComponent, {
+  CurrentOptions,
+  SetCurrentOptions,
+} from '../../../../common_components/TaskMapComponent/TaskMapComponent';
 import TaskWithOptionsComponent from '../../../../common_components/TaskWithOptionsComponent/TaskWithOptionsComponent';
 import {
   LivedTask,
@@ -26,8 +29,16 @@ const TasksListComponent = () => {
     dispatch(uncheckTask(task));
   };
 
-  const mapTaskComponent = (task: Task) => (
-    <TaskWithOptionsComponent task={task} />
+  const mapTaskComponent = (
+    task: Task,
+    currentOptions: CurrentOptions,
+    setCurrentOptions: SetCurrentOptions
+  ) => (
+    <TaskWithOptionsComponent
+      task={task}
+      currentOptions={currentOptions}
+      setCurrentOptions={setCurrentOptions}
+    />
   );
 
   const mapDoneTaskComponent = (task: LivedTask) => (
