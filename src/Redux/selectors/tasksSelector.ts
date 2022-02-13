@@ -15,9 +15,11 @@ export const selectTag = (state: AppStateType) => state.tasks.livedDay.tag;
 export const selectTomorrowTasks = createSelector(
   (state: AppStateType) => state.tasks.tasksList,
   (tasks) =>
-    tasks.filter(
-      (task) => !task.data.done && task.data.time > getTime(endOfToday())
-    )
+    tasks
+      .filter(
+        (task) => !task.data.done && task.data.time > getTime(endOfToday())
+      )
+      .sort((task, nextTask) => task.data.time - nextTask.data.time)
 );
 
 export const selectCompletedTasks = createSelector(
@@ -28,7 +30,9 @@ export const selectCompletedTasks = createSelector(
 export const selectCurrentTasks = createSelector(
   (state: AppStateType) => state.tasks.tasksList,
   (tasks) =>
-    tasks.filter(
-      (task) => !task.data.done && task.data.time <= getTime(endOfToday())
-    )
+    tasks
+      .filter(
+        (task) => !task.data.done && task.data.time <= getTime(endOfToday())
+      )
+      .sort((task, nextTask) => task.data.time - nextTask.data.time)
 );
