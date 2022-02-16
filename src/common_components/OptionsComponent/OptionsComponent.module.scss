@@ -2,7 +2,6 @@
 
 .options {
   display: flex;
-  justify-content: space-between;
 
   color: inherit;
   text-align: left;
@@ -14,23 +13,32 @@
   overflow: hidden;
   color: #fff;
 
+  background-color: $options-color;
+
+  border-radius: 0px 0px 5px 5px;
+  padding: 2px 25px;
+  border-top: none;
+
   @media screen and (max-width: 767px) {
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 
-    height: 350px;
+    height: 450px;
 
-    padding-right: 15px !important;
-    padding-left: 10px !important;
+    padding: 2px 15px;
   }
 }
 .calendar {
   display: flex;
-  width: 270px;
+  width: 100%;
 }
-.options_border {
-  background-color: $options-color;
 
-  border-radius: 0px 0px 5px 5px;
-  padding: 2px 6px;
-  border-top: none;
+.fader {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 10px;
+  width: 100%;
 }
