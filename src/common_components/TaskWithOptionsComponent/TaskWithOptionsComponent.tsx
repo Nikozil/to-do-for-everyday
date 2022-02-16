@@ -1,18 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import {
-  checkTask,
-  deleteTask,
-  PartialTaskData,
-  Task,
-  updateTask,
-} from '../../Redux/modules/tasksSlice';
-import {
-  CheckButton,
-  DeleteButton,
-  OptionsButton,
-  RepeatButton,
-} from '../Buttons/Buttons';
+import { checkTask, deleteTask, Task } from '../../Redux/modules/tasksSlice';
+import { CheckButton, DeleteButton, OptionsButton } from '../Buttons/Buttons';
 import OptionsComponent from '../OptionsComponent/OptionsComponent';
 import TaskComponent from '../TaskComponent/TaskComponent';
 import {
@@ -34,16 +23,12 @@ const TaskWithOptionsComponent: React.FC<PropsType> = ({
     );
   };
 
-  const taskComponentCheckHandler = (task: Task) => {
+  const taskComponentCheckHandler = () => {
     dispatch(checkTask(task));
   };
 
-  const taskComponentRepeatHandler = (id: string, data: PartialTaskData) => {
-    dispatch(updateTask(id, data));
-  };
-
-  const taskComponentDeleteHandler = (id: string) => {
-    dispatch(deleteTask(id));
+  const taskComponentDeleteHandler = () => {
+    dispatch(deleteTask(task.id));
   };
 
   const showOptions = currentOptions === task.id;
@@ -51,14 +36,12 @@ const TaskWithOptionsComponent: React.FC<PropsType> = ({
     <>
       <TaskComponent border={true}>
         <span className={styles.task}>
-          <DeleteButton task={task} clickHandler={taskComponentDeleteHandler} />
+          <DeleteButton clickHandler={taskComponentDeleteHandler} />
           <span className={styles['task__taskName']}>{task.data.name}</span>
         </span>
         <span className={styles['task__buttons']}>
-          <RepeatButton task={task} clickHandler={taskComponentRepeatHandler} />
           <OptionsButton clickHandler={optionsHandler} />
           <CheckButton
-            task={task}
             clickHandler={taskComponentCheckHandler}
             className={styles['task__buttons_left-margin']}
           />

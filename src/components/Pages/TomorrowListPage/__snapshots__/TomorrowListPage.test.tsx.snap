@@ -50,10 +50,10 @@ exports[`TomorrowListPage render correct with tasks 1`] = `
                 class="task"
               >
                 <button
-                  aria-label="delete task"
+                  aria-label="delete-button"
                   class="button"
                   data-testid="delete-button"
-                  name="delete task"
+                  name="delete-button"
                 >
                   <svg
                     fill="currentColor"
@@ -80,36 +80,10 @@ exports[`TomorrowListPage render correct with tasks 1`] = `
                 class="task__buttons"
               >
                 <button
-                  aria-label="repeat task"
+                  aria-label="options"
                   class="button"
-                  data-testid="repeat-button"
-                  name="repeat task"
-                >
-                  <svg
-                    fill="currentColor"
-                    height="1em"
-                    stroke="currentColor"
-                    stroke-width="0"
-                    viewBox="0 0 24 24"
-                    width="1em"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <g>
-                      <path
-                        d="M0 0h24v24H0z"
-                        fill="none"
-                      />
-                      <path
-                        d="M13.828 1.686l8.486 8.486-1.415 1.414-.707-.707-4.242 4.242-.707 3.536-1.415 1.414-4.242-4.243-4.95 4.95-1.414-1.414 4.95-4.95-4.243-4.242 1.414-1.415L8.88 8.05l4.242-4.242-.707-.707 1.414-1.415zm.708 3.536l-4.671 4.67-2.822.565 6.5 6.5.564-2.822 4.671-4.67-4.242-4.243z"
-                      />
-                    </g>
-                  </svg>
-                </button>
-                <button
-                  aria-label="options task"
-                  class="button"
-                  data-testid="options-button"
-                  name="options task"
+                  data-testid="options"
+                  name="options"
                 >
                   <svg
                     fill="currentColor"
@@ -127,10 +101,10 @@ exports[`TomorrowListPage render correct with tasks 1`] = `
                   </svg>
                 </button>
                 <button
-                  aria-label="task check"
+                  aria-label="check-button"
                   class="button task__buttons_left-margin"
                   data-testid="check-button"
-                  name="task check"
+                  name="check-button"
                 >
                   <svg
                     fill="currentColor"

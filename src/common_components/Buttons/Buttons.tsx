@@ -6,139 +6,99 @@ import {
   ImCheckboxChecked,
   ImEqualizer2,
 } from 'react-icons/im';
-import {
-  RiPushpinFill,
-  RiPushpinLine,
-  RiArrowGoForwardFill,
-} from 'react-icons/ri';
+import { RiArrowGoForwardFill } from 'react-icons/ri';
 import { MdNavigateNext, MdNavigateBefore } from 'react-icons/md';
 
-import {
-  LivedTask,
-  PartialTaskData,
-  Task,
-} from '../../Redux/modules/tasksSlice';
 import styles from './Buttons.module.scss';
 
-export const DeleteButton: React.FC<DeletePropsType> = ({
-  task,
+export const DeleteButton: React.FC<CurrentButtonPropType> = ({
   className = '',
   clickHandler,
 }) => {
-  const { id } = task;
-  const clickDeleteHandler = (event: React.MouseEvent) => {
-    event.preventDefault();
-    event.stopPropagation();
-    clickHandler(id);
-  };
-
   return (
-    <button
-      aria-label={'delete task'}
-      name={'delete task'}
-      onClick={clickDeleteHandler}
-      className={cn(styles.button, className)}
-      data-testid="delete-button">
-      <ImCross />
-    </button>
+    <Button
+      name={'delete-button'}
+      icon={<ImCross />}
+      className={className}
+      clickHandler={clickHandler}
+    />
   );
 };
 
-export const RepeatButton: React.FC<RepeatPropsType> = ({
-  task,
-  className = '',
-  clickHandler,
-}) => {
-  const { id, data } = task;
-  const { repeat } = data;
+// export const RepeatButton: React.FC<RepeatPropsType> = ({
+//   task,
+//   className = '',
+//   clickHandler,
+// }) => {
+//   const { id, data } = task;
+//   const { repeat } = data;
 
-  const clickRepeatHandler = (event: React.MouseEvent) => {
-    event.preventDefault();
-    clickHandler(id, { repeat: repeat ? 0 : 1 });
-  };
+//   const clickRepeatHandler = (event: React.MouseEvent) => {
+//     event.preventDefault();
+//     clickHandler(id, { repeat: repeat ? 0 : 1 });
+//   };
 
-  return (
-    <button
-      aria-label={'repeat task'}
-      name={'repeat task'}
-      onClick={clickRepeatHandler}
-      className={cn(styles.button, className)}
-      data-testid="repeat-button">
-      {repeat ? <RiPushpinFill /> : <RiPushpinLine />}
-    </button>
-  );
-};
-export const CheckButton: React.FC<CheckPropsType> = ({
-  task,
+//   return (
+//     <button
+//       aria-label={'repeat task'}
+//       name={'repeat task'}
+//       onClick={clickRepeatHandler}
+//       className={cn(styles.button, className)}
+//       data-testid="repeat-button">
+//       {repeat ? <RiPushpinFill /> : <RiPushpinLine />}
+//     </button>
+//   );
+// };
+
+export const CheckButton: React.FC<CurrentButtonPropType> = ({
   className = '',
   clickHandler,
 }) => {
-  const clickCheckHandler = (event: React.MouseEvent) => {
-    event.preventDefault();
-    clickHandler(task);
-  };
   return (
-    <button
-      aria-label={'task check'}
-      name={'task check'}
-      onClick={clickCheckHandler}
-      className={cn(styles.button, className)}
-      data-testid="check-button">
-      <ImCheckboxUnchecked />
-    </button>
-  );
-};
-export const UncheckButton: React.FC<UncheckPropsType> = ({
-  task,
-  className = '',
-  clickHandler,
-}) => {
-  const clickUncheckHandler = (event: React.MouseEvent) => {
-    event.preventDefault();
-    clickHandler(task);
-  };
-  return (
-    <button
-      aria-label={'task uncheck'}
-      name={'task uncheck'}
-      onClick={clickUncheckHandler}
-      className={cn(styles.button, className)}
-      data-testid="uncheck-button">
-      <ImCheckboxChecked />
-    </button>
+    <Button
+      name={'check-button'}
+      icon={<ImCheckboxUnchecked />}
+      className={className}
+      clickHandler={clickHandler}
+    />
   );
 };
 
-export const DoItAgainButton: React.FC<DoItAgainButtonPropsType> = ({
-  task,
+export const UncheckButton: React.FC<CurrentButtonPropType> = ({
   className = '',
   clickHandler,
 }) => {
-  const clickAgainHandler = (event: React.MouseEvent) => {
-    event.preventDefault();
-    clickHandler(task);
-  };
-
   return (
-    <button
-      aria-label={'again task'}
-      name={'again task'}
-      onClick={clickAgainHandler}
-      className={cn(styles.button, className)}
-      data-testid="again-button">
-      <RiArrowGoForwardFill />
-    </button>
+    <Button
+      name={'uncheck-button'}
+      icon={<ImCheckboxChecked />}
+      className={className}
+      clickHandler={clickHandler}
+    />
+  );
+};
+
+export const DoItAgainButton: React.FC<CurrentButtonPropType> = ({
+  className = '',
+  clickHandler,
+}) => {
+  return (
+    <Button
+      name={'again-button'}
+      icon={<RiArrowGoForwardFill />}
+      className={className}
+      clickHandler={clickHandler}
+    />
   );
 };
 
 export const DoItAgain: React.FC<DoItAgainPropsType> = ({
-  task,
   children,
   clickHandler,
 }) => {
   const clickAgainHandler = (event: React.MouseEvent) => {
     event.preventDefault();
-    clickHandler(task);
+    clickHandler();
   };
 
   return (
@@ -146,57 +106,57 @@ export const DoItAgain: React.FC<DoItAgainPropsType> = ({
       aria-label={'again task'}
       onClick={clickAgainHandler}
       className={styles['again-button']}
-      data-testid="again">
+      data-testid="again task">
       {children}
     </span>
   );
 };
 
-export const OptionsButton: React.FC<OptionsPropsType> = ({
+export const OptionsButton: React.FC<CurrentButtonPropType> = ({
   className = '',
   clickHandler,
 }) => {
-  const clickOptionsHandler = (event: React.MouseEvent) => {
-    event.preventDefault();
-    event.stopPropagation();
-    clickHandler();
-  };
-
   return (
-    <button
-      aria-label={'options task'}
-      name={'options task'}
-      onClick={clickOptionsHandler}
-      className={cn(styles.button, className)}
-      data-testid="options-button">
-      <ImEqualizer2 />
-    </button>
+    <Button
+      name={'options'}
+      icon={<ImEqualizer2 />}
+      className={className}
+      clickHandler={clickHandler}
+    />
   );
 };
 
-export const NextButton: React.FC<NextPropsType> = ({
+export const NextButton: React.FC<CurrentButtonPropType> = ({
   className = '',
   clickHandler,
 }) => {
-  const clickNextHandler = (event: React.MouseEvent) => {
-    event.preventDefault();
-    event.stopPropagation();
-    clickHandler();
-  };
-
   return (
-    <button
-      aria-label={'next'}
+    <Button
       name={'next'}
-      onClick={clickNextHandler}
-      className={cn(styles.button, className)}
-      data-testid="next-button">
-      <MdNavigateNext />
-    </button>
+      icon={<MdNavigateNext />}
+      className={className}
+      clickHandler={clickHandler}
+    />
   );
 };
 
-export const PrevButton: React.FC<NextPropsType> = ({
+export const PrevButton: React.FC<CurrentButtonPropType> = ({
+  className = '',
+  clickHandler,
+}) => {
+  return (
+    <Button
+      name={'prev'}
+      icon={<MdNavigateBefore />}
+      className={className}
+      clickHandler={clickHandler}
+    />
+  );
+};
+
+export const Button: React.FC<ButtonPropType> = ({
+  icon,
+  name,
   className = '',
   clickHandler,
 }) => {
@@ -208,51 +168,28 @@ export const PrevButton: React.FC<NextPropsType> = ({
 
   return (
     <button
-      aria-label={'prev'}
-      name={'prev'}
+      aria-label={name}
+      name={name}
       onClick={clickPrevHandler}
       className={cn(styles.button, className)}
-      data-testid="prev-button">
-      <MdNavigateBefore />
+      data-testid={name}>
+      {icon}
     </button>
   );
 };
 
-interface DoItAgainPropsType {
-  task: Task;
-  children: ReactNode;
-  clickHandler: (task: Task) => void;
-}
-interface CheckPropsType {
-  task: Task;
-  className?: string;
-  clickHandler: (task: Task) => void;
-}
-interface UncheckPropsType {
-  task: LivedTask;
-  className?: string;
-  clickHandler: (task: LivedTask) => void;
-}
-interface DeletePropsType {
-  task: Task;
-  className?: string;
-  clickHandler: (id: string) => void;
-}
-interface RepeatPropsType {
-  task: Task;
-  className?: string;
-  clickHandler: (id: string, data: PartialTaskData) => void;
-}
-interface DoItAgainButtonPropsType {
-  task: Task;
-  className?: string;
-  clickHandler: (task: Task) => void;
-}
-interface OptionsPropsType {
+interface ButtonPropType {
+  icon: JSX.Element;
+  name: string;
   className?: string;
   clickHandler: () => void;
 }
-interface NextPropsType {
+
+interface CurrentButtonPropType {
   className?: string;
+  clickHandler: () => void;
+}
+interface DoItAgainPropsType {
+  children: ReactNode;
   clickHandler: () => void;
 }

@@ -17,22 +17,22 @@ const TaskAutocomplete: React.FC<PropsType> = ({ filter, duration }) => {
     task.data.name.match(filter)
   );
 
-  const taskComponentAgainHandler = (task: Task) => {
-    dispatch(doAgainTask(task, duration));
+  const mapCompletedTask = (task: Task) => {
+    const taskComponentDeleteHandler = () => {
+      dispatch(deleteTask(task.id));
+    };
+    const taskComponentAgainHandler = () => {
+      dispatch(doAgainTask(task, duration));
+    };
+    return (
+      <TaskComponent key={task.id} border={true}>
+        <DoItAgain clickHandler={taskComponentAgainHandler}>
+          <TaskName>{task.data.name}</TaskName>
+          <DeleteButton clickHandler={taskComponentDeleteHandler} />
+        </DoItAgain>
+      </TaskComponent>
+    );
   };
-
-  const taskComponentDeleteHandler = (id: string) => {
-    dispatch(deleteTask(id));
-  };
-
-  const mapCompletedTask = (task: Task) => (
-    <TaskComponent key={task.id} border={true}>
-      <DoItAgain task={task} clickHandler={taskComponentAgainHandler}>
-        <TaskName>{task.data.name}</TaskName>
-        <DeleteButton task={task} clickHandler={taskComponentDeleteHandler} />
-      </DoItAgain>
-    </TaskComponent>
-  );
 
   return (
     <div className={styles['autocomplete__wrapper']}>

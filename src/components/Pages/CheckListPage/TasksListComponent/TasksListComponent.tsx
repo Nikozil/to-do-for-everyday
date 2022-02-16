@@ -25,10 +25,6 @@ const TasksListComponent = () => {
 
   const doneTasks = useSelector(selectDoneTasks);
 
-  const taskComponentUncheckHandler = (task: LivedTask) => {
-    dispatch(uncheckTask(task));
-  };
-
   const mapTaskComponent = (
     task: Task,
     currentOptions: CurrentOptions,
@@ -41,16 +37,22 @@ const TasksListComponent = () => {
     />
   );
 
-  const mapDoneTaskComponent = (task: LivedTask) => (
-    <TaskComponent key={task.id} border={true}>
-      <span className={styles.task}>
-        <span className={styles['task__doneTaskName']}>{task.name}</span>
-      </span>
-      <span className={styles['task__buttons']}>
-        <UncheckButton task={task} clickHandler={taskComponentUncheckHandler} />
-      </span>
-    </TaskComponent>
-  );
+  const mapDoneTaskComponent = (task: LivedTask) => {
+    const taskComponentUncheckHandler = () => {
+      dispatch(uncheckTask(task));
+    };
+
+    return (
+      <TaskComponent key={task.id} border={true}>
+        <span className={styles.task}>
+          <span className={styles['task__doneTaskName']}>{task.name}</span>
+        </span>
+        <span className={styles['task__buttons']}>
+          <UncheckButton clickHandler={taskComponentUncheckHandler} />
+        </span>
+      </TaskComponent>
+    );
+  };
 
   return (
     <>
