@@ -6,19 +6,37 @@ import {
   ImCheckboxChecked,
   ImEqualizer2,
 } from 'react-icons/im';
-import { RiArrowGoForwardFill } from 'react-icons/ri';
+import { RiArrowGoForwardFill, RiInboxArchiveFill } from 'react-icons/ri';
 import { MdNavigateNext, MdNavigateBefore } from 'react-icons/md';
 
 import styles from './Buttons.module.scss';
 
 export const DeleteButton: React.FC<CurrentButtonPropType> = ({
+  label,
   className = '',
   clickHandler,
 }) => {
   return (
     <Button
       name={'delete-button'}
+      label={label}
       icon={<ImCross />}
+      className={className}
+      clickHandler={clickHandler}
+    />
+  );
+};
+
+export const ArchiveButton: React.FC<CurrentButtonPropType> = ({
+  className = '',
+  label,
+  clickHandler,
+}) => {
+  return (
+    <Button
+      label={label}
+      name={'archive-button'}
+      icon={<RiInboxArchiveFill size={'1.3em'} />}
       className={className}
       clickHandler={clickHandler}
     />
@@ -157,6 +175,7 @@ export const PrevButton: React.FC<CurrentButtonPropType> = ({
 export const Button: React.FC<ButtonPropType> = ({
   icon,
   name,
+  label,
   className = '',
   clickHandler,
 }) => {
@@ -173,7 +192,7 @@ export const Button: React.FC<ButtonPropType> = ({
       onClick={clickPrevHandler}
       className={cn(styles.button, className)}
       data-testid={name}>
-      {icon}
+      {icon} {label && <label className={styles.button__label}>{label}</label>}
     </button>
   );
 };
@@ -181,11 +200,13 @@ export const Button: React.FC<ButtonPropType> = ({
 interface ButtonPropType {
   icon: JSX.Element;
   name: string;
+  label?: string;
   className?: string;
   clickHandler: () => void;
 }
 
 interface CurrentButtonPropType {
+  label?: string;
   className?: string;
   clickHandler: () => void;
 }

@@ -2,12 +2,21 @@
 
 .button {
   display: flex;
+  align-items: center;
   padding: 0;
   color: inherit;
   background-color: inherit;
   @include focus;
+
   &:hover {
     color: $button-color-hover;
+  }
+
+  &__label {
+    cursor: pointer;
+
+    font-size: 0.9em;
+    margin-left: 0.3em;
   }
 }
 

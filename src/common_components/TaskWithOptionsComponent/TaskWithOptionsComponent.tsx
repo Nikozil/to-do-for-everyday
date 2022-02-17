@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { checkTask, deleteTask, Task } from '../../Redux/modules/tasksSlice';
-import { CheckButton, DeleteButton, OptionsButton } from '../Buttons/Buttons';
+import { checkTask, Task } from '../../Redux/modules/tasksSlice';
+import { CheckButton, OptionsButton } from '../Buttons/Buttons';
 import OptionsComponent from '../OptionsComponent/OptionsComponent';
 import TaskComponent from '../TaskComponent/TaskComponent';
 import {
@@ -27,16 +27,11 @@ const TaskWithOptionsComponent: React.FC<PropsType> = ({
     dispatch(checkTask(task));
   };
 
-  const taskComponentDeleteHandler = () => {
-    dispatch(deleteTask(task.id));
-  };
-
   const showOptions = currentOptions === task.id;
   return (
     <>
       <TaskComponent border={true}>
         <span className={styles.task}>
-          <DeleteButton clickHandler={taskComponentDeleteHandler} />
           <span className={styles['task__taskName']}>{task.data.name}</span>
         </span>
         <span className={styles['task__buttons']}>

@@ -283,6 +283,23 @@ export const doAgainTask =
     }
   };
 
+export const archiveTask =
+  (task: Task): AppThunk =>
+  async (dispatch, getState) => {
+    try {
+      const { id, data } = task;
+      const { done } = data;
+
+      const newData = { done: !done };
+
+      await StoreAPI.updateTask(id, newData);
+
+      dispatch(editTask({ id, data: newData }));
+    } catch (err: any) {
+      return err.message as string;
+    }
+  };
+
 export default tasksSlice;
 
 export interface Task {
