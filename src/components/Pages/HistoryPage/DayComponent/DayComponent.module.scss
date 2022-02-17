@@ -5,15 +5,11 @@
 
   border-radius: 5px;
 
-  // background-color: $background-color;
-  // background: linear-gradient($background-color, #fff);
-
   box-shadow: 3px 3px 10px 1px $secondary-color;
 
   overflow: hidden;
 
-  // background-color: $secondary-color;
-  // color: $header-color;
+  background-color: $content-color;
 
   display: flex;
   flex-direction: column;

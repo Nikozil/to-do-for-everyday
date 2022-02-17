@@ -5,6 +5,7 @@
     position: absolute;
     left: 60px;
     z-index: 1000;
+    background-position-y: -66px;
 
     height: calc(100vh - 106px);
     width: calc(100vw - 60px);
@@ -12,7 +13,8 @@
     display: flex;
     justify-content: center;
 
-    background-color: #f8f9fa;
+    background-image: $background-image;
+
     font-size: 0.8em;
 
     @media screen and (max-width: 767px) {

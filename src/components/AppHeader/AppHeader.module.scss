@@ -6,10 +6,13 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding-right: 16px;
+
   @media screen and (max-width: 767px) {
     position: sticky;
     top: 0;
     z-index: 9999;
+    padding-right: inherit;
   }
 }
 .header__pagename {

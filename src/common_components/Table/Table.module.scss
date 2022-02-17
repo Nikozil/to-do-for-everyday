@@ -5,8 +5,8 @@
 }
 
 .header {
-  border-top: 1px solid $white-text-color;
-  border-bottom: 1px solid $white-text-color;
+  border-top: 1px solid $options-text;
+  border-bottom: 1px solid $options-text;
 }
 
 .tbody {
@@ -28,7 +28,7 @@
   cursor: pointer;
   &:hover {
     border-radius: 3px;
-    background-color: $white-text-color;
-    color: $options-color;
+    background-color: $options-hover-background;
+    color: $options-hover-color;
   }
 }

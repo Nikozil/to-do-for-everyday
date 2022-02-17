@@ -1,7 +1,7 @@
 @import '../../../App.scss';
 .time {
   width: 100%;
-  border-top: 1px solid $white-text-color;
+  border-top: 1px solid $options-text;
 
   text-align: center;
 
@@ -11,8 +11,8 @@
 
     &:hover {
       border-radius: 3px;
-      background-color: $white-text-color;
-      color: $options-color;
+      background-color: $options-hover-background;
+      color: $options-hover-color;
     }
   }
 }

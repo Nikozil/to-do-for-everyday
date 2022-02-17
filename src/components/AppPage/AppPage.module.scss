@@ -18,3 +18,12 @@
     grid-template-columns: 1fr;
   }
 }
+
+html {
+  overflow-x: hidden;
+  margin-right: calc(-1 * (100vw - 100%));
+  @media screen and (max-width: 767px) {
+    margin-right: auto;
+    overflow-y: scroll;
+  }
+}
