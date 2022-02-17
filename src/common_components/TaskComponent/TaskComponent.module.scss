@@ -10,6 +10,8 @@
   z-index: 2000;
   background-color: $content-color;
 
+  overflow: hidden;
+
   @media screen and (max-width: 767px) {
     padding-right: 15px !important;
     padding-left: 10px !important;
@@ -19,4 +21,5 @@
   box-shadow: 1px 1px 5px $secondary-color;
   border-radius: 5px;
   padding: 2px 6px;
+  padding-left: 0px;
 }

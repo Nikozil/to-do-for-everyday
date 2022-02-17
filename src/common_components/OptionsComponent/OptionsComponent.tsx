@@ -31,16 +31,16 @@ const OptionsComponent: React.FC<PropsType> = ({ task }) => {
   };
 
   return (
-    <div className={styles.options}>
-      <div className={styles.calendar}>
+    <section className={styles.options}>
+      <section className={styles.calendar}>
         <Calendar date={date} setDate={setDateHandler} />
-      </div>
-      <div className={styles.fader}>
+      </section>
+      <section className={styles.fader}>
         <RepeatRange repeat={repeat} changeHandler={setRepeatHandler} />
         <PriorityRange priority={priority} changeHandler={setPriorityHandler} />
         <OptionsButtons task={task} />
-      </div>
-    </div>
+      </section>
+    </section>
   );
 };
 

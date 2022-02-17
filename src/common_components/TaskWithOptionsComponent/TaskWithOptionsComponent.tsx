@@ -4,6 +4,7 @@ import { checkTask, Task } from '../../Redux/modules/tasksSlice';
 import { CheckButton, OptionsButton } from '../Buttons/Buttons';
 import OptionsComponent from '../OptionsComponent/OptionsComponent';
 import TaskComponent from '../TaskComponent/TaskComponent';
+import TaskIndicator from '../TaskIndicator/TaskIndicator';
 import {
   CurrentOptions,
   SetCurrentOptions,
@@ -32,6 +33,7 @@ const TaskWithOptionsComponent: React.FC<PropsType> = ({
     <>
       <TaskComponent border={true}>
         <span className={styles.task}>
+          <TaskIndicator task={task} />
           <span className={styles['task__taskName']}>{task.data.name}</span>
         </span>
         <span className={styles['task__buttons']}>

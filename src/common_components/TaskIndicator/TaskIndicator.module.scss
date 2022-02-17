@@ -1,0 +1,36 @@
+@import '../../App.scss';
+
+.indicator {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: -50vh -10px -50vh -10px;
+  &__priority {
+    width: 25px;
+    height: 100vh;
+
+    &_express {
+      background-color: $express-color;
+    }
+
+    &_regular {
+      background-color: $regular-color;
+    }
+
+    &_important {
+      background-color: $important-color;
+    }
+  }
+  &__repeat {
+    display: flex;
+    flex-direction: column;
+
+    width: 1em;
+  }
+  &__repeat-value {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.6em;
+  }
+}
