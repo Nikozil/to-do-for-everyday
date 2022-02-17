@@ -7,11 +7,14 @@
 
   width: 100%;
   height: 100%;
+
   color: inherit;
 
   &__content {
     display: flex;
-    height: 100%;
+    // height: 100%;
+    height: 245px;
+
     @media screen and (max-width: 767px) {
       height: 245px;
     }

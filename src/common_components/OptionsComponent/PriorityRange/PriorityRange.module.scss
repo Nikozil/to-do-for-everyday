@@ -1,0 +1,172 @@
+@import '../../../App.scss';
+
+.range {
+  width: 255px;
+
+  &__label {
+    width: 100%;
+    text-align: center;
+  }
+  &__value {
+    display: inline-block;
+    width: 1rem;
+  }
+  &__input {
+    width: 100%;
+    margin: 13.8px 0;
+    background-color: transparent;
+    -webkit-appearance: none;
+
+    &:focus {
+      outline: none;
+    }
+    &::-webkit-slider-runnable-track {
+      background: $range-background;
+      border-radius: 3.3px;
+      width: 100%;
+      height: 40px;
+      cursor: pointer;
+    }
+    &::-webkit-slider-thumb {
+      margin-top: -0px;
+      width: 85px;
+      height: 40px;
+      background: $range-button;
+      border-radius: 3px;
+      cursor: pointer;
+      -webkit-appearance: none;
+    }
+
+    &::-moz-range-track {
+      background: $range-background;
+      border-radius: 3.3px;
+      width: 100%;
+      height: 40px;
+      cursor: pointer;
+    }
+    &::-moz-range-thumb {
+      width: 85px;
+      height: 40px;
+      background: $range-button;
+      border-radius: 3px;
+      border: none;
+      cursor: pointer;
+    }
+    &::-ms-track {
+      background: transparent;
+      border-color: transparent;
+      border-width: 14.8px 0;
+      color: transparent;
+      width: 100%;
+      height: 40px;
+      cursor: pointer;
+    }
+    &::-ms-fill-lower {
+      background: $range-background;
+      border-radius: 2.6px;
+    }
+    &::-ms-fill-upper {
+      background: $range-background;
+      border-radius: 2.6px;
+    }
+    &::-ms-thumb {
+      width: 85px;
+      height: 40px;
+      background: $range-button;
+      border-radius: 3px;
+      cursor: pointer;
+      margin-top: 0px;
+      /*Needed to keep the Edge thumb centred*/
+    }
+    &:focus::-ms-fill-lower {
+      background: $range-background;
+    }
+    &:focus::-ms-fill-upper {
+      background: $range-focus-background;
+    }
+
+    &_express {
+      &::-webkit-slider-thumb {
+        background: $express-color;
+      }
+
+      &::-moz-range-thumb {
+        background: $express-color;
+      }
+      &::-ms-thumb {
+        background: $express-color;
+      }
+    }
+
+    &_important {
+      &::-webkit-slider-thumb {
+        background: $important-color;
+      }
+
+      &::-moz-range-thumb {
+        background: $important-color;
+      }
+      &::-ms-thumb {
+        background: $important-color;
+      }
+    }
+  }
+
+  &__express {
+    position: absolute;
+    margin: 14px 0px;
+    width: 85px;
+
+    font-size: 17px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 40px;
+
+    pointer-events: none;
+    &_checked {
+      color: $range-label-alt-color;
+    }
+  }
+  &__regular {
+    position: absolute;
+    margin: 14px 85px;
+    width: 85px;
+
+    font-size: 17px;
+    font-weight: bold;
+    line-height: 40px;
+    text-align: center;
+
+    pointer-events: none;
+    &_checked {
+      color: $range-label-alt-color;
+    }
+  }
+  &__important {
+    position: absolute;
+    margin: 14px 170px;
+    font-size: 17px;
+    width: 85px;
+
+    font-weight: bold;
+    text-align: center;
+    line-height: 40px;
+
+    pointer-events: none;
+    &_checked {
+      color: $range-label-alt-color;
+    }
+  }
+}
+
+@-moz-document url-prefix() {
+  .range__express {
+    margin: 8px 0px;
+  }
+  .range__regular {
+    margin: 8px 85px;
+  }
+  .range__important {
+    margin: 8px 170px;
+  }
+}

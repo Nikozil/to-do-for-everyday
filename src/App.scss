@@ -3,13 +3,15 @@ $secondary-color: #445269;
 
 $header-color: #fff;
 
+$content-color: #f8f9fa;
+$comment-color: #6c757d;
+
+//Buttons
 $button-color: #6c757d;
 $button-color-hover: #5c636a;
 $button-color-selected: #a0aeba;
 
-$content-color: #f8f9fa;
-$comment-color: #6c757d;
-
+//Options
 // $options-color: #6c757d;
 $options-color: rgba(108, 117, 125, 0.3);
 $options-text: #262c3b;
@@ -17,17 +19,28 @@ $options-hover-background: $options-text;
 $options-hover-color: $content-color;
 $options-selected-color: $content-color;
 
+//Text
 $text-color: #000000;
 $white-text-color: #fff;
 $nav-icon-color: #fff;
+
+//Background
 // $background-color: #3540522c;
 $background-color: #35405210;
 $background-image: url('/assets/images/background.jpg');
 
+//Range
 $range-button: $options-text;
 $range-background: $content-color;
 $range-focus-background: #6c757d;
 
+//Priority range
+$express-color: #9c2716;
+$regular-color: grey;
+$important-color: #8fad39;
+$range-label-alt-color: $range-background;
+
+//Other
 $A-color: #97b6e8;
 $B-color: #9fc0f5;
 $C-color: #86a2cf;

@@ -33,9 +33,7 @@
       cursor: pointer;
       -webkit-appearance: none;
     }
-    &:focus::-webkit-slider-runnable-track {
-      background: $range-focus-background;
-    }
+
     &::-moz-range-track {
       background: $range-background;
       border-radius: 3.3px;
@@ -48,6 +46,7 @@
       height: 30px;
       background: $range-button;
       border-radius: 3px;
+      border: none;
       cursor: pointer;
     }
     &::-ms-track {

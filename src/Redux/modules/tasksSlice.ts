@@ -311,7 +311,11 @@ export interface TaskData {
   done: boolean;
   time: number;
   repeat: number;
+  priority?: Priority;
 }
+
+export type Priority = 'regular' | 'important' | 'express';
+
 export type PartialTaskData = Partial<TaskData>;
 export interface PartialTask {
   id: string;

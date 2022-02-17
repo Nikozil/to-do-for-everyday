@@ -1,22 +1,18 @@
 import { getTime } from 'date-fns';
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import {
-  archiveTask,
-  deleteTask,
-  Task,
-  updateTask,
-} from '../../Redux/modules/tasksSlice';
-import { ArchiveButton, DeleteButton } from '../Buttons/Buttons';
+import { Priority, Task, updateTask } from '../../Redux/modules/tasksSlice';
 import Calendar from '../Calendar/Calendar';
+import OptionsButtons from './OptionsButtons/OptionsButtons';
 import styles from './OptionsComponent.module.scss';
+import PriorityRange from './PriorityRange/PriorityRange';
 import RepeatRange from './RepeatRange/RepeatRange';
 
 const OptionsComponent: React.FC<PropsType> = ({ task }) => {
   const dispatch = useDispatch();
 
   const { id } = task;
-  const { time, repeat } = task.data;
+  const { time, repeat, priority } = task.data;
 
   const date = new Date(time);
 
@@ -30,11 +26,8 @@ const OptionsComponent: React.FC<PropsType> = ({ task }) => {
     dispatch(updateTask(id, { repeat }));
   };
 
-  const taskComponentDeleteHandler = () => {
-    dispatch(deleteTask(id));
-  };
-  const taskComponentArchiveHandler = () => {
-    dispatch(archiveTask(task));
+  const setPriorityHandler = (priority: Priority) => {
+    dispatch(updateTask(id, { priority }));
   };
 
   return (
@@ -44,16 +37,8 @@ const OptionsComponent: React.FC<PropsType> = ({ task }) => {
       </div>
       <div className={styles.fader}>
         <RepeatRange repeat={repeat} changeHandler={setRepeatHandler} />
-        <div className={styles.buttons}>
-          <ArchiveButton
-            clickHandler={taskComponentArchiveHandler}
-            label={'Архив'}
-          />
-          <DeleteButton
-            clickHandler={taskComponentDeleteHandler}
-            label={'Удалить'}
-          />
-        </div>
+        <PriorityRange priority={priority} changeHandler={setPriorityHandler} />
+        <OptionsButtons task={task} />
       </div>
     </div>
   );
