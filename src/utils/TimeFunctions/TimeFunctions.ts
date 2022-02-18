@@ -5,12 +5,18 @@ import {
   getMonth,
   getYear,
   setDate,
+  setMinutes,
   setMonth,
+  setSeconds,
   setYear,
 } from 'date-fns';
 
 export const formatDate = (time: number) => {
   return format(time, 'dd.MM.yyyy');
+};
+
+export const roundMinutes = (time: number) => {
+  return setMinutes(setSeconds(time, 0), 0);
 };
 
 export const setupDate = (

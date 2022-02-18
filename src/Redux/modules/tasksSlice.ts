@@ -1,7 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { StoreAPI } from '../../api/StoreAPI';
 import { add, endOfToday, getTime, milliseconds, startOfDay } from 'date-fns';
-import { formatDate } from '../../utils/TimeFunctions/TimeFunctions';
+import {
+  formatDate,
+  roundMinutes,
+} from '../../utils/TimeFunctions/TimeFunctions';
 import { AppThunk } from '../store';
 
 export const initialState = {
@@ -101,7 +104,9 @@ export const getTasks = (): AppThunk => async (dispatch, getState) => {
 export const addTask =
   (taskName: string, duration: Duration): AppThunk =>
   async (dispatch, getState) => {
-    const time = getTime(add(getState().clock.time, duration));
+    const newTime = roundMinutes(getState().clock.time);
+
+    const time = getTime(add(newTime, duration));
     const taskData = new TaskDataObj(taskName, time);
 
     try {

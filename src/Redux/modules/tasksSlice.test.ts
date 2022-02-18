@@ -207,7 +207,7 @@ describe('tasksSlice', () => {
         expect(StoreAPIMock.setTask).toHaveBeenCalledWith({
           name: 'Задача',
           done: false,
-          time: 1635606187350,
+          time: 1635606000350,
           repeat: 0,
         });
 
