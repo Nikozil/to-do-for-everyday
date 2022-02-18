@@ -40,6 +40,11 @@ const NavQuick: FC<Props> = ({
 
     applyDate(tomorrow, month, year);
   };
+  const setWeekHandler = () => {
+    const [day, month, year] = getNthDates({ days: 7 });
+
+    applyDate(day, month, year);
+  };
 
   const setMonthHandler = () => {
     const [day, month, year] = getNthDates({ months: 1 }, date);
@@ -59,6 +64,9 @@ const NavQuick: FC<Props> = ({
         Завтра
       </span>
 
+      <span className={styles['quick-nav__button']} onClick={setWeekHandler}>
+        Неделя
+      </span>
       <span className={styles['quick-nav__button']} onClick={setMonthHandler}>
         Месяц
       </span>
