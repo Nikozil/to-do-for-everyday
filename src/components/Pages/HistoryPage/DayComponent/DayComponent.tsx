@@ -6,6 +6,8 @@ import { HistoryDay } from '../../../../Redux/modules/historySlice';
 import { LivedTask } from '../../../../Redux/modules/tasksSlice';
 import { FaCouch } from 'react-icons/fa';
 import styles from './DayComponent.module.scss';
+import TaskName from '../../../../common_components/TaskName/TaskName';
+import { addHypens } from '../../../../utils/TextFunctions/TextFunctions';
 
 const DayComponent: React.FC<PropsType> = ({ day }) => {
   const { doneTasksList, score, timestamp, tag } = day;
@@ -14,9 +16,11 @@ const DayComponent: React.FC<PropsType> = ({ day }) => {
 
   const date = format(timestamp, 'dd.MM.yyyy');
 
+  const hypensTag = tag ? addHypens(tag) : tag;
+
   const mapDoneTaskComponent = (task: LivedTask) => (
     <li className={styles['task-li']} key={task.id}>
-      <span>{task.name}</span>
+      <TaskName name={task.name} />
     </li>
   );
 
@@ -42,7 +46,7 @@ const DayComponent: React.FC<PropsType> = ({ day }) => {
         )}
       </ul>
       <div>
-        <span className={styles.tag}>{tag ?? null}</span>
+        <span className={styles.tag}>{hypensTag ?? null}</span>
         <div className={styles.score}>{[...Array(5)].map(mapStars)}</div>
       </div>
     </section>

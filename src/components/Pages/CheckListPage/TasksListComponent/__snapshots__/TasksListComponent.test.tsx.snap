@@ -30,7 +30,7 @@ exports[`TasksListComponent render correct with tasks 1`] = `
             />
           </div>
           <span
-            class="task__taskName"
+            class="taskName task__taskName"
           >
             task0
           </span>

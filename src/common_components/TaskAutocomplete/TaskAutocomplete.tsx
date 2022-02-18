@@ -27,7 +27,7 @@ const TaskAutocomplete: React.FC<PropsType> = ({ filter, duration }) => {
     return (
       <TaskComponent key={task.id} border={true}>
         <DoItAgain clickHandler={taskComponentAgainHandler}>
-          <TaskName>{task.data.name}</TaskName>
+          <TaskName name={task.data.name} />
           <DeleteButton clickHandler={taskComponentDeleteHandler} />
         </DoItAgain>
       </TaskComponent>

@@ -11,6 +11,8 @@ import {
 } from '../TaskMapComponent/TaskMapComponent';
 import styles from './TaskWithOptionsComponent.module.scss';
 
+import TaskName from '../TaskName/TaskName';
+
 const TaskWithOptionsComponent: React.FC<PropsType> = ({
   task,
   currentOptions,
@@ -29,12 +31,16 @@ const TaskWithOptionsComponent: React.FC<PropsType> = ({
   };
 
   const showOptions = currentOptions === task.id;
+
   return (
     <>
       <TaskComponent border={true}>
         <span className={styles.task}>
           <TaskIndicator task={task} />
-          <span className={styles['task__taskName']}>{task.data.name}</span>
+          <TaskName
+            className={styles['task__taskName']}
+            name={task.data.name}
+          />
         </span>
         <span className={styles['task__buttons']}>
           <OptionsButton clickHandler={optionsHandler} />

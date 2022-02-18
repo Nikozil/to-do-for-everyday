@@ -3,7 +3,7 @@ import TaskName from './TaskName';
 
 describe('TaskName tests', () => {
   it('rendering and click delete', async () => {
-    const { asFragment } = render(<TaskName>Task</TaskName>);
+    const { asFragment } = render(<TaskName name={'Task'} />);
 
     expect(asFragment()).toMatchSnapshot();
   });

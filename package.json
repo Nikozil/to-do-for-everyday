@@ -17,6 +17,7 @@
     "date-fns": "^2.25.0",
     "firebase": "^9.0.0-beta.7",
     "formik": "^2.2.9",
+    "hyphen": "^1.6.4",
     "node-sass": "^6.0.1",
     "react": "^17.0.2",
     "react-bootstrap": "^2.0.0-beta.6",
@@ -61,6 +62,7 @@
     ]
   },
   "devDependencies": {
+    "@types/hyphen": "^1.6.5",
     "@types/react-router-dom": "^5.1.8",
     "@types/uuid": "^8.3.4"
   },
