@@ -19,7 +19,7 @@ const RangeForm: React.FC<Props> = ({
     setValue(+e.target.value);
   };
 
-  const onMouseUp = () => {
+  const selectHandler = () => {
     changeHandler(value);
   };
 
@@ -35,7 +35,8 @@ const RangeForm: React.FC<Props> = ({
         max={max}
         step={step}
         value={value}
-        onMouseUp={onMouseUp}
+        onMouseUp={selectHandler}
+        onTouchEnd={selectHandler}
         onChange={onChange}
         className={cn(styles['range__input'], className)}
       />

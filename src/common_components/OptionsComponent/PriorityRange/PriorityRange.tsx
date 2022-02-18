@@ -12,7 +12,7 @@ const PriorityRange: React.FC<Props> = ({ priority, changeHandler }) => {
     setValue(+e.target.value);
   };
 
-  const onMouseUp = () => {
+  const selectHandler = () => {
     const newPriority = convertPriorityValue(value);
     changeHandler(newPriority);
   };
@@ -52,7 +52,8 @@ const PriorityRange: React.FC<Props> = ({ priority, changeHandler }) => {
         step="1"
         value={value}
         onChange={onChange}
-        onMouseUp={onMouseUp}
+        onMouseUp={selectHandler}
+        onTouchEnd={selectHandler}
       />
     </div>
   );

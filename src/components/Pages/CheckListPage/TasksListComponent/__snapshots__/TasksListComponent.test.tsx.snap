@@ -19,6 +19,16 @@ exports[`TasksListComponent render correct with tasks 1`] = `
         <span
           class="task"
         >
+          <div
+            class="indicator"
+          >
+            <div
+              class="indicator__priority indicator__priority_regular"
+            />
+            <div
+              class="indicator__repeat"
+            />
+          </div>
           <span
             class="task__taskName"
           >
