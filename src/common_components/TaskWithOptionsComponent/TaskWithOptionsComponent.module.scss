@@ -5,7 +5,9 @@
   align-items: center;
 }
 .task__taskName {
-  margin-left: 10px;
+  @media screen and (max-width: 767px) {
+    margin-left: 10px !important;
+  }
 }
 .task__doneTaskName {
   word-break: break-all;

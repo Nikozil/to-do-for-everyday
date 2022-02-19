@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import SpinComponent from '../../../common_components/SpinComponent/SpinComponent';
+import useIsMounted from '../../../hooks/useIsMounted';
 import { selectInitHistoryStatus } from '../../../Redux/selectors/historySelector';
 import { AppStateType } from '../../../Redux/store';
 import DayComponent from './DayComponent/DayComponent';
@@ -11,11 +12,12 @@ const HistoryPage = () => {
   const days = useSelector((state: AppStateType) => state.history.daysList);
 
   const initHistoryStatus = useSelector(selectInitHistoryStatus);
+  const isMounted = useIsMounted();
 
   return (
     <section className={styles['history-page']}>
       <MonthPaginator />
-      {initHistoryStatus ? (
+      {isMounted && initHistoryStatus ? (
         <ul className={styles['days-list']}>
           {days.length
             ? days.map((day) => <DayComponent key={day.timestamp} day={day} />)
