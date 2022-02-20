@@ -101,13 +101,9 @@ exports[`TasksListComponent render correct with tasks 1`] = `
         class="content content_border"
       >
         <span
-          class="task"
+          class="taskName"
         >
-          <span
-            class="task__doneTaskName"
-          >
-            task0
-          </span>
+          task0
         </span>
         <span
           class="task__buttons"

@@ -8,7 +8,7 @@ const RepeatRange: React.FC<Props> = ({ repeat, changeHandler }) => {
       <RangeForm
         changeHandler={changeHandler}
         initValue={repeat}
-        label={'Повтор'}
+        label={'Повтор через'}
         measure={'д.'}
         name={'repeat'}
         min={0}

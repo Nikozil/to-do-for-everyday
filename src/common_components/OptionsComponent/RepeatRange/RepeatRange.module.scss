@@ -2,4 +2,8 @@
 
 .wrapper {
   padding: 0 25px;
+  font-size: 0.9em;
+  @media screen and (max-width: 767px) {
+    font-size: inherit;
+  }
 }

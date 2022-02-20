@@ -6,6 +6,7 @@ import TaskMapComponent, {
   CurrentOptions,
   SetCurrentOptions,
 } from '../../../../common_components/TaskMapComponent/TaskMapComponent';
+import TaskName from '../../../../common_components/TaskName/TaskName';
 import TaskWithOptionsComponent from '../../../../common_components/TaskWithOptionsComponent/TaskWithOptionsComponent';
 import {
   LivedTask,
@@ -44,9 +45,7 @@ const TasksListComponent = () => {
 
     return (
       <TaskComponent key={task.id} border={true}>
-        <span className={styles.task}>
-          <span className={styles['task__doneTaskName']}>{task.name}</span>
-        </span>
+        <TaskName name={task.name} />
         <span className={styles['task__buttons']}>
           <UncheckButton clickHandler={taskComponentUncheckHandler} />
         </span>
