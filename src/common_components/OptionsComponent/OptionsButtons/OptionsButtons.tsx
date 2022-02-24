@@ -25,7 +25,7 @@ const OptionsButtons: React.FC<PropsType> = ({ task }) => {
     <div className={styles.buttons}>
       <ArchiveButton
         clickHandler={taskComponentArchiveHandler}
-        label={'Архив'}
+        label={'В архив'}
       />
       <DeleteButton
         clickHandler={taskComponentDeleteHandler}

@@ -330,6 +330,9 @@ export interface LivedTask {
   id: string;
   name: string;
 }
+
+export type UnionTask = Task | LivedTask;
+
 export interface LivedDay {
   tag: string;
   score: Score;

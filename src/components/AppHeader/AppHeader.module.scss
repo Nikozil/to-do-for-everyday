@@ -18,7 +18,7 @@
 .header__pagename {
   margin-left: 5px;
   font-size: 1.5rem;
-  width: 290px;
+  width: 260px;
 
   @media screen and (max-width: 767px) {
     font-size: 1.1rem;
@@ -29,7 +29,7 @@
 .usermenu {
   display: flex;
   align-items: center;
-  width: 290px;
+  width: 260px;
   justify-content: flex-end;
   @media screen and (max-width: 767px) {
     font-size: 0.9rem;

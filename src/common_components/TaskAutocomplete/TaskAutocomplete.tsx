@@ -24,6 +24,7 @@ const TaskAutocomplete: React.FC<PropsType> = ({ filter, duration }) => {
     const taskComponentAgainHandler = () => {
       dispatch(doAgainTask(task, duration));
     };
+
     return (
       <TaskComponent key={task.id} border={true}>
         <DoItAgain clickHandler={taskComponentAgainHandler}>

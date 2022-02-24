@@ -1,11 +1,15 @@
-import React, { Dispatch, SetStateAction, useRef, useState } from 'react';
+import React, { Dispatch, SetStateAction, useRef } from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import { LivedTask, Task } from '../../Redux/modules/tasksSlice';
+import { UnionTask } from '../../Redux/modules/tasksSlice';
 import styles from './TaskMapComponent.module.scss';
 
-const TaskMapComponent: React.FC<PropsType> = ({ list, stub, callback }) => {
-  const [currentOptions, setCurrentOptions] = useState<CurrentOptions>(null);
-
+const TaskMapComponent: React.FC<PropsType> = ({
+  list,
+  stub,
+  callback,
+  currentOptions,
+  setCurrentOptions,
+}) => {
   return (
     <>
       {list.length ? (
@@ -28,6 +32,7 @@ const TaskMapComponent: React.FC<PropsType> = ({ list, stub, callback }) => {
 };
 
 export default TaskMapComponent;
+
 const CSSTransitionWrapper: React.FC<WrapperPropsType> = ({
   task,
   currentOptions,
@@ -36,6 +41,7 @@ const CSSTransitionWrapper: React.FC<WrapperPropsType> = ({
   ...rest
 }) => {
   const nodeRef = useRef(null);
+
   return (
     <CSSTransition
       {...rest}
@@ -57,24 +63,19 @@ const CSSTransitionWrapper: React.FC<WrapperPropsType> = ({
 interface PropsType {
   list: UnionTask[];
   stub: string;
-  callback: (
-    task: any,
-    currentOptions: CurrentOptions,
-    setCurrentOptions: SetCurrentOptions
-  ) => JSX.Element;
+  callback: UnionCallback;
+  currentOptions?: CurrentOptions;
+  setCurrentOptions?: SetCurrentOptions;
 }
 
 interface WrapperPropsType {
   task: UnionTask;
-  currentOptions: CurrentOptions;
-  setCurrentOptions: SetCurrentOptions;
-  callback: (
-    task: UnionTask,
-    currentOptions: any,
-    setCurrentOptions: any
-  ) => JSX.Element;
+  currentOptions?: CurrentOptions;
+  setCurrentOptions?: SetCurrentOptions;
+  callback: UnionCallback;
 }
 
-type UnionTask = Task | LivedTask;
 export type CurrentOptions = string | null;
 export type SetCurrentOptions = Dispatch<SetStateAction<CurrentOptions>>;
+
+type UnionCallback = any;

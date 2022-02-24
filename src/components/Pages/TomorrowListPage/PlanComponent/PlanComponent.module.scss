@@ -1,0 +1,14 @@
+@import '../../../../App.scss';
+
+.plan {
+  margin-bottom: 8px;
+
+  &__title {
+    text-align: left;
+    border-bottom: 3px solid;
+    margin-bottom: 8px;
+  }
+  &__date {
+    font-weight: 600;
+  }
+}
