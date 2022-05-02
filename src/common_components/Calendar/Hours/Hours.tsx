@@ -32,7 +32,7 @@ const Hours: FC<Props> = ({ date, changeDate, changeShow }) => {
   return (
     <Table
       array={hours}
-      header={'Выберите минуты'}
+      header={'Выберите час'}
       columns={6}
       clickHandle={clickHandle}
       className={styles.hour}
